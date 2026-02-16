@@ -12,6 +12,7 @@
 - Q: Copy button visibility strategy → A: Only visible when text is selected or user hovers over content area
 - Q: Text generation pattern → A: First paragraph is the original text and afterwards is continuous unique text
 - Q: Text source implementation → A: Hardcoded word bank with algorithmic generation
+- Q: Scroll detection mechanism → A: Scroll position threshold
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -39,7 +40,7 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 **Acceptance Scenarios**:
 
 1. **Given** user is on the main page with original lorem ipsum text visible, **When** they scroll down, **Then** new unique lorem ipsum text appears progressively
-2. **Given** user is scrolling, **When** they reach the bottom of generated content, **Then** more unique text automatically generates
+2. **Given** user is scrolling, **When** they reach the position threshold near bottom of generated content, **Then** more unique text automatically generates
 3. **Given** text is generating, **When** user scrolls rapidly, **Then** scrolling remains smooth at 60fps without lag
 
 ---
@@ -100,6 +101,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-001b**: Text generation MUST use hardcoded word bank with algorithmic generation (no external dependencies)
 - **FR-002**: System MUST maintain smooth scrolling performance at 60fps during text generation
 - **FR-003**: System MUST automatically detect when user approaches bottom of content and generate more text
+- **FR-003a**: Scroll detection MUST use position threshold (X% from bottom) rather than waypoint elements
 - **FR-004**: System MUST provide copy functionality for all or selected text
 - **FR-004a**: Copy buttons MUST only appear when text is selected or user hovers over content area
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
