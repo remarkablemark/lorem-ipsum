@@ -13,6 +13,7 @@
 - Q: Text generation pattern → A: First paragraph is the original text and afterwards is continuous unique text
 - Q: Text source implementation → A: Hardcoded word bank with algorithmic generation
 - Q: Scroll detection mechanism → A: Scroll position threshold
+- Q: Copy operation feedback → A: Button text change
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -57,8 +58,8 @@ User can copy all or portions of the generated lorem ipsum text to clipboard for
 
 1. **Given** text is generated, **When** user hovers over content area, **Then** copy buttons become visible
 2. **Given** user selects specific text, **When** selection is made, **Then** copy buttons become visible
-3. **Given** copy buttons are visible, **When** user clicks "Copy All", **Then** all visible text is copied to clipboard
-4. **Given** copy buttons are visible, **When** user clicks "Copy Selection", **Then** only selected text is copied
+3. **Given** copy buttons are visible, **When** user clicks "Copy All", **Then** button text changes to "Copied!" and all visible text is copied to clipboard
+4. **Given** copy buttons are visible, **When** user clicks "Copy Selection", **Then** button text changes to "Copied!" and only selected text is copied
 5. **Given** copy was successful, **When** user pastes elsewhere, **Then** content matches exactly
 
 ---
@@ -104,6 +105,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-003a**: Scroll detection MUST use position threshold (X% from bottom) rather than waypoint elements
 - **FR-004**: System MUST provide copy functionality for all or selected text
 - **FR-004a**: Copy buttons MUST only appear when text is selected or user hovers over content area
+- **FR-004b**: Copy operation MUST provide feedback via button text change (e.g., "Copy" → "Copied!")
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
 - **FR-007**: System MUST use semantic HTML with proper ARIA labels for screen readers
