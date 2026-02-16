@@ -16,6 +16,7 @@
 - Q: Copy operation feedback → A: Button text change
 - Q: Mobile touch interaction → A: Touch-optimized scroll detection (unified approach)
 - Q: Mobile copy button visibility → A: Tap to show buttons
+- Q: Copy all scope → A: All generated text
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -60,7 +61,7 @@ User can copy all or portions of the generated lorem ipsum text to clipboard for
 
 1. **Given** text is generated, **When** user hovers over content area (desktop) or taps content area (mobile), **Then** copy buttons become visible
 2. **Given** user selects specific text, **When** selection is made, **Then** copy buttons become visible
-3. **Given** copy buttons are visible, **When** user clicks "Copy All", **Then** button text changes to "Copied!" and all visible text is copied to clipboard
+3. **Given** copy buttons are visible, **When** user clicks "Copy All", **Then** button text changes to "Copied!" and all generated text (from original paragraph to current bottom) is copied to clipboard
 4. **Given** copy buttons are visible, **When** user clicks "Copy Selection", **Then** button text changes to "Copied!" and only selected text is copied
 5. **Given** copy was successful, **When** user pastes elsewhere, **Then** content matches exactly
 
@@ -89,6 +90,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - How does system behave with very small screen sizes or mobile devices? (Unified scroll/touch interaction)
 - What happens when user scrolls while text is still generating?
 - How does system ensure text generation works offline without external dependencies?
+- How does system handle copying very large amounts of text (performance implications)?
 
 ## Requirements _(mandatory)_
 
@@ -109,6 +111,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-004a**: Copy buttons MUST only appear when text is selected or user hovers over content area
 - **FR-004c**: On mobile devices, copy buttons MUST appear on tap (touch alternative to hover)
 - **FR-004b**: Copy operation MUST provide feedback via button text change (e.g., "Copy" → "Copied!")
+- **FR-004d**: "Copy All" MUST copy all generated text from original paragraph to current bottom
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
 - **FR-006a**: Touch and scroll interactions MUST use unified approach (same detection logic for both)
