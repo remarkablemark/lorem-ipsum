@@ -19,7 +19,7 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 
 ## Path Conventions
 
-- **Single project**: `src/`, `tests/` at repository root
+- **React SPA**: `src/` at repository root, tests co-located with source files
 - **Web app**: React single-page application structure
 - Paths shown below assume React project structure from plan.md
 
