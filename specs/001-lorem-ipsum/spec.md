@@ -5,6 +5,12 @@
 **Status**: Draft
 **Input**: User description: "lorem ipsum generator via scrolling the page"
 
+## Clarifications
+
+### Session 2026-02-16
+
+- Q: Copy button visibility strategy → A: Only visible when text is selected or user hovers over content area
+
 ## User Scenarios & Testing _(mandatory)_
 
 <!--
@@ -38,17 +44,19 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 
 ### User Story 2 - Copy Generated Text (Priority: P2)
 
-User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications.
+User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications. Copy buttons appear only when text is selected or user hovers over the content area.
 
 **Why this priority**: Improves workflow - enables users to easily use generated content elsewhere
 
-**Independent Test**: Can be tested by copying text and verifying clipboard content matches generated text
+**Independent Test**: Can be fully tested by copying text and verifying clipboard content matches generated text
 
 **Acceptance Scenarios**:
 
-1. **Given** text is generated, **When** user clicks "Copy All", **Then** all visible text is copied to clipboard
-2. **Given** user selects specific text, **When** they click "Copy Selection", **Then** only selected text is copied
-3. **Given** copy was successful, **When** user pastes elsewhere, **Then** content matches exactly
+1. **Given** text is generated, **When** user hovers over content area, **Then** copy buttons become visible
+2. **Given** user selects specific text, **When** selection is made, **Then** copy buttons become visible
+3. **Given** copy buttons are visible, **When** user clicks "Copy All", **Then** all visible text is copied to clipboard
+4. **Given** copy buttons are visible, **When** user clicks "Copy Selection", **Then** only selected text is copied
+5. **Given** copy was successful, **When** user pastes elsewhere, **Then** content matches exactly
 
 ---
 
@@ -88,6 +96,7 @@ User can reset the generated text and start fresh with a new scrolling session.
 - **FR-002**: System MUST maintain smooth scrolling performance at 60fps during text generation
 - **FR-003**: System MUST automatically detect when user approaches bottom of content and generate more text
 - **FR-004**: System MUST provide copy functionality for all or selected text
+- **FR-004a**: Copy buttons MUST only appear when text is selected or user hovers over content area
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
 - **FR-007**: System MUST use semantic HTML with proper ARIA labels for screen readers
