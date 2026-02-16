@@ -1,9 +1,11 @@
-# lorem-ipsum
+# Lorem Ipsum Generator
 
 [![build](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/build.yml)
 [![test](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/test.yml)
 
-Vite React Tailwind Template
+📝 Lorem ipsum generator:
+
+- [Lorem Ipsum](https://remarkablemark.org/lorem-ipsum/)
 
 ## Install
 
