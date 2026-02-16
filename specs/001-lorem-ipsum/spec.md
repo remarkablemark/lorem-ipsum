@@ -14,6 +14,7 @@
 - Q: Text source implementation → A: Hardcoded word bank with algorithmic generation
 - Q: Scroll detection mechanism → A: Scroll position threshold
 - Q: Copy operation feedback → A: Button text change
+- Q: Mobile touch interaction → A: Touch-optimized scroll detection (unified approach)
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -84,7 +85,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - What happens when user scrolls extremely rapidly (scroll-jacking behavior)?
 - How does system handle memory usage with very large amounts of generated text?
 - What happens when user scrolls to bottom but network is slow?
-- How does system behave with very small screen sizes or mobile devices?
+- How does system behave with very small screen sizes or mobile devices? (Unified scroll/touch interaction)
 - What happens when user scrolls while text is still generating?
 - How does system ensure text generation works offline without external dependencies?
 
@@ -108,6 +109,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-004b**: Copy operation MUST provide feedback via button text change (e.g., "Copy" → "Copied!")
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
+- **FR-006a**: Touch and scroll interactions MUST use unified approach (same detection logic for both)
 - **FR-007**: System MUST use semantic HTML with proper ARIA labels for screen readers
 - **FR-008**: System MUST provide reset functionality to clear generated content
 - **FR-009**: System MUST handle rapid scrolling without performance degradation
