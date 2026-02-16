@@ -123,6 +123,47 @@ describe('TextGenerator', () => {
     expect(originalText.id).toBe('original-lorem-ipsum');
   });
 
+  test('should generate paragraphs with seed', () => {
+    const config = {
+      scrollThreshold: 85,
+      wordsPerParagraph: { min: 30, max: 100 },
+      sentencesPerParagraph: { min: 3, max: 8 },
+      maxParagraphs: 100,
+      chunkSize: 50,
+      seed: 'test-seed',
+    };
+
+    const generator = new TextGenerator(config);
+    const paragraphs1 = generator.generateParagraphs(2, 'custom-seed');
+    const paragraphs2 = generator.generateParagraphs(2, 'custom-seed');
+
+    expect(Array.isArray(paragraphs1)).toBe(true);
+    expect(paragraphs1).toHaveLength(2);
+    expect(Array.isArray(paragraphs2)).toBe(true);
+    expect(paragraphs2).toHaveLength(2);
+
+    // Same seed should produce same results
+    expect(paragraphs1[0].content).toBe(paragraphs2[0].content);
+    expect(paragraphs1[1].content).toBe(paragraphs2[1].content);
+  });
+
+  test('should handle empty words array in sentence generation', () => {
+    const config = {
+      scrollThreshold: 85,
+      wordsPerParagraph: { min: 30, max: 100 },
+      sentencesPerParagraph: { min: 3, max: 8 },
+      maxParagraphs: 100,
+      chunkSize: 50,
+      seed: 'test-seed',
+    };
+
+    const generator = new TextGenerator(config);
+
+    // Access the private method through a public method that uses it
+    const sentence = generator.generateSentence(0);
+    expect(sentence).toBe('');
+  });
+
   test('should check generation trigger', () => {
     const config = {
       scrollThreshold: 85,
