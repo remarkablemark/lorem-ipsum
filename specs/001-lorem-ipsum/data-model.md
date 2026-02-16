@@ -16,8 +16,6 @@ interface LoremText {
   type: 'original' | 'generated'; // Original vs algorithmically generated
   position: number; // Position in the document (0-based index)
   paragraphIndex: number; // Paragraph number (1-based)
-  wordCount: number; // Total words in this text segment
-  createdAt: Date; // When this segment was generated
 }
 ```
 
@@ -130,8 +128,6 @@ erDiagram
         string type
         number position
         number paragraphIndex
-        number wordCount
-        Date createdAt
     }
 
     ScrollPosition {
