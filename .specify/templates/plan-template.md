@@ -17,21 +17,25 @@
   the iteration process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript 5 with React 19
+**Primary Dependencies**: Vite 7, Vitest 4, Tailwind CSS 4
+**Storage**: N/A (client-side only)
+**Testing**: Vitest 4 with @testing-library/react
+**Target Platform**: Web browser (responsive)
+**Project Type**: Web application (single-page)
+**Performance Goals**: 60fps scrolling, <100ms interaction response
+**Constraints**: Must work without backend, accessibility WCAG 2.1 AA
+**Scale/Scope**: Single-page lorem ipsum generator
 
 ## Constitution Check
 
 _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-[Gates determined based on constitution file]
+- ✅ **User Experience First**: Smooth scrolling and responsive interaction
+- ✅ **React Component Architecture**: Functional components with TypeScript
+- ✅ **Test-First Development**: TDD mandatory with 100% coverage
+- ✅ **Accessibility & Semantic HTML**: WCAG 2.1 AA compliance required
+- ✅ **Performance & Optimization**: Optimized for scrolling performance
 
 ## Project Structure
 
@@ -57,43 +61,27 @@ specs/[###-feature]/
 -->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+├── components/          # React components
+│   ├── [ComponentName]/
+│   │   ├── ComponentName.tsx
+│   │   ├── ComponentName.types.ts
+│   │   ├── ComponentName.test.tsx
+│   │   └── index.ts
+│   └── App/
+├── types/              # Shared TypeScript interfaces
+├── utils/              # Utility functions
+└── hooks/              # Custom React hooks
 
 tests/
-├── contract/
-├── integration/
-└── unit/
+├── components/         # Component tests
+├── utils/              # Utility tests
+└── integration/        # Integration tests
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+public/                 # Static assets
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Single-page React application with component-based architecture. All components follow the established pattern with TypeScript interfaces, comprehensive tests, and barrel exports.
 
 ## Complexity Tracking
 

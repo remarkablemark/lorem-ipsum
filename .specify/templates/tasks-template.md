@@ -47,9 +47,9 @@ description: 'Task list template for feature implementation'
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
+- [ ] T001 Create React component structure per implementation plan
+- [ ] T002 Initialize TypeScript project with React 19 dependencies
+- [ ] T003 [P] Configure ESLint, Prettier, and Tailwind CSS
 
 ---
 
@@ -61,12 +61,12 @@ description: 'Task list template for feature implementation'
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T004 Setup lorem ipsum text generation utility
+- [ ] T005 [P] Implement React hooks for text generation state
+- [ ] T006 [P] Setup component routing and navigation structure
+- [ ] T007 Create base TypeScript interfaces that all components depend on
+- [ ] T008 Configure error handling and user feedback system
+- [ ] T009 Setup environment configuration for Vite build
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -82,17 +82,17 @@ Examples of foundational tasks (adjust based on your project):
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test\_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test\_[name].py
+- [ ] T010 [P] [US1] Component test for TextGenerator in tests/components/TextGenerator.test.tsx
+- [ ] T011 [P] [US1] Integration test for text generation flow in tests/integration/generation.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T012 [P] [US1] Create LoremText type in src/types/lorem.types.ts
+- [ ] T013 [P] [US1] Create GenerationConfig type in src/types/config.types.ts
+- [ ] T014 [US1] Implement useLoremGenerator hook in src/hooks/useLoremGenerator.ts (depends on T012, T013)
+- [ ] T015 [US1] Implement TextGenerator component in src/components/TextGenerator/TextGenerator.tsx
+- [ ] T016 [US1] Add accessibility attributes and keyboard navigation
+- [ ] T017 [US1] Add smooth scrolling optimization for large text blocks
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -106,15 +106,15 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test\_[name].py
-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test\_[name].py
+- [ ] T018 [P] [US2] Component test for CustomControls in tests/components/CustomControls.test.tsx
+- [ ] T019 [P] [US2] Integration test for customization flow in tests/integration/customization.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
-- [ ] T021 [US2] Implement [Service] in src/services/[service].py
-- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
+- [ ] T020 [P] [US2] Create CustomControls component in src/components/CustomControls/CustomControls.tsx
+- [ ] T021 [US2] Implement text quantity calculation utilities in src/utils/textCalculations.ts
+- [ ] T022 [US2] Integrate CustomControls with TextGenerator component
+- [ ] T023 [US2] Add responsive design for mobile customization controls
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -128,14 +128,14 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test\_[name].py
-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test\_[name].py
+- [ ] T024 [P] [US3] Component test for CopyButton in tests/components/CopyButton.test.tsx
+- [ ] T025 [P] [US3] Integration test for clipboard functionality in tests/integration/clipboard.test.tsx
 
 ### Implementation for User Story 3
 
-- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
-- [ ] T027 [US3] Implement [Service] in src/services/[service].py
-- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
+- [ ] T026 [P] [US3] Create CopyButton component in src/components/CopyButton/CopyButton.tsx
+- [ ] T027 [US3] Implement clipboard utilities in src/utils/clipboard.ts
+- [ ] T028 [US3] Add visual feedback for copy operations
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -149,12 +149,12 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] TXXX [P] Documentation updates in docs/
+- [ ] TXXX [P] Component documentation updates
 - [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Performance optimization across all stories
-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
-- [ ] TXXX Security hardening
-- [ ] TXXX Run quickstart.md validation
+- [ ] TXXX Performance optimization for scrolling
+- [ ] TXXX [P] Additional unit tests in tests/unit/
+- [ ] TXXX Accessibility audit and improvements
+- [ ] TXXX Run component integration validation
 
 ---
 
