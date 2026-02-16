@@ -18,6 +18,7 @@
 - Q: Mobile copy button visibility → A: Tap to show buttons
 - Q: Copy all scope → A: All generated text
 - Q: Copy all button display logic → A: Always shown when copy buttons appear
+- Q: Scroll navigation controls → A: No dedicated scroll controls
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -92,6 +93,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - What happens when user scrolls while text is still generating?
 - How does system ensure text generation works offline without external dependencies?
 - How does system handle copying very large amounts of text (performance implications)?
+- How do users navigate quickly to top/bottom without dedicated controls? (Native browser scrolling)
 
 ## Requirements _(mandatory)_
 
@@ -117,6 +119,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
 - **FR-006a**: Touch and scroll interactions MUST use unified approach (same detection logic for both)
+- **FR-006b**: System MUST NOT provide dedicated scroll-to-top/bottom controls (rely on native browser scrolling)
 - **FR-007**: System MUST use semantic HTML with proper ARIA labels for screen readers
 - **FR-008**: System MUST provide reset functionality to clear generated content
 - **FR-009**: System MUST handle rapid scrolling without performance degradation
