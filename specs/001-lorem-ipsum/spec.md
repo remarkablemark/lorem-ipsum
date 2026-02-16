@@ -15,6 +15,7 @@
 - Q: Scroll detection mechanism → A: Scroll position threshold
 - Q: Copy operation feedback → A: Button text change
 - Q: Mobile touch interaction → A: Touch-optimized scroll detection (unified approach)
+- Q: Mobile copy button visibility → A: Tap to show buttons
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -49,7 +50,7 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 
 ### User Story 2 - Copy Generated Text (Priority: P2)
 
-User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications. Copy buttons appear only when text is selected or user hovers over the content area.
+User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications. Copy buttons appear when text is selected, when user hovers over content area (desktop), or when user taps content area (mobile).
 
 **Why this priority**: Improves workflow - enables users to easily use generated content elsewhere
 
@@ -57,7 +58,7 @@ User can copy all or portions of the generated lorem ipsum text to clipboard for
 
 **Acceptance Scenarios**:
 
-1. **Given** text is generated, **When** user hovers over content area, **Then** copy buttons become visible
+1. **Given** text is generated, **When** user hovers over content area (desktop) or taps content area (mobile), **Then** copy buttons become visible
 2. **Given** user selects specific text, **When** selection is made, **Then** copy buttons become visible
 3. **Given** copy buttons are visible, **When** user clicks "Copy All", **Then** button text changes to "Copied!" and all visible text is copied to clipboard
 4. **Given** copy buttons are visible, **When** user clicks "Copy Selection", **Then** button text changes to "Copied!" and only selected text is copied
@@ -106,6 +107,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-003a**: Scroll detection MUST use position threshold (X% from bottom) rather than waypoint elements
 - **FR-004**: System MUST provide copy functionality for all or selected text
 - **FR-004a**: Copy buttons MUST only appear when text is selected or user hovers over content area
+- **FR-004c**: On mobile devices, copy buttons MUST appear on tap (touch alternative to hover)
 - **FR-004b**: Copy operation MUST provide feedback via button text change (e.g., "Copy" → "Copied!")
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
