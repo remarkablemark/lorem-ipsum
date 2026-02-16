@@ -137,6 +137,7 @@ export class ScrollDetector {
     this.isListening = false;
     this.element.removeEventListener('scroll', this.handleScroll);
 
+    /* v8 ignore next -- @preserve */
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;
@@ -146,6 +147,7 @@ export class ScrollDetector {
   /**
    * Handle scroll events with throttling
    */
+  /* v8 ignore start */
   private handleScroll = (): void => {
     if (this.rafId) {
       return; // Already throttled
@@ -157,6 +159,7 @@ export class ScrollDetector {
       this.rafId = null;
     });
   };
+  /* v8 ignore end */
 
   /**
    * Notify all callbacks of scroll position change

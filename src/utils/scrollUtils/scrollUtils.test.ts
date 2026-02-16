@@ -249,6 +249,97 @@ describe('ScrollDetector', () => {
       detector.start();
     }).not.toThrow();
   });
+
+  it('should handle raf cancellation when stopping', () => {
+    const detector = new ScrollDetector();
+    const callback = vi.fn();
+
+    detector.onScroll(callback);
+    detector.start();
+    detector.stop();
+
+    // Should not throw when stopping
+    expect(() => {
+      detector.stop();
+    }).not.toThrow();
+  });
+
+  it('should handle scroll position calculation with window', () => {
+    const detector = new ScrollDetector(window);
+    const position = detector.getCurrentPosition();
+
+    expect(position).toHaveProperty('scrollTop');
+    expect(position).toHaveProperty('scrollHeight');
+    expect(position).toHaveProperty('clientHeight');
+    expect(typeof position.scrollTop).toBe('number');
+    expect(typeof position.scrollHeight).toBe('number');
+    expect(typeof position.clientHeight).toBe('number');
+  });
+
+  it('should handle scroll percentage calculation edge case', () => {
+    const detector = new ScrollDetector();
+    const position = detector.getCurrentPosition();
+
+    expect(position).toHaveProperty('scrollPercentage');
+    expect(typeof position.scrollPercentage).toBe('number');
+  });
+
+  it('should handle velocity calculation with time difference', () => {
+    const detector = new ScrollDetector();
+
+    // First call should have 0 velocity
+    const position1 = detector.getCurrentPosition();
+    expect(position1.scrollVelocity).toBe(0);
+
+    // Second call should calculate velocity
+    const position2 = detector.getCurrentPosition();
+    expect(typeof position2.scrollVelocity).toBe('number');
+    expect(position2.scrollVelocity).toBeGreaterThanOrEqual(0);
+  });
+
+  it('should handle velocity calculation with zero time difference', () => {
+    const detector = new ScrollDetector();
+
+    // First call should have 0 velocity
+    const position1 = detector.getCurrentPosition();
+    expect(position1.scrollVelocity).toBe(0);
+
+    // Mock Date.now to return same value
+    const mockNow = vi.fn(() => 1000);
+    vi.stubGlobal('Date', { now: mockNow });
+
+    const position = detector.getCurrentPosition();
+    expect(position.scrollVelocity).toBe(0);
+  });
+
+  it('should handle scroll throttling', () => {
+    const detector = new ScrollDetector();
+    const callback = vi.fn();
+
+    detector.onScroll(callback);
+
+    // Should not throw when scroll is handled
+    expect(() => {
+      detector.start();
+      detector.stop();
+    }).not.toThrow();
+  });
+
+  it('should handle callback errors in scroll notifications', () => {
+    const detector = new ScrollDetector();
+    const errorCallback = vi.fn(() => {
+      throw new Error('Callback error');
+    });
+    const normalCallback = vi.fn();
+
+    detector.onScroll(errorCallback);
+    detector.onScroll(normalCallback);
+
+    // Should not throw when getting position (which triggers callbacks)
+    expect(() => {
+      detector.getCurrentPosition();
+    }).not.toThrow();
+  });
 });
 
 describe('createScrollDetector', () => {

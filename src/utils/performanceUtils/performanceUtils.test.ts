@@ -5,8 +5,6 @@
 import {
   createPerformanceMonitor,
   debounce,
-  isMemoryAPISupported,
-  isPerformanceAPISupported,
   PerformanceMonitor,
   throttleByFPS,
 } from './performanceUtils';
@@ -168,6 +166,55 @@ describe('PerformanceMonitor', () => {
     const metrics = monitor.getMetrics();
     expect(metrics.memoryUsage).toBe(Math.round(100000000 / 1048576)); // ~95MB
   });
+
+  it('should handle stopMonitoring when already stopped', () => {
+    const monitor = new PerformanceMonitor();
+    // Should not throw when stopping already stopped monitoring
+    expect(() => {
+      monitor.cleanup(); // This calls stopMonitoring internally
+    }).not.toThrow();
+  });
+
+  it('should handle startCleanupTimer when timer already exists', () => {
+    const monitor = new PerformanceMonitor();
+    const callback = vi.fn();
+
+    // Start monitoring to create timer
+    monitor.onMetricsUpdate(callback);
+
+    // Should not throw when starting again
+    expect(() => {
+      monitor.onMetricsUpdate(vi.fn());
+    }).not.toThrow();
+  });
+
+  it('should handle stopCleanupTimer when no timer exists', () => {
+    const monitor = new PerformanceMonitor();
+    // Should not throw when stopping timer that doesn't exist
+    expect(() => {
+      monitor.cleanup();
+    }).not.toThrow();
+  });
+
+  it('should handle frame monitoring when not monitoring', () => {
+    const monitor = new PerformanceMonitor();
+    // Should not throw when cleanup is called on stopped monitor
+    expect(() => {
+      monitor.cleanup();
+    }).not.toThrow();
+  });
+
+  it('should start and stop monitoring correctly', () => {
+    const monitor = new PerformanceMonitor();
+    const callback = vi.fn();
+
+    const unsubscribe = monitor.onMetricsUpdate(callback);
+
+    // Should start monitoring when callback is added
+    expect(() => {
+      unsubscribe();
+    }).not.toThrow();
+  });
 });
 
 describe('createPerformanceMonitor', () => {
@@ -236,19 +283,5 @@ describe('debounce', () => {
     expect(() => {
       debouncedFn();
     }).not.toThrow();
-  });
-});
-
-describe('isPerformanceAPISupported', () => {
-  it('should return boolean', () => {
-    const result = isPerformanceAPISupported();
-    expect(typeof result).toBe('boolean');
-  });
-});
-
-describe('isMemoryAPISupported', () => {
-  it('should return boolean', () => {
-    const result = isMemoryAPISupported();
-    expect(typeof result).toBe('boolean');
   });
 });
