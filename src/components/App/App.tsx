@@ -2,12 +2,19 @@
  * Main App component for Lorem Ipsum Generator
  */
 
-import { useLoremText, usePerformance, useScrollDetection } from 'src/hooks';
+import { useEffect } from 'react';
+import { useLoremText, useScrollDetection } from 'src/hooks';
 
 export default function App() {
-  const { texts, originalText, isGenerating } = useLoremText();
-  const { position } = useScrollDetection();
-  const { metrics, isPerformant } = usePerformance();
+  const { texts, originalText, isGenerating, generateMore } = useLoremText();
+  const { isNearBottom } = useScrollDetection();
+
+  // Trigger text generation when near bottom
+  useEffect(() => {
+    if (isNearBottom && !isGenerating) {
+      generateMore(2); // Generate 2 paragraphs when near bottom
+    }
+  }, [isNearBottom, isGenerating, generateMore]);
 
   return (
     <div className="min-h-screen" data-testid="app">
@@ -22,7 +29,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto min-h-screen max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         <section
           className="space-y-8"
           role="region"
@@ -68,21 +75,6 @@ export default function App() {
               <p className="text-slate-500">No text generated yet</p>
             </div>
           )}
-
-          {/* Debug info (remove in production) */}
-          <div className="mt-16 border-t border-slate-200 pt-8">
-            <h3 className="mb-2 text-sm font-medium text-slate-900">
-              Debug Information
-            </h3>
-            <div className="grid grid-cols-1 gap-2 text-xs text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
-              <div>Texts: {texts.length}</div>
-              <div>Scroll: {position.scrollPercentage.toFixed(1)}%</div>
-              <div>FPS: {metrics.fps}</div>
-              <div>Memory: {metrics.memoryUsage}MB</div>
-              <div>Performant: {isPerformant ? 'Yes' : 'No'}</div>
-              <div>Generating: {isGenerating ? 'Yes' : 'No'}</div>
-            </div>
-          </div>
         </section>
       </main>
 

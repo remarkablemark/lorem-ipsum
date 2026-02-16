@@ -6,8 +6,7 @@ import { render, screen } from '@testing-library/react';
 
 import App from './App';
 
-// Mock the hooks to control their behavior
-vi.mock('src/hooks/useLoremText', () => ({
+vi.mock('src/hooks', () => ({
   useLoremText: vi.fn(() => ({
     texts: [
       {
@@ -31,9 +30,6 @@ vi.mock('src/hooks/useLoremText', () => ({
     getAllText: vi.fn(),
     getWordCount: vi.fn(),
   })),
-}));
-
-vi.mock('src/hooks/usePerformance', () => ({
   usePerformance: vi.fn(() => ({
     metrics: {
       fps: 60,
@@ -45,9 +41,6 @@ vi.mock('src/hooks/usePerformance', () => ({
     },
     isPerformant: true,
   })),
-}));
-
-vi.mock('src/hooks/useScrollDetection', () => ({
   useScrollDetection: vi.fn(() => ({
     position: {
       scrollTop: 0,
@@ -61,8 +54,7 @@ vi.mock('src/hooks/useScrollDetection', () => ({
   })),
 }));
 
-import { useLoremText } from 'src/hooks/useLoremText';
-import { usePerformance } from 'src/hooks/usePerformance';
+import { useLoremText, useScrollDetection } from 'src/hooks';
 
 describe('App', () => {
   it('should render the main heading', () => {
@@ -182,32 +174,64 @@ describe('App', () => {
     expect(emptyStateText).toBeInTheDocument();
   });
 
-  it('should render debug information with non-performant metrics', () => {
-    vi.mocked(usePerformance).mockReturnValue({
-      metrics: {
-        fps: 20,
-        renderTime: 100,
-        textGenerationTime: 50,
-        memoryUsage: 150,
-        scrollEventCount: 10,
-        lastCleanupTime: Date.now(),
+  it('should render the text container', () => {
+    render(<App />);
+
+    const textContainer = screen.getByTestId('text-container');
+    expect(textContainer).toBeInTheDocument();
+  });
+
+  it('should trigger generateMore when near bottom and not generating', () => {
+    const mockGenerateMore = vi.fn();
+
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
       },
-      isPerformant: false,
-      cleanup: vi.fn(),
+      isGenerating: false,
+      generateMore: mockGenerateMore,
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    vi.mocked(useScrollDetection).mockReturnValue({
+      position: {
+        scrollTop: 0,
+        scrollHeight: 1000,
+        clientHeight: 800,
+        scrollPercentage: 90,
+        isNearBottom: true,
+        lastScrollTime: Date.now(),
+        scrollVelocity: 0,
+      },
+      isNearBottom: true,
+      velocity: 0,
+      scrollToTop: vi.fn(),
+      scrollToBottom: vi.fn(),
     });
 
     render(<App />);
 
-    const debugHeading = screen.getByText('Debug Information');
-    expect(debugHeading).toBeInTheDocument();
-
-    const performantStatus = screen.getByText((content) => {
-      return content.includes('Performant:') && content.includes('No');
-    });
-    expect(performantStatus).toBeInTheDocument();
+    expect(mockGenerateMore).toHaveBeenCalledWith(2);
   });
 
-  it('should render debug information with generating state', () => {
+  it('should not trigger generateMore when near bottom but already generating', () => {
+    const mockGenerateMore = vi.fn();
+
     vi.mocked(useLoremText).mockReturnValue({
       texts: [
         {
@@ -226,29 +250,30 @@ describe('App', () => {
         paragraphIndex: 1,
       },
       isGenerating: true,
-      generateMore: vi.fn(),
+      generateMore: mockGenerateMore,
       reset: vi.fn(),
       getAllText: vi.fn(),
       getWordCount: vi.fn(),
     });
 
+    vi.mocked(useScrollDetection).mockReturnValue({
+      position: {
+        scrollTop: 0,
+        scrollHeight: 1000,
+        clientHeight: 800,
+        scrollPercentage: 90,
+        isNearBottom: true,
+        lastScrollTime: Date.now(),
+        scrollVelocity: 0,
+      },
+      isNearBottom: true,
+      velocity: 0,
+      scrollToTop: vi.fn(),
+      scrollToBottom: vi.fn(),
+    });
+
     render(<App />);
 
-    const generatingStatus = screen.getByText((content) => {
-      return content.includes('Generating:') && content.includes('Yes');
-    });
-    expect(generatingStatus).toBeInTheDocument();
-  });
-
-  it('should render debug information', () => {
-    render(<App />);
-
-    const debugHeading = screen.getByText('Debug Information');
-    expect(debugHeading).toBeInTheDocument();
-
-    const textCount = screen.getByText((content, element) => {
-      return content.includes('Texts:') && element?.tagName === 'DIV';
-    });
-    expect(textCount).toBeInTheDocument();
+    expect(mockGenerateMore).not.toHaveBeenCalled();
   });
 });

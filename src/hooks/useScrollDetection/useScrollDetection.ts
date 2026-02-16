@@ -1,20 +1,22 @@
 /**
- * Mock scroll detection hook for testing
+ * Custom hook for scroll detection
  */
 
-import type { ScrollPosition } from '../../types/scroll.types';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import type {
+  ScrollDetectionConfig,
+  ScrollPosition,
+} from '../../types/scroll.types';
+import { createScrollDetector } from '../../utils/scrollUtils/scrollUtils';
 
 /**
- * Mock scroll position
+ * Default configuration for scroll detection
  */
-const mockScrollPosition: ScrollPosition = {
-  scrollTop: 0,
-  scrollHeight: 1000,
-  clientHeight: 800,
-  scrollPercentage: 0,
-  isNearBottom: false,
-  lastScrollTime: Date.now(),
-  scrollVelocity: 0,
+const DEFAULT_CONFIG: ScrollDetectionConfig = {
+  threshold: 85,
+  debounceMs: 16, // ~60fps
+  maxVelocity: 10000,
 };
 
 /**
@@ -34,22 +36,58 @@ interface UseScrollDetectionReturn {
 }
 
 /**
- * Mock scroll detection hook
+ * Custom hook for scroll detection
  */
-// eslint-disable-next-line react-x/no-unnecessary-use-prefix
-export function useScrollDetection(): UseScrollDetectionReturn {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+export function useScrollDetection(
+  element?: HTMLElement | Window,
+  config?: Partial<ScrollDetectionConfig>,
+): UseScrollDetectionReturn {
+  const scrollConfig = { ...DEFAULT_CONFIG, ...config };
+  const [position, setPosition] = useState<ScrollPosition>(() => ({
+    scrollTop: 0,
+    scrollHeight: 1000,
+    clientHeight: 800,
+    scrollPercentage: 0,
+    isNearBottom: false,
+    lastScrollTime: Date.now(),
+    scrollVelocity: 0,
+  }));
 
-  const scrollToBottom = () => {
+  const detectorRef = useRef(createScrollDetector(element, scrollConfig));
+
+  const isNearBottom = position.isNearBottom;
+  const velocity = position.scrollVelocity;
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const scrollToBottom = useCallback(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  };
+  }, []);
+
+  useEffect(() => {
+    const detector = detectorRef.current;
+
+    // Subscribe to scroll events
+    const unsubscribe = detector.onScroll((newPosition) => {
+      setPosition(newPosition);
+    });
+
+    // Start detection
+    detector.start();
+
+    // Cleanup on unmount
+    return () => {
+      unsubscribe();
+      detector.stop();
+    };
+  }, []);
 
   return {
-    position: mockScrollPosition,
-    isNearBottom: false,
-    velocity: 0,
+    position,
+    isNearBottom,
+    velocity,
     scrollToTop,
     scrollToBottom,
   };
