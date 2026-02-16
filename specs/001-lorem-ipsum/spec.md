@@ -96,7 +96,7 @@ User can reset the generated text and start fresh with a new scrolling session.
 
 ### Key Entities
 
-- **LoremText**: Generated placeholder text with metadata (word count, paragraph count, generation timestamp)
+- **LoremText**: Generated placeholder text
 - **ScrollPosition**: Current scroll location and proximity to content boundaries
 - **ClipboardState**: Status of copy operations (success/failure/pending)
 - **PerformanceMetrics**: Real-time scrolling performance data (fps, render time)
