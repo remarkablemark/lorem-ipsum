@@ -15,6 +15,12 @@ export const APP_CONFIG = {
 
   /** Text generation configuration */
   generation: {
+    /** Number of paragraphs to generate when scrolling near bottom */
+    scrollGenerationCount: 2,
+    /** Number of paragraphs to generate when button is clicked */
+    buttonGenerationCount: 3,
+    /** Minimum number of paragraphs to always generate */
+    minGenerationCount: 2,
     /** Number of words to generate per chunk */
     chunkSize: 50,
     /** Maximum number of paragraphs to generate */

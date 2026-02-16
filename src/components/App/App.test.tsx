@@ -3,6 +3,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 
 import App from './App';
 
@@ -223,6 +224,7 @@ describe('App', () => {
 
     render(<App />);
 
+    // Should generate the configured number of paragraphs
     expect(mockGenerateMore).toHaveBeenCalledWith(2);
   });
 
@@ -272,5 +274,106 @@ describe('App', () => {
     render(<App />);
 
     expect(mockGenerateMore).not.toHaveBeenCalled();
+  });
+
+  it('should render manual generation button', () => {
+    // Ensure the mock is not in generating state
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: false,
+      generateMore: vi.fn(),
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const generateButton = screen.getByRole('button');
+    expect(generateButton).toBeInTheDocument();
+    expect(generateButton).toHaveTextContent('Generate 3 Paragraphs');
+  });
+
+  it('should disable button when generating', () => {
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: true,
+      generateMore: vi.fn(),
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const generateButton = screen.getByRole('button', { name: /generating/i });
+    expect(generateButton).toBeDisabled();
+  });
+
+  it('should call generateMore when button is clicked', () => {
+    const mockGenerateMore = vi.fn();
+
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: false,
+      generateMore: mockGenerateMore,
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const generateButton = screen.getByRole('button', {
+      name: /generate 3 paragraphs/i,
+    });
+    generateButton.click();
+
+    expect(mockGenerateMore).toHaveBeenCalledWith(3);
   });
 });

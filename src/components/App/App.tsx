@@ -3,6 +3,7 @@
  */
 
 import { useEffect } from 'react';
+import { APP_CONFIG } from 'src/constants/config';
 import { useLoremText, useScrollDetection } from 'src/hooks';
 
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
   // Trigger text generation when near bottom
   useEffect(() => {
     if (isNearBottom && !isGenerating) {
-      generateMore(2); // Generate 2 paragraphs when near bottom
+      generateMore(APP_CONFIG.generation.scrollGenerationCount);
     }
   }, [isNearBottom, isGenerating, generateMore]);
 
@@ -36,6 +37,24 @@ export default function App() {
           aria-label="Lorem ipsum text"
           data-testid="text-container"
         >
+          {/* Manual trigger */}
+          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <button
+              onClick={() => {
+                generateMore(APP_CONFIG.generation.buttonGenerationCount);
+              }}
+              disabled={isGenerating}
+              className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-400"
+            >
+              {isGenerating
+                ? 'Generating...'
+                : `Generate ${APP_CONFIG.generation.buttonGenerationCount.toString()} Paragraphs`}
+            </button>
+            <p className="mt-2 text-sm text-slate-600">
+              Or scroll down to trigger automatic generation
+            </p>
+          </div>
+
           {/* Original text */}
           <article className="prose prose-slate max-w-none">
             <p className="leading-relaxed text-slate-700">
@@ -69,6 +88,17 @@ export default function App() {
               <p className="text-slate-500">No text generated yet</p>
             </div>
           )}
+
+          {/* Spacer to make page scrollable */}
+          <div className="flex h-96 items-center justify-center rounded-lg border-2 border-dashed border-slate-300">
+            <div className="text-center text-slate-500">
+              <p className="text-lg">📜</p>
+              <p>Scroll down to trigger automatic text generation</p>
+              <p className="mt-2 text-sm">
+                Or use the button above to generate manually
+              </p>
+            </div>
+          </div>
         </section>
       </main>
 

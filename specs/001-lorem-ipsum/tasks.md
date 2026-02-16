@@ -100,6 +100,10 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 - [x] T040 [P] [US1] Create barrel exports for hooks in src/hooks/usePerformance/index.ts
 - [x] T041 [P] [US1] Create barrel exports for utils in src/utils/textGenerator/index.ts
 - [x] T042 [P] [US1] Create barrel exports for utils in src/utils/scrollUtils/index.ts
+- [x] T043 [US1] Add manual text generation button with loading states
+- [x] T044 [US1] Add scrollable spacer content for testing scroll-triggered generation
+- [x] T045 [US1] Update paragraph generation settings to use existing config file
+- [x] T046 [US1] Implement configuration-based text generation with consolidated config
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
