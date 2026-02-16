@@ -17,6 +17,7 @@
 - Q: Mobile touch interaction → A: Touch-optimized scroll detection (unified approach)
 - Q: Mobile copy button visibility → A: Tap to show buttons
 - Q: Copy all scope → A: All generated text
+- Q: Copy all button display logic → A: Always shown when copy buttons appear
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -51,7 +52,7 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 
 ### User Story 2 - Copy Generated Text (Priority: P2)
 
-User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications. Copy buttons appear when text is selected, when user hovers over content area (desktop), or when user taps content area (mobile).
+User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications. Both "Copy All" and "Copy Selection" buttons appear when text is selected, when user hovers over content area (desktop), or when user taps content area (mobile).
 
 **Why this priority**: Improves workflow - enables users to easily use generated content elsewhere
 
@@ -112,6 +113,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-004c**: On mobile devices, copy buttons MUST appear on tap (touch alternative to hover)
 - **FR-004b**: Copy operation MUST provide feedback via button text change (e.g., "Copy" → "Copied!")
 - **FR-004d**: "Copy All" MUST copy all generated text from original paragraph to current bottom
+- **FR-004e**: "Copy All" button MUST always be shown when copy buttons appear (both buttons visible together)
 - **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
 - **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
 - **FR-006a**: Touch and scroll interactions MUST use unified approach (same detection logic for both)
