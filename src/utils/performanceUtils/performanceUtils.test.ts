@@ -2,8 +2,6 @@
  * Tests for performance monitoring utilities
  */
 
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-
 import {
   createPerformanceMonitor,
   debounce,
@@ -46,18 +44,18 @@ describe('PerformanceMonitor', () => {
     vi.useRealTimers();
   });
 
-  test('should create instance with default config', () => {
+  it('should create instance with default config', () => {
     const monitor = new PerformanceMonitor();
     expect(monitor).toBeInstanceOf(PerformanceMonitor);
   });
 
-  test('should create instance with custom config', () => {
+  it('should create instance with custom config', () => {
     const config = { targetFPS: 30, maxMemoryMB: 50, cleanupInterval: 15000 };
     const monitor = new PerformanceMonitor(config);
     expect(monitor).toBeInstanceOf(PerformanceMonitor);
   });
 
-  test('should get current metrics', () => {
+  it('should get current metrics', () => {
     const monitor = new PerformanceMonitor();
     const metrics = monitor.getMetrics();
 
@@ -75,7 +73,7 @@ describe('PerformanceMonitor', () => {
     expect(typeof metrics.lastCleanupTime).toBe('number');
   });
 
-  test('should subscribe to metrics updates', () => {
+  it('should subscribe to metrics updates', () => {
     const monitor = new PerformanceMonitor();
     const callback = vi.fn();
     const unsubscribe = monitor.onMetricsUpdate(callback);
@@ -84,7 +82,7 @@ describe('PerformanceMonitor', () => {
     unsubscribe();
   });
 
-  test('should handle multiple subscribers', () => {
+  it('should handle multiple subscribers', () => {
     const monitor = new PerformanceMonitor();
     const callback1 = vi.fn();
     const callback2 = vi.fn();
@@ -95,13 +93,13 @@ describe('PerformanceMonitor', () => {
     unsubscribe2();
   });
 
-  test('should check performance status', () => {
+  it('should check performance status', () => {
     const monitor = new PerformanceMonitor();
     const isPerformant = monitor.isPerformant();
     expect(typeof isPerformant).toBe('boolean');
   });
 
-  test('should record scroll events', () => {
+  it('should record scroll events', () => {
     const monitor = new PerformanceMonitor();
     const initialCount = monitor.getMetrics().scrollEventCount;
     monitor.recordScrollEvent();
@@ -109,7 +107,7 @@ describe('PerformanceMonitor', () => {
     expect(newCount).toBe(initialCount + 1);
   });
 
-  test('should record text generation time', () => {
+  it('should record text generation time', () => {
     const monitor = new PerformanceMonitor();
     const duration = 150;
     monitor.recordTextGenerationTime(duration);
@@ -117,7 +115,7 @@ describe('PerformanceMonitor', () => {
     expect(metrics.textGenerationTime).toBe(duration);
   });
 
-  test('should cleanup manually', () => {
+  it('should cleanup manually', () => {
     const monitor = new PerformanceMonitor();
     const initialCleanupTime = monitor.getMetrics().lastCleanupTime;
 
@@ -129,7 +127,7 @@ describe('PerformanceMonitor', () => {
     expect(newCleanupTime).toBeGreaterThan(initialCleanupTime);
   });
 
-  test('should handle callback errors gracefully', () => {
+  it('should handle callback errors gracefully', () => {
     const monitor = new PerformanceMonitor();
     const errorCallback = vi.fn(() => {
       throw new Error('Callback error');
@@ -145,7 +143,7 @@ describe('PerformanceMonitor', () => {
     }).not.toThrow();
   });
 
-  test('should estimate memory usage without performance.memory API', () => {
+  it('should estimate memory usage without performance.memory API', () => {
     vi.stubGlobal('performance', {
       now: vi.fn(() => Date.now()),
     });
@@ -156,7 +154,7 @@ describe('PerformanceMonitor', () => {
     expect(metrics.memoryUsage).toBeGreaterThanOrEqual(0);
   });
 
-  test('should use performance.memory API when available', () => {
+  it('should use performance.memory API when available', () => {
     vi.stubGlobal('performance', {
       now: vi.fn(() => Date.now()),
       memory: {
@@ -173,7 +171,7 @@ describe('PerformanceMonitor', () => {
 });
 
 describe('createPerformanceMonitor', () => {
-  test('should create PerformanceMonitor instance', () => {
+  it('should create PerformanceMonitor instance', () => {
     const monitor = createPerformanceMonitor();
     expect(monitor).toBeInstanceOf(PerformanceMonitor);
   });
@@ -192,13 +190,13 @@ describe('throttleByFPS', () => {
     vi.useRealTimers();
   });
 
-  test('should create throttled function', () => {
+  it('should create throttled function', () => {
     const fn = vi.fn();
     const throttledFn = throttleByFPS(fn, 60);
     expect(typeof throttledFn).toBe('function');
   });
 
-  test('should throttle function calls', () => {
+  it('should throttle function calls', () => {
     const fn = vi.fn();
     const throttledFn = throttleByFPS(fn, 60);
 
@@ -216,7 +214,7 @@ describe('throttleByFPS', () => {
     expect(fn).toHaveBeenCalledTimes(2);
   });
 
-  test('should use default FPS when not specified', () => {
+  it('should use default FPS when not specified', () => {
     const fn = vi.fn();
     const throttledFn = throttleByFPS(fn);
     expect(typeof throttledFn).toBe('function');
@@ -224,13 +222,13 @@ describe('throttleByFPS', () => {
 });
 
 describe('debounce', () => {
-  test('should create debounced function', () => {
+  it('should create debounced function', () => {
     const fn = vi.fn();
     const debouncedFn = debounce(fn, 100);
     expect(typeof debouncedFn).toBe('function');
   });
 
-  test('should return function that can be called', () => {
+  it('should return function that can be called', () => {
     const fn = vi.fn();
     const debouncedFn = debounce(fn, 100);
 
@@ -242,14 +240,14 @@ describe('debounce', () => {
 });
 
 describe('isPerformanceAPISupported', () => {
-  test('should return boolean', () => {
+  it('should return boolean', () => {
     const result = isPerformanceAPISupported();
     expect(typeof result).toBe('boolean');
   });
 });
 
 describe('isMemoryAPISupported', () => {
-  test('should return boolean', () => {
+  it('should return boolean', () => {
     const result = isMemoryAPISupported();
     expect(typeof result).toBe('boolean');
   });

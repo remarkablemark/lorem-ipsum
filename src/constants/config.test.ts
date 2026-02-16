@@ -2,8 +2,6 @@
  * Tests for configuration constants
  */
 
-import { describe, expect, test } from 'vitest';
-
 import {
   APP_CONFIG,
   DEFAULT_COPY_BUTTON_CONFIG,
@@ -11,7 +9,7 @@ import {
 } from './config';
 
 describe('APP_CONFIG', () => {
-  test('should have scroll configuration', () => {
+  it('should have scroll configuration', () => {
     expect(APP_CONFIG.scroll).toBeDefined();
     expect(APP_CONFIG.scroll.threshold).toBeTypeOf('number');
     expect(APP_CONFIG.scroll.threshold).toBeGreaterThanOrEqual(0);
@@ -20,7 +18,7 @@ describe('APP_CONFIG', () => {
     expect(APP_CONFIG.scroll.maxVelocity).toBeTypeOf('number');
   });
 
-  test('should have generation configuration', () => {
+  it('should have generation configuration', () => {
     expect(APP_CONFIG.generation).toBeDefined();
     expect(APP_CONFIG.generation.chunkSize).toBeTypeOf('number');
     expect(APP_CONFIG.generation.maxParagraphs).toBeTypeOf('number');
@@ -29,27 +27,27 @@ describe('APP_CONFIG', () => {
     expect(APP_CONFIG.generation.seed).toBeTypeOf('string');
   });
 
-  test('should have performance configuration', () => {
+  it('should have performance configuration', () => {
     expect(APP_CONFIG.performance).toBeDefined();
     expect(APP_CONFIG.performance.targetFPS).toBeTypeOf('number');
     expect(APP_CONFIG.performance.maxMemoryMB).toBeTypeOf('number');
     expect(APP_CONFIG.performance.cleanupInterval).toBeTypeOf('number');
   });
 
-  test('should have clipboard configuration', () => {
+  it('should have clipboard configuration', () => {
     expect(APP_CONFIG.clipboard).toBeDefined();
     expect(APP_CONFIG.clipboard.autoHideDelay).toBeTypeOf('number');
     expect(APP_CONFIG.clipboard.feedbackDuration).toBeTypeOf('number');
   });
 
-  test('should have UI configuration', () => {
+  it('should have UI configuration', () => {
     expect(APP_CONFIG.ui).toBeDefined();
     expect(APP_CONFIG.ui.showCopyOnHover).toBeTypeOf('boolean');
     expect(APP_CONFIG.ui.showCopyOnTap).toBeTypeOf('boolean');
     expect(APP_CONFIG.ui.showCopyOnSelection).toBeTypeOf('boolean');
   });
 
-  test('should have valid configuration values', () => {
+  it('should have valid configuration values', () => {
     expect(APP_CONFIG.scroll.threshold).toBe(85);
     expect(APP_CONFIG.scroll.debounceMs).toBe(16);
     expect(APP_CONFIG.scroll.maxVelocity).toBe(10000);
@@ -67,7 +65,7 @@ describe('APP_CONFIG', () => {
 });
 
 describe('DEFAULT_GENERATION_CONFIG', () => {
-  test('should have correct generation configuration', () => {
+  it('should have correct generation configuration', () => {
     expect(DEFAULT_GENERATION_CONFIG).toBeDefined();
     expect(DEFAULT_GENERATION_CONFIG.scrollThreshold).toBe(
       APP_CONFIG.scroll.threshold,
@@ -89,7 +87,7 @@ describe('DEFAULT_GENERATION_CONFIG', () => {
 });
 
 describe('DEFAULT_COPY_BUTTON_CONFIG', () => {
-  test('should have correct copy button configuration', () => {
+  it('should have correct copy button configuration', () => {
     expect(DEFAULT_COPY_BUTTON_CONFIG).toBeDefined();
     expect(DEFAULT_COPY_BUTTON_CONFIG.showOnHover).toBe(
       APP_CONFIG.ui.showCopyOnHover,

@@ -2,8 +2,6 @@
  * Tests for scroll utilities
  */
 
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-
 import {
   createScrollDetector,
   getScrollableParent,
@@ -45,18 +43,18 @@ describe('ScrollDetector', () => {
     vi.restoreAllMocks();
   });
 
-  test('should create instance with default config', () => {
+  it('should create instance with default config', () => {
     const detector = new ScrollDetector();
     expect(detector).toBeInstanceOf(ScrollDetector);
   });
 
-  test('should create instance with custom config', () => {
+  it('should create instance with custom config', () => {
     const config = { threshold: 90, debounceMs: 32 };
     const detector = new ScrollDetector(window, config);
     expect(detector).toBeInstanceOf(ScrollDetector);
   });
 
-  test('should get current position', () => {
+  it('should get current position', () => {
     const detector = new ScrollDetector();
     const position = detector.getCurrentPosition();
 
@@ -69,25 +67,25 @@ describe('ScrollDetector', () => {
     expect(position).toHaveProperty('scrollVelocity');
   });
 
-  test('should check if near bottom', () => {
+  it('should check if near bottom', () => {
     const detector = new ScrollDetector();
     const isNear = detector.isNearBottom();
     expect(typeof isNear).toBe('boolean');
   });
 
-  test('should get velocity', () => {
+  it('should get velocity', () => {
     const detector = new ScrollDetector();
     const velocity = detector.getVelocity();
     expect(typeof velocity).toBe('number');
   });
 
-  test('should start and stop monitoring', () => {
+  it('should start and stop monitoring', () => {
     const detector = new ScrollDetector();
     detector.start();
     detector.stop();
   });
 
-  test('should handle scroll subscription', () => {
+  it('should handle scroll subscription', () => {
     const detector = new ScrollDetector();
     const callback = vi.fn();
     const unsubscribe = detector.onScroll(callback);
@@ -97,7 +95,7 @@ describe('ScrollDetector', () => {
     unsubscribe();
   });
 
-  test('should handle multiple scroll subscriptions', () => {
+  it('should handle multiple scroll subscriptions', () => {
     const detector = new ScrollDetector();
     const callback1 = vi.fn();
     const callback2 = vi.fn();
@@ -112,7 +110,7 @@ describe('ScrollDetector', () => {
     unsubscribe2();
   });
 
-  test('should handle HTMLElement element', () => {
+  it('should handle HTMLElement element', () => {
     const element = {
       scrollTop: 100,
       scrollHeight: 1000,
@@ -129,7 +127,7 @@ describe('ScrollDetector', () => {
     expect(position.clientHeight).toBe(200);
   });
 
-  test('should calculate scroll percentage correctly', () => {
+  it('should calculate scroll percentage correctly', () => {
     vi.stubGlobal('window', {
       pageYOffset: 900,
       innerHeight: 800,
@@ -145,7 +143,7 @@ describe('ScrollDetector', () => {
     expect(typeof position.scrollPercentage).toBe('number');
   });
 
-  test('should handle edge case when maxScroll is 0', () => {
+  it('should handle edge case when maxScroll is 0', () => {
     vi.stubGlobal('document', {
       documentElement: {
         scrollTop: 0,
@@ -165,7 +163,7 @@ describe('ScrollDetector', () => {
     expect(position).toHaveProperty('scrollPercentage');
   });
 
-  test('should clamp scroll percentage between 0 and 100', () => {
+  it('should clamp scroll percentage between 0 and 100', () => {
     vi.stubGlobal('window', {
       pageYOffset: -100, // Negative scroll
       innerHeight: 800,
@@ -180,7 +178,7 @@ describe('ScrollDetector', () => {
     expect(position).toHaveProperty('scrollPercentage');
   });
 
-  test('should calculate velocity correctly', () => {
+  it('should calculate velocity correctly', () => {
     const detector = new ScrollDetector();
 
     // First call should have 0 velocity
@@ -193,14 +191,14 @@ describe('ScrollDetector', () => {
     expect(position2.scrollVelocity).toBeGreaterThanOrEqual(0);
   });
 
-  test('should clamp velocity to maxVelocity', () => {
+  it('should clamp velocity to maxVelocity', () => {
     const detector = new ScrollDetector(window, { maxVelocity: 100 });
 
     const position = detector.getCurrentPosition();
     expect(position.scrollVelocity).toBeLessThanOrEqual(100);
   });
 
-  test('should handle callback errors gracefully', () => {
+  it('should handle callback errors gracefully', () => {
     const detector = new ScrollDetector();
     const errorCallback = vi.fn(() => {
       throw new Error('Callback error');
@@ -212,7 +210,7 @@ describe('ScrollDetector', () => {
     expect(() => detector.getCurrentPosition()).not.toThrow();
   });
 
-  test('should handle scroll event throttling', () => {
+  it('should handle scroll event throttling', () => {
     const detector = new ScrollDetector();
     const callback = vi.fn();
 
@@ -225,7 +223,7 @@ describe('ScrollDetector', () => {
     }).not.toThrow();
   });
 
-  test('should stop listening correctly', () => {
+  it('should stop listening correctly', () => {
     const detector = new ScrollDetector();
     const callback = vi.fn();
 
@@ -238,7 +236,7 @@ describe('ScrollDetector', () => {
     }).not.toThrow();
   });
 
-  test('should handle multiple start/stop cycles', () => {
+  it('should handle multiple start/stop cycles', () => {
     const detector = new ScrollDetector();
 
     detector.start();
@@ -254,12 +252,12 @@ describe('ScrollDetector', () => {
 });
 
 describe('createScrollDetector', () => {
-  test('should create ScrollDetector instance', () => {
+  it('should create ScrollDetector instance', () => {
     const detector = createScrollDetector();
     expect(detector).toBeInstanceOf(ScrollDetector);
   });
 
-  test('should create instance with config', () => {
+  it('should create instance with config', () => {
     const config = { threshold: 90 };
     const detector = createScrollDetector(window, config);
     expect(detector).toBeInstanceOf(ScrollDetector);
@@ -267,7 +265,7 @@ describe('createScrollDetector', () => {
 });
 
 describe('isScrollable', () => {
-  test('should check if element is scrollable', () => {
+  it('should check if element is scrollable', () => {
     const element = {
       scrollHeight: 1000,
       clientHeight: 500,
@@ -283,7 +281,7 @@ describe('isScrollable', () => {
 });
 
 describe('getScrollableParent', () => {
-  test('should get scrollable parent', () => {
+  it('should get scrollable parent', () => {
     const element = {
       parentElement: null,
     } as HTMLElement;
@@ -298,7 +296,7 @@ describe('getScrollableParent', () => {
 });
 
 describe('scrollToElement', () => {
-  test('should scroll to element', () => {
+  it('should scroll to element', () => {
     const element = {
       scrollIntoView: vi.fn(),
     } as unknown as HTMLElement;
@@ -310,7 +308,7 @@ describe('scrollToElement', () => {
 });
 
 describe('scrollToTop', () => {
-  test('should scroll to top with window', () => {
+  it('should scroll to top with window', () => {
     const mockWindow = {
       scrollTo: vi.fn(),
     } as unknown as Window;
@@ -323,7 +321,7 @@ describe('scrollToTop', () => {
     });
   });
 
-  test('should scroll to top with HTMLElement', () => {
+  it('should scroll to top with HTMLElement', () => {
     const mockElement = {
       scrollTo: vi.fn(),
     } as unknown as HTMLElement;
@@ -336,7 +334,7 @@ describe('scrollToTop', () => {
     });
   });
 
-  test('should scroll to top with default window', () => {
+  it('should scroll to top with default window', () => {
     vi.stubGlobal('window', {
       scrollTo: vi.fn(),
     });
@@ -350,7 +348,7 @@ describe('scrollToTop', () => {
 });
 
 describe('scrollToBottom', () => {
-  test('should scroll to bottom with window', () => {
+  it('should scroll to bottom with window', () => {
     const mockWindow = {
       scrollTo: vi.fn(),
     } as unknown as Window;
@@ -370,7 +368,7 @@ describe('scrollToBottom', () => {
     );
   });
 
-  test('should scroll to bottom with HTMLElement', () => {
+  it('should scroll to bottom with HTMLElement', () => {
     const mockElement = {
       scrollTo: vi.fn(),
       scrollHeight: 1500,
@@ -384,7 +382,7 @@ describe('scrollToBottom', () => {
     });
   });
 
-  test('should scroll to bottom with default window', () => {
+  it('should scroll to bottom with default window', () => {
     vi.stubGlobal('window', {
       scrollTo: vi.fn(),
     });
@@ -404,7 +402,7 @@ describe('scrollToBottom', () => {
 });
 
 describe('isScrollable', () => {
-  test('should return true for scrollable element', () => {
+  it('should return true for scrollable element', () => {
     const element = {
       scrollHeight: 1000,
       clientHeight: 500,
@@ -418,7 +416,7 @@ describe('isScrollable', () => {
     expect(result).toBe(true);
   });
 
-  test('should return false for non-scrollable element', () => {
+  it('should return false for non-scrollable element', () => {
     const element = {
       scrollHeight: 500,
       clientHeight: 500,
@@ -432,7 +430,7 @@ describe('isScrollable', () => {
     expect(result).toBe(false);
   });
 
-  test('should return false for element with overflow hidden', () => {
+  it('should return false for element with overflow hidden', () => {
     const element = {
       scrollHeight: 1000,
       clientHeight: 500,
@@ -448,7 +446,7 @@ describe('isScrollable', () => {
 });
 
 describe('getScrollableParent', () => {
-  test('should return window when no scrollable parent found', () => {
+  it('should return window when no scrollable parent found', () => {
     const element = {
       parentElement: null,
     } as HTMLElement;
@@ -461,7 +459,7 @@ describe('getScrollableParent', () => {
     expect(parent).toBe(window);
   });
 
-  test('should return scrollable parent when found', () => {
+  it('should return scrollable parent when found', () => {
     const scrollableParent = {
       scrollHeight: 1000,
       clientHeight: 500,

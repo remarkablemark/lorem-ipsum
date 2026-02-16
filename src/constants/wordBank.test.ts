@@ -2,12 +2,10 @@
  * Tests for word bank constants
  */
 
-import { describe, expect, test } from 'vitest';
-
 import { SENTENCE_PATTERNS, WORD_BANK, WORD_CATEGORIES } from './wordBank';
 
 describe('WORD_BANK', () => {
-  test('should be an array of strings', () => {
+  it('should be an array of strings', () => {
     expect(Array.isArray(WORD_BANK)).toBe(true);
     expect(WORD_BANK.length).toBeGreaterThan(0);
 
@@ -16,7 +14,7 @@ describe('WORD_BANK', () => {
     }
   });
 
-  test('should contain original lorem ipsum words', () => {
+  it('should contain original lorem ipsum words', () => {
     expect(WORD_BANK).toContain('lorem');
     expect(WORD_BANK).toContain('ipsum');
     expect(WORD_BANK).toContain('dolor');
@@ -24,20 +22,20 @@ describe('WORD_BANK', () => {
     expect(WORD_BANK).toContain('amet');
   });
 
-  test('should contain additional Latin words', () => {
+  it('should contain additional Latin words', () => {
     expect(WORD_BANK).toContain('at');
     expect(WORD_BANK).toContain('vero');
     expect(WORD_BANK).toContain('eos');
     expect(WORD_BANK).toContain('accusamus');
   });
 
-  test('should have no empty strings', () => {
+  it('should have no empty strings', () => {
     WORD_BANK.forEach((word) => {
       expect(word.trim()).not.toBe('');
     });
   });
 
-  test('should track duplicate words', () => {
+  it('should track duplicate words', () => {
     const uniqueWords = new Set(WORD_BANK);
     expect(uniqueWords.size).toBeLessThanOrEqual(WORD_BANK.length);
     // The actual data has duplicates, so we just verify it's tracked correctly
@@ -45,14 +43,14 @@ describe('WORD_BANK', () => {
     expect(WORD_BANK.length).toBe(243);
   });
 
-  test('should have reasonable word count', () => {
+  it('should have reasonable word count', () => {
     expect(WORD_BANK.length).toBeGreaterThan(50);
     expect(WORD_BANK.length).toBeLessThan(1000);
   });
 });
 
 describe('SENTENCE_PATTERNS', () => {
-  test('should be an array of arrays', () => {
+  it('should be an array of arrays', () => {
     expect(Array.isArray(SENTENCE_PATTERNS)).toBe(true);
     expect(SENTENCE_PATTERNS.length).toBeGreaterThan(0);
 
@@ -61,7 +59,7 @@ describe('SENTENCE_PATTERNS', () => {
     }
   });
 
-  test('should contain valid pattern types', () => {
+  it('should contain valid pattern types', () => {
     const validPatternTypes = [
       'subject',
       'verb',
@@ -79,14 +77,14 @@ describe('SENTENCE_PATTERNS', () => {
     });
   });
 
-  test('should have patterns with reasonable length', () => {
+  it('should have patterns with reasonable length', () => {
     SENTENCE_PATTERNS.forEach((pattern) => {
       expect(pattern.length).toBeGreaterThan(0);
       expect(pattern.length).toBeLessThan(10);
     });
   });
 
-  test('should have no duplicate patterns', () => {
+  it('should have no duplicate patterns', () => {
     const patternStrings = SENTENCE_PATTERNS.map((pattern) =>
       pattern.join('-'),
     );
@@ -96,7 +94,7 @@ describe('SENTENCE_PATTERNS', () => {
 });
 
 describe('WORD_CATEGORIES', () => {
-  test('should have all required categories', () => {
+  it('should have all required categories', () => {
     const requiredCategories = [
       'subjects',
       'verbs',
@@ -116,32 +114,32 @@ describe('WORD_CATEGORIES', () => {
     });
   });
 
-  test('should have non-empty arrays for each category', () => {
+  it('should have non-empty arrays for each category', () => {
     Object.values(WORD_CATEGORIES).forEach((words) => {
       expect(words.length).toBeGreaterThan(0);
       expect(words[0]).toBeTypeOf('string');
     });
   });
 
-  test('should contain lorem ipsum words in subjects', () => {
+  it('should contain lorem ipsum words in subjects', () => {
     expect(WORD_CATEGORIES.subjects).toContain('lorem');
     expect(WORD_CATEGORIES.subjects).toContain('ipsum');
     expect(WORD_CATEGORIES.subjects).toContain('dolor');
   });
 
-  test('should contain action words in verbs', () => {
+  it('should contain action words in verbs', () => {
     expect(WORD_CATEGORIES.verbs).toContain('sit');
     expect(WORD_CATEGORIES.verbs).toContain('amet');
     expect(WORD_CATEGORIES.verbs).toContain('consectetur');
   });
 
-  test('should contain descriptive words in adjectives', () => {
+  it('should contain descriptive words in adjectives', () => {
     expect(WORD_CATEGORIES.adjectives).toContain('magna');
     expect(WORD_CATEGORIES.adjectives).toContain('aliqua');
     expect(WORD_CATEGORIES.adjectives).toContain('minim');
   });
 
-  test('should have no empty strings in any category', () => {
+  it('should have no empty strings in any category', () => {
     Object.values(WORD_CATEGORIES).forEach((words) => {
       words.forEach((word) => {
         expect(word.trim()).not.toBe('');
@@ -149,7 +147,7 @@ describe('WORD_CATEGORIES', () => {
     });
   });
 
-  test('should track duplicate words within categories', () => {
+  it('should track duplicate words within categories', () => {
     Object.values(WORD_CATEGORIES).forEach((words) => {
       const uniqueWords = new Set(words);
       expect(uniqueWords.size).toBeLessThanOrEqual(words.length);
@@ -157,7 +155,7 @@ describe('WORD_CATEGORIES', () => {
     });
   });
 
-  test('should have reasonable category sizes', () => {
+  it('should have reasonable category sizes', () => {
     Object.values(WORD_CATEGORIES).forEach((words) => {
       expect(words.length).toBeGreaterThan(5);
       expect(words.length).toBeLessThan(500);

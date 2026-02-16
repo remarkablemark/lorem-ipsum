@@ -2,8 +2,6 @@
  * Tests for text generation utilities
  */
 
-import { describe, expect, test } from 'vitest';
-
 import {
   createTextGenerator,
   generateLoremSentence,
@@ -13,26 +11,26 @@ import {
 } from './textGenerator';
 
 describe('SeededRandom', () => {
-  test('should create instance with seed', () => {
+  it('should create instance with seed', () => {
     const random = new SeededRandom('test-seed');
     expect(random).toBeInstanceOf(SeededRandom);
   });
 
-  test('should generate random numbers', () => {
+  it('should generate random numbers', () => {
     const random = new SeededRandom('test-seed');
     const value = random.next();
     expect(value).toBeGreaterThanOrEqual(0);
     expect(value).toBeLessThan(1);
   });
 
-  test('should generate random integers', () => {
+  it('should generate random integers', () => {
     const random = new SeededRandom('test-seed');
     const value = random.nextInt(1, 10);
     expect(value).toBeGreaterThanOrEqual(1);
     expect(value).toBeLessThanOrEqual(10);
   });
 
-  test('should select random array element', () => {
+  it('should select random array element', () => {
     const random = new SeededRandom('test-seed');
     const array = ['a', 'b', 'c', 'd'];
     const element = random.nextElement(array);
@@ -41,7 +39,7 @@ describe('SeededRandom', () => {
 });
 
 describe('TextGenerator', () => {
-  test('should create instance with config', () => {
+  it('should create instance with config', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -55,7 +53,7 @@ describe('TextGenerator', () => {
     expect(generator).toBeInstanceOf(TextGenerator);
   });
 
-  test('should generate paragraphs', () => {
+  it('should generate paragraphs', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -82,7 +80,7 @@ describe('TextGenerator', () => {
     });
   });
 
-  test('should generate sentence', () => {
+  it('should generate sentence', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -101,7 +99,7 @@ describe('TextGenerator', () => {
     expect(sentence.endsWith('.')).toBe(true);
   });
 
-  test('should get original text', () => {
+  it('should get original text', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -123,7 +121,7 @@ describe('TextGenerator', () => {
     expect(originalText.id).toBe('original-lorem-ipsum');
   });
 
-  test('should generate paragraphs with seed', () => {
+  it('should generate paragraphs with seed', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -147,7 +145,7 @@ describe('TextGenerator', () => {
     expect(paragraphs1[1].content).toBe(paragraphs2[1].content);
   });
 
-  test('should handle empty words array in sentence generation', () => {
+  it('should handle empty words array in sentence generation', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -164,7 +162,7 @@ describe('TextGenerator', () => {
     expect(sentence).toBe('');
   });
 
-  test('should format sentence with proper capitalization and punctuation', () => {
+  it('should format sentence with proper capitalization and punctuation', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -190,7 +188,7 @@ describe('TextGenerator', () => {
     expect(sentenceWithPunct).toMatch(/^[A-Z][a-z]*(?: [a-z]+)*\.$/);
   });
 
-  test('should check generation trigger', () => {
+  it('should check generation trigger', () => {
     const config = {
       scrollThreshold: 85,
       wordsPerParagraph: { min: 30, max: 100 },
@@ -231,12 +229,12 @@ describe('TextGenerator', () => {
 });
 
 describe('createTextGenerator', () => {
-  test('should create TextGenerator instance', () => {
+  it('should create TextGenerator instance', () => {
     const generator = createTextGenerator();
     expect(generator).toBeInstanceOf(TextGenerator);
   });
 
-  test('should create instance with custom config', () => {
+  it('should create instance with custom config', () => {
     const config = { seed: 'custom-seed' };
     const generator = createTextGenerator(config);
     expect(generator).toBeInstanceOf(TextGenerator);
@@ -244,7 +242,7 @@ describe('createTextGenerator', () => {
 });
 
 describe('generateLoremText', () => {
-  test('should generate lorem text paragraphs', () => {
+  it('should generate lorem text paragraphs', () => {
     const paragraphs = generateLoremText(3);
 
     expect(Array.isArray(paragraphs)).toBe(true);
@@ -259,7 +257,7 @@ describe('generateLoremText', () => {
     });
   });
 
-  test('should generate lorem text with custom config', () => {
+  it('should generate lorem text with custom config', () => {
     const config = { seed: 'test-seed' };
     const paragraphs = generateLoremText(2, config);
 
@@ -269,7 +267,7 @@ describe('generateLoremText', () => {
 });
 
 describe('generateLoremSentence', () => {
-  test('should generate lorem sentence', () => {
+  it('should generate lorem sentence', () => {
     const sentence = generateLoremSentence(10);
 
     expect(typeof sentence).toBe('string');
@@ -277,7 +275,7 @@ describe('generateLoremSentence', () => {
     expect(sentence.split(' ').length).toBeGreaterThan(0);
   });
 
-  test('should generate lorem sentence with seed', () => {
+  it('should generate lorem sentence with seed', () => {
     const sentence1 = generateLoremSentence(10, 'seed1');
     const sentence2 = generateLoremSentence(10, 'seed1');
     const sentence3 = generateLoremSentence(10, 'seed2');

@@ -2,8 +2,6 @@
  * Tests for clipboard utilities
  */
 
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-
 import type { CopyResult } from '../../types/clipboard.types';
 import type { LoremText } from '../../types/loremText.types';
 import {
