@@ -71,12 +71,9 @@ src/
 │   └── App/
 ├── types/              # Shared TypeScript interfaces
 ├── utils/              # Utility functions
-└── hooks/              # Custom React hooks
-
-tests/
-├── components/         # Component tests
-├── utils/              # Utility tests
-└── integration/        # Integration tests
+├── hooks/              # Custom React hooks
+├── main.test.tsx       # Entry point test
+└── setupTests.ts       # Test configuration
 
 public/                 # Static assets
 ```
