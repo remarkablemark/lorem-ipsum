@@ -101,14 +101,6 @@ export default function App() {
           </div>
         </section>
       </main>
-
-      <footer className="mt-auto border-t border-slate-200">
-        <div className="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm text-slate-500">
-            Lorem Ipsum Generator - Built with React & TypeScript
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
