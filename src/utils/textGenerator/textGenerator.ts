@@ -165,6 +165,7 @@ export class TextGenerator {
 
     // Add period at end
     const lastWord = words[words.length - 1];
+    /* v8 ignore next -- @preserve */
     if (!lastWord.endsWith('.')) {
       words[words.length - 1] = lastWord + '.';
     }

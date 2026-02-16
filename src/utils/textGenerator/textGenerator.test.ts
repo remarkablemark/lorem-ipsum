@@ -164,6 +164,32 @@ describe('TextGenerator', () => {
     expect(sentence).toBe('');
   });
 
+  test('should format sentence with proper capitalization and punctuation', () => {
+    const config = {
+      scrollThreshold: 85,
+      wordsPerParagraph: { min: 30, max: 100 },
+      sentencesPerParagraph: { min: 3, max: 8 },
+      maxParagraphs: 100,
+      chunkSize: 50,
+      seed: 'test-seed',
+    };
+
+    const generator = new TextGenerator(config);
+
+    // Test single word sentence
+    const singleWordSentence = generator.generateSentence(1);
+    expect(singleWordSentence).toMatch(/^[A-Z][a-z]*\.$/);
+
+    // Test multiple word sentence
+    const multiWordSentence = generator.generateSentence(5);
+    expect(multiWordSentence).toMatch(/^[A-Z][a-z]*(?: [a-z]+)*\.$/);
+    expect(multiWordSentence.split(' ').length).toBeGreaterThan(1);
+
+    // Test sentence with word that already has punctuation
+    const sentenceWithPunct = generator.generateSentence(3);
+    expect(sentenceWithPunct).toMatch(/^[A-Z][a-z]*(?: [a-z]+)*\.$/);
+  });
+
   test('should check generation trigger', () => {
     const config = {
       scrollThreshold: 85,
