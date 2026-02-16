@@ -10,6 +10,7 @@
 ### Session 2026-02-16
 
 - Q: Copy button visibility strategy → A: Only visible when text is selected or user hovers over content area
+- Q: Text generation pattern → A: First paragraph is the original text and afterwards is continuous unique text
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -28,7 +29,7 @@
 
 ### User Story 1 - Generate Lorem Ipsum Text via Scrolling (Priority: P1)
 
-User can generate lorem ipsum placeholder text by scrolling down the page, with text appearing progressively as they scroll.
+User can generate lorem ipsum placeholder text by scrolling down the page, with text appearing progressively as they scroll. The first paragraph is the original lorem ipsum text, followed by continuously generated unique text.
 
 **Why this priority**: Core functionality - the primary interaction model is scrolling-based generation
 
@@ -36,8 +37,8 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 
 **Acceptance Scenarios**:
 
-1. **Given** user is on the main page with initial text visible, **When** they scroll down, **Then** new lorem ipsum text appears progressively
-2. **Given** user is scrolling, **When** they reach the bottom of generated content, **Then** more text automatically generates
+1. **Given** user is on the main page with original lorem ipsum text visible, **When** they scroll down, **Then** new unique lorem ipsum text appears progressively
+2. **Given** user is scrolling, **When** they reach the bottom of generated content, **Then** more unique text automatically generates
 3. **Given** text is generating, **When** user scrolls rapidly, **Then** scrolling remains smooth at 60fps without lag
 
 ---
@@ -62,7 +63,7 @@ User can copy all or portions of the generated lorem ipsum text to clipboard for
 
 ### User Story 3 - Reset and Start Over (Priority: P3)
 
-User can reset the generated text and start fresh with a new scrolling session.
+User can reset the generated text and start fresh with a new scrolling session, returning to the original lorem ipsum paragraph.
 
 **Why this priority**: Provides control - users often want to start over with different requirements
 
@@ -70,8 +71,8 @@ User can reset the generated text and start fresh with a new scrolling session.
 
 **Acceptance Scenarios**:
 
-1. **Given** user has generated lots of text, **When** they click "Reset", **Then** page returns to initial state with only starting text
-2. **Given** page is reset, **When** user scrolls, **Then** new text generation starts from beginning
+1. **Given** user has generated lots of text, **When** they click "Reset", **Then** page returns to initial state with only the original lorem ipsum paragraph
+2. **Given** page is reset, **When** they scroll, **Then** new unique text generation starts after the original paragraph
 
 ---
 
@@ -93,6 +94,7 @@ User can reset the generated text and start fresh with a new scrolling session.
 ### Functional Requirements
 
 - **FR-001**: System MUST generate lorem ipsum text progressively as user scrolls down
+- **FR-001a**: First paragraph MUST be the original lorem ipsum text, followed by continuously generated unique text
 - **FR-002**: System MUST maintain smooth scrolling performance at 60fps during text generation
 - **FR-003**: System MUST automatically detect when user approaches bottom of content and generate more text
 - **FR-004**: System MUST provide copy functionality for all or selected text
