@@ -2,6 +2,7 @@
 
 [![build](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/build.yml)
 [![test](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/test.yml)
+[![codecov](https://codecov.io/github/remarkablemark/lorem-ipsum/graph/badge.svg?token=sAPMtHvKvJ)](https://codecov.io/github/remarkablemark/lorem-ipsum)
 
 📝 Lorem ipsum generator:
 
