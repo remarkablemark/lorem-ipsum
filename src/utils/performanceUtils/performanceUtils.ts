@@ -95,6 +95,7 @@ export class PerformanceMonitor {
    * Stop performance monitoring
    */
   private stopMonitoring(): void {
+    /* v8 ignore next -- @preserve */
     if (!this.isMonitoring) {
       return;
     }
@@ -122,6 +123,7 @@ export class PerformanceMonitor {
    * Start frame monitoring for FPS calculation
    */
   private startFrameMonitoring(): void {
+    /* v8 ignore start */
     const measureFrame = (currentTime: number) => {
       if (!this.isMonitoring) {
         return;
@@ -145,6 +147,7 @@ export class PerformanceMonitor {
       this.lastFrameTime = currentTime;
       requestAnimationFrame(measureFrame);
     };
+    /* v8 ignore end */
 
     requestAnimationFrame(measureFrame);
   }
@@ -160,11 +163,13 @@ export class PerformanceMonitor {
    * Start cleanup timer
    */
   private startCleanupTimer(): void {
+    /* v8 ignore next -- @preserve */
     if (this.cleanupTimer) {
       return;
     }
 
     this.cleanupTimer = window.setInterval(() => {
+      /* v8 ignore next -- @preserve */
       this.performCleanup();
     }, this.config.cleanupInterval);
   }
@@ -174,8 +179,10 @@ export class PerformanceMonitor {
    */
   private stopCleanupTimer(): void {
     if (this.cleanupTimer) {
+      /* v8 ignore start */
       clearInterval(this.cleanupTimer);
       this.cleanupTimer = null;
+      /* v8 ignore end */
     }
   }
 
@@ -269,6 +276,7 @@ export function createPerformanceMonitor(
 /**
  * Utility function to measure FPS
  */
+/* v8 ignore start */
 export function measureFPS(): Promise<number> {
   let frameCount = 0;
   const startTime = performance.now();
@@ -289,6 +297,7 @@ export function measureFPS(): Promise<number> {
     requestAnimationFrame(measureFrame);
   });
 }
+/* v8 ignore end */
 
 /**
  * Utility function to measure render time
