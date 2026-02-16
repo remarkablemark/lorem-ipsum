@@ -1,7 +1,7 @@
-# vite-react-tailwind-template
+# lorem-ipsum
 
-[![build](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/build.yml)
-[![test](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/vite-react-tailwind-template/actions/workflows/test.yml)
+[![build](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/build.yml)
+[![test](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/lorem-ipsum/actions/workflows/test.yml)
 
 Vite React Tailwind Template
 
@@ -10,8 +10,8 @@ Vite React Tailwind Template
 Clone the repository:
 
 ```sh
-git clone https://github.com/remarkablemark/vite-react-tailwind-template.git
-cd vite-react-tailwind-template
+git clone https://github.com/remarkablemark/lorem-ipsum.git
+cd lorem-ipsum
 ```
 
 Install the dependencies:
