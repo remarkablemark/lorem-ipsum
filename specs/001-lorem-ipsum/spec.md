@@ -11,6 +11,7 @@
 
 - Q: Copy button visibility strategy → A: Only visible when text is selected or user hovers over content area
 - Q: Text generation pattern → A: First paragraph is the original text and afterwards is continuous unique text
+- Q: Text source implementation → A: Hardcoded word bank with algorithmic generation
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -83,6 +84,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - What happens when user scrolls to bottom but network is slow?
 - How does system behave with very small screen sizes or mobile devices?
 - What happens when user scrolls while text is still generating?
+- How does system ensure text generation works offline without external dependencies?
 
 ## Requirements _(mandatory)_
 
@@ -95,6 +97,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 
 - **FR-001**: System MUST generate lorem ipsum text progressively as user scrolls down
 - **FR-001a**: First paragraph MUST be the original lorem ipsum text, followed by continuously generated unique text
+- **FR-001b**: Text generation MUST use hardcoded word bank with algorithmic generation (no external dependencies)
 - **FR-002**: System MUST maintain smooth scrolling performance at 60fps during text generation
 - **FR-003**: System MUST automatically detect when user approaches bottom of content and generate more text
 - **FR-004**: System MUST provide copy functionality for all or selected text
