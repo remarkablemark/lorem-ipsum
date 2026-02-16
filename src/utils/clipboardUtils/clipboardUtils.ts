@@ -101,10 +101,8 @@ export class ClipboardManager {
    * Check if clipboard API is supported
    */
   private checkClipboardSupport(): boolean {
-    return (
-      'clipboard' in navigator &&
-      typeof navigator.clipboard.writeText === 'function'
-    );
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    return typeof navigator.clipboard?.writeText === 'function';
   }
 }
 
