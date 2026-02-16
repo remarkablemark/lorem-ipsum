@@ -31,16 +31,13 @@ export default function App() {
 
       <main className="mx-auto min-h-screen max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         <section
-          className="space-y-8"
+          className="space-y-6"
           role="region"
           aria-label="Lorem ipsum text"
           data-testid="text-container"
         >
           {/* Original text */}
           <article className="prose prose-slate max-w-none">
-            <h2 className="text-xl font-semibold text-slate-900">
-              Original Text
-            </h2>
             <p className="leading-relaxed text-slate-700">
               {originalText.content}
             </p>
@@ -49,9 +46,6 @@ export default function App() {
           {/* Generated texts */}
           {texts.length > 1 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-semibold text-slate-900">
-                Generated Text
-              </h2>
               {texts.slice(1).map((text) => (
                 <article key={text.id} className="prose prose-slate max-w-none">
                   <p className="leading-relaxed text-slate-700">

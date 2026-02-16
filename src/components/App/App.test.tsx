@@ -113,9 +113,6 @@ describe('App', () => {
 
     render(<App />);
 
-    const generatedTextHeading = screen.getByText('Generated Text');
-    expect(generatedTextHeading).toBeInTheDocument();
-
     const generatedText = screen.getByText('Generated lorem ipsum text.');
     expect(generatedText).toBeInTheDocument();
   });
