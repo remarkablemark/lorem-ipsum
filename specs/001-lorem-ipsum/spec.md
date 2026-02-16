@@ -140,7 +140,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 
 ### Measurable Outcomes
 
-- **SC-001**: Users can generate lorem ipsum text through scrolling with no perceptible delay
+- **SC-001**: Users can generate lorem ipsum text through scrolling with <100ms response time
 - **SC-002**: Scrolling performance maintains 60fps during continuous text generation
 - **SC-003**: 100% of users can complete all actions using keyboard only
 - **SC-004**: Copy to clipboard works successfully on 95% of supported browsers

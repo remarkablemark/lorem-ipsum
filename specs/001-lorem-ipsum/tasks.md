@@ -64,15 +64,16 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 
 ### Tests for User Story 1 (REQUIRED - TDD approach) ⚠️
 
-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **CRITICAL TDD REQUIREMENT**: Write these tests FIRST, verify they FAIL, then implement
+> **Constitution III**: Test-First Development is NON-NEGOTIABLE - tests must be written and approved before implementation
 
-- [ ] T014 [P] [US1] Component test for App in src/components/App/App.test.tsx
-- [ ] T015 [P] [US1] Component test for TextContainer in src/components/TextContainer/TextContainer.test.tsx
-- [ ] T016 [P] [US1] Hook test for useLoremText in src/hooks/useLoremText/useLoremText.test.ts
-- [ ] T017 [P] [US1] Hook test for useScrollDetection in src/hooks/useScrollDetection/useScrollDetection.test.ts
-- [ ] T018 [P] [US1] Utility test for textGenerator in src/utils/textGenerator/textGenerator.test.ts
-- [ ] T019 [P] [US1] Utility test for scrollUtils in src/utils/scrollUtils/scrollUtils.test.ts
-- [ ] T020 [P] [US1] Integration test for scroll generation flow in src/main.test.tsx
+- [ ] T014 [P] [US1] Component test for App in src/components/App/App.test.tsx (WRITE FIRST, VERIFY FAIL)
+- [ ] T015 [P] [US1] Component test for TextContainer in src/components/TextContainer/TextContainer.test.tsx (WRITE FIRST, VERIFY FAIL)
+- [ ] T016 [P] [US1] Hook test for useLoremText in src/hooks/useLoremText/useLoremText.test.ts (WRITE FIRST, VERIFY FAIL)
+- [ ] T017 [P] [US1] Hook test for useScrollDetection in src/hooks/useScrollDetection/useScrollDetection.test.ts (WRITE FIRST, VERIFY FAIL)
+- [ ] T018 [P] [US1] Utility test for textGenerator in src/utils/textGenerator/textGenerator.test.ts (WRITE FIRST, VERIFY FAIL)
+- [ ] T019 [P] [US1] Utility test for scrollUtils in src/utils/scrollUtils/scrollUtils.test.ts (WRITE FIRST, VERIFY FAIL)
+- [ ] T020 [P] [US1] Integration test for scroll generation flow in src/main.test.tsx (WRITE FIRST, VERIFY FAIL)
 
 ### Implementation for User Story 1
 
@@ -85,6 +86,7 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 - [ ] T027 [US1] Implement usePerformance hook in src/hooks/usePerformance/usePerformance.ts (depends on T023)
 - [ ] T028 [US1] Implement text generation algorithm in src/utils/textGenerator/textGenerator.ts
 - [ ] T029 [US1] Implement scroll utilities in src/utils/scrollUtils/scrollUtils.ts
+- [ ] T029a [US1] Implement scroll event throttling for rapid scrolling performance in src/utils/scrollUtils/scrollUtils.ts (covers FR-009)
 - [ ] T030 [US1] Create App component in src/components/App/App.tsx (depends on T025, T026, T027)
 - [ ] T031 [US1] Create TextContainer component in src/components/TextContainer/TextContainer.tsx (depends on T025, T026)
 - [ ] T032 [US1] Add accessibility attributes and keyboard navigation to TextContainer
@@ -268,14 +270,14 @@ With multiple developers:
 
 ## Summary
 
-- **Total Tasks**: 80 tasks
+- **Total Tasks**: 81 tasks
 - **Task Count per User Story**:
-  - User Story 1: 29 tasks (including tests)
+  - User Story 1: 30 tasks (including tests)
   - User Story 2: 18 tasks (including tests)
   - User Story 3: 9 tasks (including tests)
 - **Parallel Opportunities**: 47 tasks marked as parallelizable
 - **Independent Test Criteria**: Each user story has clear independent test criteria
-- **Suggested MVP Scope**: User Story 1 only (29 tasks) - provides core scrolling text generation
+- **Suggested MVP Scope**: User Story 1 only (30 tasks) - provides core scrolling text generation
 - **TDD Approach**: Tests required for all user stories following constitution requirements
 
 ---
