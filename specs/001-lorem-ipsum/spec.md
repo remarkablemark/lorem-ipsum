@@ -36,23 +36,7 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 
 ---
 
-### User Story 2 - Control Generation Speed (Priority: P2)
-
-User can control how much text is generated per scroll action to match their reading speed and needs.
-
-**Why this priority**: Enhances user experience - different users prefer different amounts of content
-
-**Independent Test**: Can be tested by setting different generation speeds and verifying text quantity matches expectations
-
-**Acceptance Scenarios**:
-
-1. **Given** user wants more text per scroll, **When** they increase generation speed, **Then** more paragraphs appear per scroll action
-2. **Given** user wants less text per scroll, **When** they decrease generation speed, **Then** fewer paragraphs appear per scroll action
-3. **Given** user changes speed setting, **When** they scroll, **Then** new setting takes effect immediately
-
----
-
-### User Story 3 - Copy Generated Text (Priority: P3)
+### User Story 2 - Copy Generated Text (Priority: P2)
 
 User can copy all or portions of the generated lorem ipsum text to clipboard for use in other applications.
 
@@ -68,7 +52,7 @@ User can copy all or portions of the generated lorem ipsum text to clipboard for
 
 ---
 
-### User Story 4 - Reset and Start Over (Priority: P3)
+### User Story 3 - Reset and Start Over (Priority: P3)
 
 User can reset the generated text and start fresh with a new scrolling session.
 
@@ -103,19 +87,17 @@ User can reset the generated text and start fresh with a new scrolling session.
 - **FR-001**: System MUST generate lorem ipsum text progressively as user scrolls down
 - **FR-002**: System MUST maintain smooth scrolling performance at 60fps during text generation
 - **FR-003**: System MUST automatically detect when user approaches bottom of content and generate more text
-- **FR-004**: Users MUST be able to adjust text generation speed (amount per scroll)
-- **FR-005**: System MUST provide copy functionality for all or selected text
-- **FR-006**: System MUST be fully accessible via keyboard navigation including scrolling
-- **FR-007**: System MUST be responsive across all device sizes with touch-friendly scrolling
-- **FR-008**: System MUST use semantic HTML with proper ARIA labels for screen readers
-- **FR-009**: System MUST provide reset functionality to clear generated content
-- **FR-010**: System MUST handle rapid scrolling without performance degradation
+- **FR-004**: System MUST provide copy functionality for all or selected text
+- **FR-005**: System MUST be fully accessible via keyboard navigation including scrolling
+- **FR-006**: System MUST be responsive across all device sizes with touch-friendly scrolling
+- **FR-007**: System MUST use semantic HTML with proper ARIA labels for screen readers
+- **FR-008**: System MUST provide reset functionality to clear generated content
+- **FR-009**: System MUST handle rapid scrolling without performance degradation
 
 ### Key Entities
 
 - **LoremText**: Generated placeholder text with metadata (word count, paragraph count, generation timestamp)
 - **ScrollPosition**: Current scroll location and proximity to content boundaries
-- **GenerationConfig**: User preferences for text generation (speed, amount per scroll)
 - **ClipboardState**: Status of copy operations (success/failure/pending)
 - **PerformanceMetrics**: Real-time scrolling performance data (fps, render time)
 
