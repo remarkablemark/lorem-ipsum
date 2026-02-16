@@ -1,32 +1,254 @@
+/**
+ * Tests for App component
+ */
+
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
-import App from '.';
+import App from './App';
 
-describe('App component', () => {
-  it('renders without crashing', () => {
+// Mock the hooks to control their behavior
+vi.mock('src/hooks/useLoremText', () => ({
+  useLoremText: vi.fn(() => ({
+    texts: [
+      {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+    ],
+    originalText: {
+      id: 'original-lorem-ipsum',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      type: 'original',
+      position: 0,
+      paragraphIndex: 1,
+    },
+    isGenerating: false,
+    generateMore: vi.fn(),
+    reset: vi.fn(),
+    getAllText: vi.fn(),
+    getWordCount: vi.fn(),
+  })),
+}));
+
+vi.mock('src/hooks/usePerformance', () => ({
+  usePerformance: vi.fn(() => ({
+    metrics: {
+      fps: 60,
+      renderTime: 16,
+      textGenerationTime: 5,
+      memoryUsage: 25,
+      scrollEventCount: 0,
+      lastCleanupTime: Date.now(),
+    },
+    isPerformant: true,
+  })),
+}));
+
+vi.mock('src/hooks/useScrollDetection', () => ({
+  useScrollDetection: vi.fn(() => ({
+    position: {
+      scrollTop: 0,
+      scrollHeight: 1000,
+      clientHeight: 800,
+      scrollPercentage: 0,
+      isNearBottom: false,
+      lastScrollTime: Date.now(),
+      scrollVelocity: 0,
+    },
+  })),
+}));
+
+import { useLoremText } from 'src/hooks/useLoremText';
+import { usePerformance } from 'src/hooks/usePerformance';
+
+describe('App', () => {
+  it('should render the main heading', () => {
     render(<App />);
 
     const heading = screen.getByRole('heading', { level: 1 });
     expect(heading).toBeInTheDocument();
-
-    const button = screen.getByRole('button', { name: /count is 0/i });
-    expect(button).toBeInTheDocument();
-
-    const images = screen.getAllByRole('img');
-    expect(images).toHaveLength(3);
+    expect(heading.textContent).toBe('Lorem Ipsum Generator');
   });
 
-  it('button click increments count', async () => {
-    const user = userEvent.setup();
+  it('should render the original lorem ipsum text', () => {
     render(<App />);
 
-    const button = screen.getByRole('button', { name: /count is 0/i });
+    const originalText = screen.getByText(/Lorem ipsum dolor sit amet/);
+    expect(originalText).toBeInTheDocument();
+  });
 
-    await user.click(button);
-    expect(button).toHaveTextContent('count is 1');
+  it('should render the text container', () => {
+    render(<App />);
 
-    await user.click(button);
-    expect(button).toHaveTextContent('count is 2');
+    const textContainer = screen.getByTestId('text-container');
+    expect(textContainer).toBeInTheDocument();
+  });
+
+  it('should render generated texts when present', () => {
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+        {
+          id: 'generated-1',
+          content: 'Generated lorem ipsum text.',
+          type: 'generated',
+          position: 1,
+          paragraphIndex: 2,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: false,
+      generateMore: vi.fn(),
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const generatedTextHeading = screen.getByText('Generated Text');
+    expect(generatedTextHeading).toBeInTheDocument();
+
+    const generatedText = screen.getByText('Generated lorem ipsum text.');
+    expect(generatedText).toBeInTheDocument();
+  });
+
+  it('should render loading state when generating', () => {
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: true,
+      generateMore: vi.fn(),
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const loadingText = screen.getByText('Generating more text...');
+    expect(loadingText).toBeInTheDocument();
+  });
+
+  it('should render empty state when no texts', () => {
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: false,
+      generateMore: vi.fn(),
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const emptyStateText = screen.getByText('No text generated yet');
+    expect(emptyStateText).toBeInTheDocument();
+  });
+
+  it('should render debug information with non-performant metrics', () => {
+    vi.mocked(usePerformance).mockReturnValue({
+      metrics: {
+        fps: 20,
+        renderTime: 100,
+        textGenerationTime: 50,
+        memoryUsage: 150,
+        scrollEventCount: 10,
+        lastCleanupTime: Date.now(),
+      },
+      isPerformant: false,
+      cleanup: vi.fn(),
+    });
+
+    render(<App />);
+
+    const debugHeading = screen.getByText('Debug Information');
+    expect(debugHeading).toBeInTheDocument();
+
+    const performantStatus = screen.getByText((content) => {
+      return content.includes('Performant:') && content.includes('No');
+    });
+    expect(performantStatus).toBeInTheDocument();
+  });
+
+  it('should render debug information with generating state', () => {
+    vi.mocked(useLoremText).mockReturnValue({
+      texts: [
+        {
+          id: 'original-lorem-ipsum',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          type: 'original',
+          position: 0,
+          paragraphIndex: 1,
+        },
+      ],
+      originalText: {
+        id: 'original-lorem-ipsum',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        type: 'original',
+        position: 0,
+        paragraphIndex: 1,
+      },
+      isGenerating: true,
+      generateMore: vi.fn(),
+      reset: vi.fn(),
+      getAllText: vi.fn(),
+      getWordCount: vi.fn(),
+    });
+
+    render(<App />);
+
+    const generatingStatus = screen.getByText((content) => {
+      return content.includes('Generating:') && content.includes('Yes');
+    });
+    expect(generatingStatus).toBeInTheDocument();
+  });
+
+  it('should render debug information', () => {
+    render(<App />);
+
+    const debugHeading = screen.getByText('Debug Information');
+    expect(debugHeading).toBeInTheDocument();
+
+    const textCount = screen.getByText((content, element) => {
+      return content.includes('Texts:') && element?.tagName === 'DIV';
+    });
+    expect(textCount).toBeInTheDocument();
   });
 });
