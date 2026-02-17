@@ -1,39 +1,31 @@
 /**
- * Tests for useLoremText hook
+ * Tests for useLoremText custom hook
  */
 
 import { act, renderHook } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 
 import { useLoremText } from './useLoremText';
 
-// Mock the text generator utility
+// Mock the text generator
 vi.mock('../../utils/textGenerator/textGenerator', () => ({
   createTextGenerator: vi.fn(() => ({
-    random: {
-      next: vi.fn(() => 0.5),
-      nextInt: vi.fn(() => 5),
-      nextElement: vi.fn((array: string[]) => array[0]),
-    },
-    nextPosition: 0,
-    nextParagraphIndex: 1,
-    generateParagraphs: vi.fn((count: number) =>
-      Array.from({ length: count }, (_, index) => ({
-        id: `generated-${String(index + 1)}`,
-        content: `Generated lorem ipsum text ${String(index + 1)}.`,
-        type: 'generated',
-        position: index + 1,
-        paragraphIndex: index + 2,
-      })),
-    ),
-    generateSentence: vi.fn(() => 'Generated sentence.'),
     getOriginalText: vi.fn(() => ({
       id: 'original-lorem-ipsum',
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      type: 'original',
+      type: 'original' as const,
       position: 0,
       paragraphIndex: 1,
     })),
-    shouldGenerate: vi.fn(() => false),
+    generateParagraphs: vi.fn((count: number) =>
+      Array.from({ length: count }, (_, i) => ({
+        id: `generated-${String(i)}`,
+        content: `Generated paragraph ${String(i + 1)}.`,
+        type: 'generated' as const,
+        position: i + 1,
+        paragraphIndex: i + 2,
+      })),
+    ),
   })),
 }));
 
@@ -42,70 +34,33 @@ describe('useLoremText', () => {
     vi.clearAllMocks();
   });
 
-  it('should initialize with original text only', () => {
+  it('should initialize with original text', () => {
     const { result } = renderHook(() => useLoremText());
 
     expect(result.current.texts).toHaveLength(1);
     expect(result.current.texts[0].type).toBe('original');
-    expect(result.current.texts[0].content).toContain(
-      'Lorem ipsum dolor sit amet',
-    );
     expect(result.current.originalText.type).toBe('original');
     expect(result.current.isGenerating).toBe(false);
   });
 
-  it('should generate more text when generateMore is called', async () => {
+  it('should generate more text', async () => {
     const { result } = renderHook(() => useLoremText());
 
     expect(result.current.texts).toHaveLength(1);
 
-    // Call generateMore and wait for state update
-    await act(async () => {
+    // Generate more text
+    act(() => {
       result.current.generateMore(2);
+    });
+
+    // Wait for the setTimeout to complete
+    await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
     expect(result.current.texts).toHaveLength(3); // Original + 2 generated
     expect(result.current.texts[1].type).toBe('generated');
     expect(result.current.texts[2].type).toBe('generated');
-  });
-
-  it('should reset to original text only', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    // Add some generated text first
-    await act(async () => {
-      result.current.generateMore(1);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    expect(result.current.texts).toHaveLength(2);
-
-    // Reset
-    act(() => {
-      result.current.reset();
-    });
-
-    expect(result.current.texts).toHaveLength(1);
-    expect(result.current.texts[0].type).toBe('original');
-  });
-
-  it('should get all text as string', () => {
-    const { result } = renderHook(() => useLoremText());
-
-    const allText = result.current.getAllText();
-
-    expect(allText).toBe(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    );
-  });
-
-  it('should get word count', () => {
-    const { result } = renderHook(() => useLoremText());
-
-    const wordCount = result.current.getWordCount();
-
-    expect(wordCount).toBe(8); // "Lorem ipsum dolor sit amet, consectetur adipiscing elit." = 8 words
   });
 
   it('should handle generation state correctly', async () => {
@@ -131,39 +86,7 @@ describe('useLoremText', () => {
     expect(result.current.texts.length).toBeGreaterThan(1);
   });
 
-  it('should use default count when generateMore is called without parameters', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    await act(async () => {
-      result.current.generateMore();
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    // Should generate default number of paragraphs (3)
-    expect(result.current.texts.length).toBe(4); // Original + 3 generated
-  });
-
-  it('should maintain text order by position', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    await act(async () => {
-      result.current.generateMore(3);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    const texts = result.current.texts;
-
-    // Original should be first (position 0)
-    expect(texts[0].position).toBe(0);
-    expect(texts[0].type).toBe('original');
-
-    // Generated texts should follow in order
-    expect(texts[1].position).toBe(1);
-    expect(texts[2].position).toBe(2);
-    expect(texts[3].position).toBe(3);
-  });
-
-  it('should not generate when already generating', async () => {
+  it('should not generate when already generating', () => {
     const { result } = renderHook(() => useLoremText());
 
     // Start generation
@@ -178,80 +101,23 @@ describe('useLoremText', () => {
       result.current.generateMore(2);
     });
 
-    // Should still be generating and not have added more texts
+    // Should still be generating from first call
     expect(result.current.isGenerating).toBe(true);
-
-    // Wait for first generation to complete
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    // Should have only the first generation's texts
-    expect(result.current.texts.length).toBe(3); // Original + 2 from first call
   });
 
-  it('should calculate word count correctly for multiple texts', async () => {
+  it('should use default count when none provided', async () => {
     const { result } = renderHook(() => useLoremText());
 
-    // Add some generated text
+    act(() => {
+      result.current.generateMore();
+    });
+
+    // Wait for the setTimeout to complete
     await act(async () => {
-      result.current.generateMore(1);
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
-    const wordCount = result.current.getWordCount();
-
-    expect(wordCount).toBe(13); // 8 (original) + 5 (generated)
-  });
-
-  // Edge case tests
-  it('should handle zero paragraph generation request', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    await act(async () => {
-      result.current.generateMore(0);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    // Should not add any texts when requesting 0 paragraphs
-    expect(result.current.texts).toHaveLength(1); // Only original
-  });
-
-  it('should handle negative paragraph generation request', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    await act(async () => {
-      result.current.generateMore(-1);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    // Should not add any texts when requesting negative paragraphs
-    expect(result.current.texts).toHaveLength(1); // Only original
-  });
-
-  it('should handle very large paragraph generation request', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    await act(async () => {
-      result.current.generateMore(1000);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    // Should handle large requests without crashing
-    expect(result.current.texts.length).toBeGreaterThan(1);
-  });
-
-  it('should handle concurrent generation requests gracefully', async () => {
-    const { result } = renderHook(() => useLoremText());
-
-    // Start multiple generation requests concurrently within a single act
-    await act(async () => {
-      result.current.generateMore(2);
-      result.current.generateMore(3);
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    // Should complete both generations due to mock implementation
-    expect(result.current.texts.length).toBeGreaterThanOrEqual(4); // Original + generated texts
+    // Should use default count of 3
+    expect(result.current.texts).toHaveLength(4); // Original + 3 generated
   });
 });

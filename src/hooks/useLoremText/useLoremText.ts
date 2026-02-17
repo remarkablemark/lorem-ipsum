@@ -31,12 +31,6 @@ interface UseLoremTextReturn {
   isGenerating: boolean;
   /** Generate more lorem ipsum text */
   generateMore: (count?: number) => void;
-  /** Reset to original text only */
-  reset: () => void;
-  /** Get all text as a single string */
-  getAllText: () => string;
-  /** Get total word count */
-  getWordCount: () => number;
 }
 
 /**
@@ -77,29 +71,10 @@ export function useLoremText(
     [isGenerating],
   );
 
-  const reset = useCallback((): void => {
-    const originalText = generatorRef.current.getOriginalText();
-    setTexts([originalText]);
-    setIsGenerating(false);
-  }, []);
-
-  const getAllText = useCallback((): string => {
-    return texts.map((text) => text.content).join('\n\n');
-  }, [texts]);
-
-  const getWordCount = useCallback((): number => {
-    return texts.reduce((count, text) => {
-      return count + text.content.split(/\s+/).filter(Boolean).length;
-    }, 0);
-  }, [texts]);
-
   return {
     texts,
     originalText,
     isGenerating,
     generateMore,
-    reset,
-    getAllText,
-    getWordCount,
   };
 }

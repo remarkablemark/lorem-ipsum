@@ -26,20 +26,6 @@ vi.mock('src/hooks', () => ({
     },
     isGenerating: false,
     generateMore: vi.fn(),
-    reset: vi.fn(),
-    getAllText: vi.fn(),
-    getWordCount: vi.fn(),
-  })),
-  usePerformance: vi.fn(() => ({
-    metrics: {
-      fps: 60,
-      renderTime: 16,
-      textGenerationTime: 5,
-      memoryUsage: 25,
-      scrollEventCount: 0,
-      lastCleanupTime: Date.now(),
-    },
-    isPerformant: true,
   })),
   useScrollDetection: vi.fn(() => ({
     position: {
@@ -106,9 +92,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -137,9 +120,6 @@ describe('App', () => {
       },
       isGenerating: true,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -160,9 +140,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -200,9 +177,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: mockGenerateMore,
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     vi.mocked(useScrollDetection).mockReturnValue({
@@ -249,9 +223,6 @@ describe('App', () => {
       },
       isGenerating: true,
       generateMore: mockGenerateMore,
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     vi.mocked(useScrollDetection).mockReturnValue({
@@ -296,9 +267,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -328,9 +296,6 @@ describe('App', () => {
       },
       isGenerating: true,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -361,9 +326,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: mockGenerateMore,
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -397,9 +359,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: vi.fn().mockRejectedValue(new Error('Generation failed')),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -438,9 +397,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -470,9 +426,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: vi.fn(),
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);
@@ -504,9 +457,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: mockGenerateMore,
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     vi.mocked(useScrollDetection).mockReturnValue({
@@ -569,9 +519,6 @@ describe('App', () => {
       },
       isGenerating: false,
       generateMore: mockGenerateMore,
-      reset: vi.fn(),
-      getAllText: vi.fn(),
-      getWordCount: vi.fn(),
     });
 
     render(<App />);

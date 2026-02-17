@@ -51,8 +51,6 @@ export interface AppState {
   texts: LoremText[];
   /** Current scroll state */
   currentPosition: import('./scroll.types').ScrollPosition;
-  /** Performance monitoring */
-  performance: import('./performance.types').PerformanceMetrics;
   /** Text generation in progress */
   isGenerating: boolean;
   /** Available words for generation */

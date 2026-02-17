@@ -1,1 +1,0 @@
-export { usePerformance } from './usePerformance';
