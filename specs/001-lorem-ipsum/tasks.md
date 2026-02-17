@@ -70,7 +70,7 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 - [x] T014 [P] [US1] Component test for App in src/components/App/App.test.tsx (WRITE FIRST, VERIFY FAIL)
 - [x] T015 [P] [US1] Component test for TextContainer in src/components/TextContainer/TextContainer.test.tsx (WRITE FIRST, VERIFY FAIL)
 - [x] T016 [P] [US1] Hook test for useLoremText in src/hooks/useLoremText/useLoremText.test.ts (WRITE FIRST, VERIFY FAIL)
-- [ ] T017 [P] [US1] Hook test for useScrollDetection in src/hooks/useScrollDetection/useScrollDetection.test.ts (WRITE FIRST, VERIFY FAIL)
+- [x] T017 [P] [US1] Hook test for useScrollDetection in src/hooks/useScrollDetection/useScrollDetection.test.ts (WRITE FIRST, VERIFY FAIL)
 - [x] T018 [P] [US1] Utility test for textGenerator in src/utils/textGenerator/textGenerator.test.ts (WRITE FIRST, VERIFY FAIL)
 - [x] T019 [P] [US1] Utility test for scrollUtils in src/utils/scrollUtils/scrollUtils.test.ts (WRITE FIRST, VERIFY FAIL)
 - [x] T020 [P] [US1] Integration test for scroll generation flow in src/main.test.tsx (WRITE FIRST, VERIFY FAIL)
@@ -117,25 +117,25 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 
 ### Tests for User Story 2 (REQUIRED - TDD approach) ⚠️
 
-- [ ] T043 [P] [US2] Component test for CopyButton in src/components/CopyButton/CopyButton.test.tsx
-- [ ] T044 [P] [US2] Hook test for useClipboard in src/hooks/useClipboard/useClipboard.test.ts
-- [ ] T045 [P] [US2] Utility test for clipboardUtils in src/utils/clipboardUtils/clipboardUtils.test.ts
+- [x] T043 [P] [US2] Component test for CopyButton in src/components/CopyButton/CopyButton.test.tsx
+- [x] T044 [P] [US2] Hook test for useClipboard in src/hooks/useClipboard/useClipboard.test.ts
+- [x] T045 [P] [US2] Utility test for clipboardUtils in src/utils/clipboardUtils/clipboardUtils.test.ts
 - [ ] T046 [P] [US2] Integration test for clipboard functionality in src/main.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T047 [P] [US2] Create ClipboardState type in src/types/clipboard.types.ts
-- [ ] T048 [P] [US2] Create CopyButtonConfig type in src/types/clipboard.types.ts
-- [ ] T049 [US2] Implement useClipboard hook in src/hooks/useClipboard/useClipboard.ts (depends on T047, T048)
-- [ ] T050 [US2] Implement clipboard utilities in src/utils/clipboardUtils/clipboardUtils.ts
-- [ ] T051 [US2] Create CopyButton component in src/components/CopyButton/CopyButton.tsx (depends on T049)
+- [x] T047 [P] [US2] Create ClipboardState type in src/types/clipboard.types.ts
+- [x] T048 [P] [US2] Create CopyButtonConfig type in src/types/clipboard.types.ts
+- [x] T049 [US2] Implement useClipboard hook in src/hooks/useClipboard/useClipboard.ts (depends on T047, T048)
+- [x] T050 [US2] Implement clipboard utilities in src/utils/clipboardUtils/clipboardUtils.ts
+- [x] T051 [US2] Create CopyButton component in src/components/CopyButton/CopyButton.tsx (depends on T049)
 - [ ] T052 [US2] Add copy button visibility logic (hover/selection/tap)
 - [ ] T053 [US2] Add visual feedback for copy operations (button text changes)
 - [ ] T054 [US2] Handle clipboard API fallbacks for older browsers
 - [ ] T055 [US2] Create CopyButton component types in src/components/CopyButton/CopyButton.types.ts
-- [ ] T056 [P] [US2] Create barrel exports for CopyButton component in src/components/CopyButton/index.ts
-- [ ] T057 [P] [US2] Create barrel exports for hooks in src/hooks/useClipboard/index.ts
-- [ ] T058 [P] [US2] Create barrel exports for utils in src/utils/clipboardUtils/index.ts
+- [x] T056 [P] [US2] Create barrel exports for CopyButton component in src/components/CopyButton/index.ts
+- [x] T057 [P] [US2] Create barrel exports for hooks in src/hooks/useClipboard/index.ts
+- [x] T058 [P] [US2] Create barrel exports for utils in src/utils/clipboardUtils/index.ts
 - [ ] T059 [US2] Integrate CopyButton with TextContainer component
 - [ ] T060 [US2] Add mobile touch interaction support for copy buttons
 
