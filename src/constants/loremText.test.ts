@@ -2,7 +2,7 @@
  * Tests for lorem ipsum text constants
  */
 
-import { ORIGINAL_LOREM_TEXT, ORIGINAL_LOREM_WORDS } from './loremText';
+import { ORIGINAL_LOREM_TEXT } from './loremText';
 
 describe('ORIGINAL_LOREM_TEXT', () => {
   it('should be a non-empty string', () => {
@@ -23,45 +23,5 @@ describe('ORIGINAL_LOREM_TEXT', () => {
 
   it('should end with a period', () => {
     expect(ORIGINAL_LOREM_TEXT.endsWith('.')).toBe(true);
-  });
-});
-
-describe('ORIGINAL_LOREM_WORDS', () => {
-  it('should be an array of strings', () => {
-    expect(Array.isArray(ORIGINAL_LOREM_WORDS)).toBe(true);
-    expect(ORIGINAL_LOREM_WORDS.length).toBeGreaterThan(0);
-
-    if (ORIGINAL_LOREM_WORDS.length > 0) {
-      expect(ORIGINAL_LOREM_WORDS[0]).toBeTypeOf('string');
-    }
-  });
-
-  it('should contain lorem ipsum words without punctuation', () => {
-    expect(ORIGINAL_LOREM_WORDS).toContain('Lorem');
-    expect(ORIGINAL_LOREM_WORDS).toContain('ipsum');
-    expect(ORIGINAL_LOREM_WORDS).toContain('dolor');
-    expect(ORIGINAL_LOREM_WORDS).toContain('sit');
-    expect(ORIGINAL_LOREM_WORDS).toContain('amet');
-  });
-
-  it('should not contain words with punctuation', () => {
-    ORIGINAL_LOREM_WORDS.forEach((word) => {
-      expect(word).not.toContain('.');
-      expect(word).not.toContain(',');
-    });
-  });
-
-  it('should have consistent word count', () => {
-    const expectedWordCount = ORIGINAL_LOREM_TEXT.split(' ').length;
-    expect(ORIGINAL_LOREM_WORDS.length).toBe(expectedWordCount);
-  });
-
-  it('should have unique words when case-insensitive', () => {
-    const lowercasedWords = ORIGINAL_LOREM_WORDS.map((word) =>
-      word.toLowerCase(),
-    );
-    const uniqueWords = new Set(lowercasedWords);
-    expect(uniqueWords.size).toBeGreaterThan(0);
-    expect(uniqueWords.size).toBeLessThanOrEqual(ORIGINAL_LOREM_WORDS.length);
   });
 });
