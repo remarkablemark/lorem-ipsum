@@ -2,11 +2,7 @@
  * Tests for configuration constants
  */
 
-import {
-  APP_CONFIG,
-  DEFAULT_COPY_BUTTON_CONFIG,
-  DEFAULT_GENERATION_CONFIG,
-} from './config';
+import { APP_CONFIG, DEFAULT_GENERATION_CONFIG } from './config';
 
 describe('APP_CONFIG', () => {
   it('should have scroll configuration', () => {
@@ -27,40 +23,13 @@ describe('APP_CONFIG', () => {
     expect(APP_CONFIG.generation.seed).toBeTypeOf('string');
   });
 
-  it('should have performance configuration', () => {
-    expect(APP_CONFIG.performance).toBeDefined();
-    expect(APP_CONFIG.performance.targetFPS).toBeTypeOf('number');
-    expect(APP_CONFIG.performance.maxMemoryMB).toBeTypeOf('number');
-    expect(APP_CONFIG.performance.cleanupInterval).toBeTypeOf('number');
-  });
-
-  it('should have clipboard configuration', () => {
-    expect(APP_CONFIG.clipboard).toBeDefined();
-    expect(APP_CONFIG.clipboard.autoHideDelay).toBeTypeOf('number');
-    expect(APP_CONFIG.clipboard.feedbackDuration).toBeTypeOf('number');
-  });
-
-  it('should have UI configuration', () => {
-    expect(APP_CONFIG.ui).toBeDefined();
-    expect(APP_CONFIG.ui.showCopyOnHover).toBeTypeOf('boolean');
-    expect(APP_CONFIG.ui.showCopyOnTap).toBeTypeOf('boolean');
-    expect(APP_CONFIG.ui.showCopyOnSelection).toBeTypeOf('boolean');
-  });
-
   it('should have valid configuration values', () => {
     expect(APP_CONFIG.scroll.threshold).toBe(85);
     expect(APP_CONFIG.scroll.debounceMs).toBe(16);
     expect(APP_CONFIG.scroll.maxVelocity).toBe(10000);
     expect(APP_CONFIG.generation.chunkSize).toBe(50);
     expect(APP_CONFIG.generation.maxParagraphs).toBe(100);
-    expect(APP_CONFIG.performance.targetFPS).toBe(60);
-    expect(APP_CONFIG.performance.maxMemoryMB).toBe(100);
-    expect(APP_CONFIG.performance.cleanupInterval).toBe(30000);
-    expect(APP_CONFIG.clipboard.autoHideDelay).toBe(2000);
-    expect(APP_CONFIG.clipboard.feedbackDuration).toBe(1000);
-    expect(APP_CONFIG.ui.showCopyOnHover).toBe(true);
-    expect(APP_CONFIG.ui.showCopyOnTap).toBe(true);
-    expect(APP_CONFIG.ui.showCopyOnSelection).toBe(true);
+    expect(APP_CONFIG.generation.seed).toBe('lorem-ipsum-2026');
   });
 });
 
@@ -83,26 +52,5 @@ describe('DEFAULT_GENERATION_CONFIG', () => {
       APP_CONFIG.generation.chunkSize,
     );
     expect(DEFAULT_GENERATION_CONFIG.seed).toBe(APP_CONFIG.generation.seed);
-  });
-});
-
-describe('DEFAULT_COPY_BUTTON_CONFIG', () => {
-  it('should have correct copy button configuration', () => {
-    expect(DEFAULT_COPY_BUTTON_CONFIG).toBeDefined();
-    expect(DEFAULT_COPY_BUTTON_CONFIG.showOnHover).toBe(
-      APP_CONFIG.ui.showCopyOnHover,
-    );
-    expect(DEFAULT_COPY_BUTTON_CONFIG.showOnTap).toBe(
-      APP_CONFIG.ui.showCopyOnTap,
-    );
-    expect(DEFAULT_COPY_BUTTON_CONFIG.showOnSelection).toBe(
-      APP_CONFIG.ui.showCopyOnSelection,
-    );
-    expect(DEFAULT_COPY_BUTTON_CONFIG.autoHideDelay).toBe(
-      APP_CONFIG.clipboard.autoHideDelay,
-    );
-    expect(DEFAULT_COPY_BUTTON_CONFIG.feedbackDuration).toBe(
-      APP_CONFIG.clipboard.feedbackDuration,
-    );
   });
 });

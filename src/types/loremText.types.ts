@@ -60,26 +60,6 @@ export interface AppState {
 }
 
 /**
- * Text generation state transitions
- */
-export type GenerationState =
-  | { type: 'idle' } // No generation needed
-  | { type: 'triggered'; position: number } // Generation started
-  | { type: 'generating'; progress: number } // Currently generating
-  | { type: 'completed'; paragraphs: LoremText[] } // Generation finished
-  | { type: 'error'; message: string }; // Generation failed
-
-/**
- * Validation result interface
- */
-export interface ValidationResult {
-  /** Whether the validation passed */
-  isValid: boolean;
-  /** Array of error messages */
-  errors: string[];
-}
-
-/**
  * Text generation API interface
  */
 export interface TextGenerationAPI {
