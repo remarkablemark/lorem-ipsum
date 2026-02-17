@@ -1,1 +1,11 @@
 @import 'tailwindcss';
+
+/**
+ * GitHub Corners (used in index.html)
+ */
+.github-corner > svg {
+  @apply hidden opacity-50 transition-opacity duration-400 sm:block;
+}
+.github-corner:hover > svg {
+  @apply opacity-100;
+}
