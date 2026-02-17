@@ -191,8 +191,6 @@ describe('App', () => {
       },
       isNearBottom: true,
       velocity: 0,
-      scrollToTop: vi.fn(),
-      scrollToBottom: vi.fn(),
     });
 
     render(<App />);
@@ -237,8 +235,6 @@ describe('App', () => {
       },
       isNearBottom: true,
       velocity: 0,
-      scrollToTop: vi.fn(),
-      scrollToBottom: vi.fn(),
     });
 
     render(<App />);
@@ -471,8 +467,6 @@ describe('App', () => {
       },
       isNearBottom: true,
       velocity: 0,
-      scrollToTop: vi.fn(),
-      scrollToBottom: vi.fn(),
     });
 
     render(<App />);

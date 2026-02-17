@@ -53,39 +53,11 @@ describe('useScrollDetection', () => {
     expect(result.current.velocity).toBe(0);
   });
 
-  it('should have scrollToTop function', () => {
-    const { result } = renderHook(() => useScrollDetection());
-
-    expect(typeof result.current.scrollToTop).toBe('function');
-
-    result.current.scrollToTop();
-
-    expect(mockScrollTo).toHaveBeenCalledWith({
-      top: 0,
-      behavior: 'smooth',
-    });
-  });
-
-  it('should have scrollToBottom function', () => {
-    const { result } = renderHook(() => useScrollDetection());
-
-    expect(typeof result.current.scrollToBottom).toBe('function');
-
-    result.current.scrollToBottom();
-
-    expect(mockScrollTo).toHaveBeenCalledWith({
-      top: 2000,
-      behavior: 'smooth',
-    });
-  });
-
   it('should accept custom element parameter', () => {
     const mockElement = document.createElement('div');
     const { result } = renderHook(() => useScrollDetection(mockElement));
 
     expect(result.current.position.scrollTop).toBe(0);
-    expect(typeof result.current.scrollToTop).toBe('function');
-    expect(typeof result.current.scrollToBottom).toBe('function');
   });
 
   it('should accept custom config parameter', () => {
@@ -99,8 +71,6 @@ describe('useScrollDetection', () => {
     );
 
     expect(result.current.position.scrollTop).toBe(0);
-    expect(typeof result.current.scrollToTop).toBe('function');
-    expect(typeof result.current.scrollToBottom).toBe('function');
   });
 
   it('should accept both custom element and config parameters', () => {
@@ -115,8 +85,6 @@ describe('useScrollDetection', () => {
     );
 
     expect(result.current.position.scrollTop).toBe(0);
-    expect(typeof result.current.scrollToTop).toBe('function');
-    expect(typeof result.current.scrollToBottom).toBe('function');
   });
 
   it('should cleanup on unmount', () => {
@@ -307,8 +275,6 @@ describe('useScrollDetection', () => {
     );
 
     expect(result.current.position.scrollTop).toBe(0);
-    expect(typeof result.current.scrollToTop).toBe('function');
-    expect(typeof result.current.scrollToBottom).toBe('function');
   });
 
   it('should handle undefined config gracefully', () => {
@@ -317,7 +283,5 @@ describe('useScrollDetection', () => {
     );
 
     expect(result.current.position.scrollTop).toBe(0);
-    expect(typeof result.current.scrollToTop).toBe('function');
-    expect(typeof result.current.scrollToBottom).toBe('function');
   });
 });

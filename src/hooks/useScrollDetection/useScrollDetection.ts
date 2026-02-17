@@ -2,7 +2,7 @@
  * Custom hook for scroll detection
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import type {
   ScrollDetectionConfig,
@@ -29,10 +29,6 @@ interface UseScrollDetectionReturn {
   isNearBottom: boolean;
   /** Current scroll velocity */
   velocity: number;
-  /** Scroll to top */
-  scrollToTop: () => void;
-  /** Scroll to bottom */
-  scrollToBottom: () => void;
 }
 
 /**
@@ -58,20 +54,12 @@ export function useScrollDetection(
   const isNearBottom = position.isNearBottom;
   const velocity = position.scrollVelocity;
 
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
-  const scrollToBottom = useCallback(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  }, []);
-
   useEffect(() => {
     const detector = detectorRef.current;
 
     // Subscribe to scroll events
     const unsubscribe = detector.onScroll((newPosition) => {
-      setPosition(newPosition);
+      setPosition((prevPosition) => ({ ...prevPosition, ...newPosition }));
     });
 
     // Start detection
@@ -88,7 +76,5 @@ export function useScrollDetection(
     position,
     isNearBottom,
     velocity,
-    scrollToTop,
-    scrollToBottom,
   };
 }
