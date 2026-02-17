@@ -244,19 +244,12 @@ describe('useLoremText', () => {
   it('should handle concurrent generation requests gracefully', async () => {
     const { result } = renderHook(() => useLoremText());
 
-    // Start multiple generation requests concurrently
-    const promises = [
-      act(async () => {
-        result.current.generateMore(2);
-        await new Promise((resolve) => setTimeout(resolve, 0));
-      }),
-      act(async () => {
-        result.current.generateMore(3);
-        await new Promise((resolve) => setTimeout(resolve, 0));
-      }),
-    ];
-
-    await Promise.all(promises);
+    // Start multiple generation requests concurrently within a single act
+    await act(async () => {
+      result.current.generateMore(2);
+      result.current.generateMore(3);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
 
     // Should complete both generations due to mock implementation
     expect(result.current.texts.length).toBeGreaterThanOrEqual(4); // Original + generated texts
