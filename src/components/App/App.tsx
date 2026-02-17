@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen" data-testid="app">
-      <header className="border-b border-slate-200 text-center">
+      <header className="border-b border-slate-200 text-center select-none">
         <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
             Lorem Ipsum Generator
@@ -42,7 +42,7 @@ export default function App() {
           data-testid="text-container"
         >
           {/* Manual trigger */}
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 select-none">
             <h2 className="sr-only">Text Generation Controls</h2>
             <button
               onClick={() => {
@@ -64,7 +64,6 @@ export default function App() {
 
           {/* Original text */}
           <section aria-label="Original lorem ipsum text">
-            <h2 className="sr-only">Original Text</h2>
             <article className="prose prose-slate max-w-none">
               <p className="leading-relaxed text-slate-700">
                 {originalText.content}
@@ -77,7 +76,6 @@ export default function App() {
             <section
               aria-label={`Generated text (${String(texts.length - 1)} paragraphs)`}
             >
-              <h2 className="sr-only">Generated Text</h2>
               <div className="space-y-6">
                 {texts.slice(1).map((text, index) => (
                   <article
@@ -118,7 +116,7 @@ export default function App() {
 
           {/* Spacer to make page scrollable */}
           <div
-            className="flex h-96 items-center justify-center rounded-lg border-2 border-dashed border-slate-300"
+            className="flex h-96 items-center justify-center rounded-lg border-2 border-dashed border-slate-300 select-none"
             role="region"
             aria-label="Scroll trigger area"
           >

@@ -139,7 +139,7 @@ describe('VirtualScrollManager', () => {
 
     // Get the observer instance and trigger callback
     const mockObserver =
-      manager.observer as unknown as MockIntersectionObserver;
+      manager.getObserverForTesting() as unknown as MockIntersectionObserver;
     expect(mockObserver).toBeDefined();
 
     // Simulate intersection entries
@@ -177,7 +177,7 @@ describe('VirtualScrollManager', () => {
 
     // Get the observer and trigger callback
     const mockObserver =
-      manager.observer as unknown as MockIntersectionObserver;
+      manager.getObserverForTesting() as unknown as MockIntersectionObserver;
     const entries = [
       {
         target: element,
@@ -207,7 +207,7 @@ describe('VirtualScrollManager', () => {
 
     // Get the observer and trigger callback
     const mockObserver =
-      manager.observer as unknown as MockIntersectionObserver;
+      manager.getObserverForTesting() as unknown as MockIntersectionObserver;
     const entries = [
       {
         target: element,

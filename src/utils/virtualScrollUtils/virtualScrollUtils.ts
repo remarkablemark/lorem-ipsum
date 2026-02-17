@@ -147,6 +147,14 @@ export class VirtualScrollManager {
       }
     });
   }
+
+  /**
+   * Get the observer instance (for testing purposes only)
+   */
+  getObserverForTesting(): IntersectionObserver | null {
+    /* v8 ignore next -- @preserve */
+    return import.meta.env.MODE === 'test' ? this.observer : null;
+  }
 }
 
 /**
