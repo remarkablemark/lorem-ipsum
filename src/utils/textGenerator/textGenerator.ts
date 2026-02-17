@@ -186,7 +186,7 @@ export function createTextGenerator(
     sentencesPerParagraph: { min: 3, max: 8 },
     maxParagraphs: 100,
     chunkSize: 50,
-    seed: 'lorem-ipsum-2024',
+    seed: 'lorem-ipsum-2026',
   };
 
   const finalConfig = { ...defaultConfig, ...config };

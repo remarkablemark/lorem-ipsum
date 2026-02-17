@@ -36,7 +36,7 @@ export const APP_CONFIG = {
       max: 8,
     },
     /** Seed for reproducible generation */
-    seed: 'lorem-ipsum-2024',
+    seed: 'lorem-ipsum-2026',
   },
 
   /** Performance monitoring configuration */

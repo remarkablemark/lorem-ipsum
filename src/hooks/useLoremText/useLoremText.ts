@@ -16,7 +16,7 @@ const DEFAULT_CONFIG: GenerationConfig = {
   sentencesPerParagraph: { min: 3, max: 8 },
   maxParagraphs: 100,
   chunkSize: 50,
-  seed: 'lorem-ipsum-2024',
+  seed: 'lorem-ipsum-2026',
 };
 
 /**
