@@ -172,4 +172,152 @@ describe('useScrollDetection', () => {
 
     expect(result.current.position).toEqual(newPosition);
   });
+
+  // Edge case tests
+  it('should handle extreme scroll values', () => {
+    let scrollCallback: ((position: ScrollPosition) => void) | undefined;
+
+    mockCreateScrollDetector.mockReturnValue({
+      element: window,
+      config: { threshold: 85, debounceMs: 16, maxVelocity: 10000 },
+      callbacks: new Set(),
+      lastScrollTop: 0,
+      lastScrollTime: 0,
+      rafId: null,
+      isListening: false,
+      onScroll: vi.fn((callback: (position: ScrollPosition) => void) => {
+        scrollCallback = callback;
+        return vi.fn();
+      }),
+      start: vi.fn(),
+      stop: vi.fn(),
+      getCurrentPosition: vi.fn(),
+      isNearBottom: vi.fn(),
+      getVelocity: vi.fn(),
+    } as unknown as ScrollDetector);
+
+    const { result } = renderHook(() => useScrollDetection());
+
+    const extremePosition = {
+      scrollTop: Number.MAX_SAFE_INTEGER,
+      scrollHeight: Number.MAX_SAFE_INTEGER,
+      clientHeight: 0,
+      scrollPercentage: 100,
+      isNearBottom: true,
+      lastScrollTime: Date.now(),
+      scrollVelocity: Number.MAX_SAFE_INTEGER,
+    };
+
+    act(() => {
+      scrollCallback?.(extremePosition);
+    });
+
+    expect(result.current.position).toEqual(extremePosition);
+  });
+
+  it('should handle negative scroll values', () => {
+    let scrollCallback: ((position: ScrollPosition) => void) | undefined;
+
+    mockCreateScrollDetector.mockReturnValue({
+      element: window,
+      config: { threshold: 85, debounceMs: 16, maxVelocity: 10000 },
+      callbacks: new Set(),
+      lastScrollTop: 0,
+      lastScrollTime: 0,
+      rafId: null,
+      isListening: false,
+      onScroll: vi.fn((callback: (position: ScrollPosition) => void) => {
+        scrollCallback = callback;
+        return vi.fn();
+      }),
+      start: vi.fn(),
+      stop: vi.fn(),
+      getCurrentPosition: vi.fn(),
+      isNearBottom: vi.fn(),
+      getVelocity: vi.fn(),
+    } as unknown as ScrollDetector);
+
+    const { result } = renderHook(() => useScrollDetection());
+
+    const negativePosition = {
+      scrollTop: -100,
+      scrollHeight: 1000,
+      clientHeight: 800,
+      scrollPercentage: -10,
+      isNearBottom: false,
+      lastScrollTime: Date.now(),
+      scrollVelocity: -5,
+    };
+
+    act(() => {
+      scrollCallback?.(negativePosition);
+    });
+
+    expect(result.current.position).toEqual(negativePosition);
+  });
+
+  it('should handle rapid scroll events', () => {
+    let scrollCallback: ((position: ScrollPosition) => void) | undefined;
+
+    mockCreateScrollDetector.mockReturnValue({
+      element: window,
+      config: { threshold: 85, debounceMs: 16, maxVelocity: 10000 },
+      callbacks: new Set(),
+      lastScrollTop: 0,
+      lastScrollTime: 0,
+      rafId: null,
+      isListening: false,
+      onScroll: vi.fn((callback: (position: ScrollPosition) => void) => {
+        scrollCallback = callback;
+        return vi.fn();
+      }),
+      start: vi.fn(),
+      stop: vi.fn(),
+      getCurrentPosition: vi.fn(),
+      isNearBottom: vi.fn(),
+      getVelocity: vi.fn(),
+    } as unknown as ScrollDetector);
+
+    const { result } = renderHook(() => useScrollDetection());
+
+    // Simulate rapid scroll events
+    for (let i = 0; i < 100; i++) {
+      const position = {
+        scrollTop: i * 10,
+        scrollHeight: 1000,
+        clientHeight: 800,
+        scrollPercentage: (i * 10) / 10,
+        isNearBottom: i > 85,
+        lastScrollTime: Date.now(),
+        scrollVelocity: i * 5,
+      };
+
+      act(() => {
+        scrollCallback?.(position);
+      });
+    }
+
+    // Should handle rapid events without crashing
+    expect(result.current.position.scrollTop).toBe(990);
+  });
+
+  it('should handle null element gracefully', () => {
+    const { result } = renderHook(() =>
+      useScrollDetection(null as unknown as HTMLElement | Window | undefined),
+    );
+
+    expect(result.current.position.scrollTop).toBe(0);
+    expect(typeof result.current.scrollToTop).toBe('function');
+    expect(typeof result.current.scrollToBottom).toBe('function');
+  });
+
+  it('should handle undefined config gracefully', () => {
+    const { result } = renderHook(() =>
+      useScrollDetection(undefined, undefined),
+    );
+
+    expect(result.current.position.scrollTop).toBe(0);
+    expect(typeof result.current.scrollToTop).toBe('function');
+    expect(typeof result.current.scrollToBottom).toBe('function');
+  });
 });

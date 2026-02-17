@@ -203,4 +203,62 @@ describe('useLoremText', () => {
 
     expect(wordCount).toBe(13); // 8 (original) + 5 (generated)
   });
+
+  // Edge case tests
+  it('should handle zero paragraph generation request', async () => {
+    const { result } = renderHook(() => useLoremText());
+
+    await act(async () => {
+      result.current.generateMore(0);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    // Should not add any texts when requesting 0 paragraphs
+    expect(result.current.texts).toHaveLength(1); // Only original
+  });
+
+  it('should handle negative paragraph generation request', async () => {
+    const { result } = renderHook(() => useLoremText());
+
+    await act(async () => {
+      result.current.generateMore(-1);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    // Should not add any texts when requesting negative paragraphs
+    expect(result.current.texts).toHaveLength(1); // Only original
+  });
+
+  it('should handle very large paragraph generation request', async () => {
+    const { result } = renderHook(() => useLoremText());
+
+    await act(async () => {
+      result.current.generateMore(1000);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    // Should handle large requests without crashing
+    expect(result.current.texts.length).toBeGreaterThan(1);
+  });
+
+  it('should handle concurrent generation requests gracefully', async () => {
+    const { result } = renderHook(() => useLoremText());
+
+    // Start multiple generation requests concurrently
+    const promises = [
+      act(async () => {
+        result.current.generateMore(2);
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      }),
+      act(async () => {
+        result.current.generateMore(3);
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      }),
+    ];
+
+    await Promise.all(promises);
+
+    // Should complete both generations due to mock implementation
+    expect(result.current.texts.length).toBeGreaterThanOrEqual(4); // Original + generated texts
+  });
 });
