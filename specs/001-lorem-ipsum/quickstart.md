@@ -17,11 +17,6 @@ src/
 │   │   ├── App.types.ts            # App props interfaces
 │   │   ├── App.test.tsx            # App component tests
 │   │   └── index.ts                # Barrel export
-│   └── ResetButton/
-│       ├── ResetButton.tsx         # Reset functionality
-│       ├── ResetButton.types.ts    # Reset button interfaces
-│       ├── ResetButton.test.tsx    # Reset button tests
-│       └── index.ts                # Barrel export
 ├── hooks/
 │   ├── useLoremText/
 │   │   ├── useLoremText.ts         # Text generation logic
@@ -80,15 +75,6 @@ src/
 - Handles component composition
 - Manages application lifecycle
 
-### ResetButton Component
-
-**Purpose**: Reset application to initial state
-**Key Features**:
-
-- Clears all generated text
-- Returns to original lorem ipsum paragraph
-- Only visible when content exists
-
 ## Key Hooks
 
 ### useLoremText
@@ -99,7 +85,6 @@ src/
 - Generates lorem ipsum text algorithmically
 - Maintains text array and metadata
 - Handles generation triggers
-- Provides reset functionality
 
 ### useScrollDetection
 
@@ -145,7 +130,6 @@ src/
 
 - [ ] Implement copy functionality with clipboard API
 - [ ] Add copy button visibility logic
-- [ ] Create reset functionality
 - [ ] Handle mobile touch interactions
 - [ ] Add keyboard navigation support
 

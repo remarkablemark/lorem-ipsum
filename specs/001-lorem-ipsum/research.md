@@ -116,7 +116,7 @@
 - `useScrollDetection` hook for scroll position monitoring
 - `useTextGeneration` hook for lorem ipsum generation logic
 - `usePerformanceMonitoring` hook for 60fps tracking
-- Component structure: `App`, `ResetButton`
+- Component structure: `App`
 
 ## Testing Strategy
 

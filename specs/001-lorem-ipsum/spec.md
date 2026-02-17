@@ -43,18 +43,18 @@ User can generate lorem ipsum placeholder text by scrolling down the page, with 
 2. **Given** user is scrolling, **When** they reach the position threshold near bottom of generated content, **Then** more unique text automatically generates
 3. **Given** text is generating, **When** user scrolls rapidly, **Then** scrolling remains smooth at 60fps without lag
 
-### User Story 2 - Reset and Start Over (Priority: P2)
+### User Story 2 - Reset and Start Over (Priority: P2) - REMOVED
 
-User can reset the generated text and start fresh with a new scrolling session, returning to the original lorem ipsum paragraph.
+User can reset the generated text and start fresh with a new scrolling session by reloading the page.
 
-**Why this priority**: Provides control - users often want to start over with different requirements
+**Why removed**: Page reload provides equivalent functionality with simpler implementation
 
-**Independent Test**: Can be tested by clicking reset and verifying page returns to initial state
+**Independent Test**: Can be tested by reloading page and verifying it returns to initial state
 
 **Acceptance Scenarios**:
 
-1. **Given** user has generated lots of text, **When** they click "Reset", **Then** page returns to initial state with only the original lorem ipsum paragraph
-2. **Given** page is reset, **When** they scroll, **Then** new unique text generation starts after the original paragraph
+1. **Given** user has generated lots of text, **When** they reload the page, **Then** page returns to initial state with only the original lorem ipsum paragraph
+2. **Given** page is reloaded, **When** they scroll, **Then** new unique text generation starts after the original paragraph
 
 ---
 
@@ -89,7 +89,7 @@ User can reset the generated text and start fresh with a new scrolling session, 
 - **FR-005a**: Touch and scroll interactions MUST use unified approach (same detection logic for both)
 - **FR-005b**: System MUST NOT provide dedicated scroll-to-top/bottom controls (rely on native browser scrolling)
 - **FR-006**: System MUST use semantic HTML with proper ARIA labels for screen readers
-- **FR-007**: System MUST provide reset functionality to clear generated content
+- **FR-007**: System MUST allow users to reset by reloading the page (no dedicated reset button)
 - **FR-008**: System MUST handle rapid scrolling without performance degradation
 
 ### Key Entities

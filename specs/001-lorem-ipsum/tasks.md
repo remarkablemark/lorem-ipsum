@@ -102,34 +102,9 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
-## Phase 4: User Story 2 - Reset and Start Over (Priority: P2)
-
-**Goal**: User can reset the generated text and start fresh with a new scrolling session, returning to the original lorem ipsum paragraph.
-
-**Why this priority**: Provides control - users often want to start over with different requirements
-
-**Independent Test**: Can be tested by clicking reset and verifying page returns to initial state
-
-### Tests for User Story 2 (REQUIRED - TDD approach) ⚠️
-
-- [ ] T043 [P] [US2] Component test for ResetButton in src/components/ResetButton/ResetButton.test.tsx
-- [ ] T044 [P] [US2] Integration test for reset functionality in src/main.test.tsx
-
-### Implementation for User Story 2
-
-- [ ] T045 [P] [US2] Create ResetButton component in src/components/ResetButton/ResetButton.tsx
-- [ ] T046 [US2] Add reset functionality to useLoremText hook
-- [ ] T047 [US2] Add reset button visibility logic (only show when content exists)
-- [ ] T048 [US2] Create ResetButton component types in src/components/ResetButton/ResetButton.types.ts
-- [ ] T049 [P] [US2] Create barrel exports for ResetButton component in src/components/ResetButton/index.ts
-- [ ] T050 [US2] Integrate ResetButton with App component
-- [ ] T051 [US2] Add keyboard navigation support for reset button
-
-**Checkpoint**: All user stories should now be independently functional
-
 ---
 
-## Phase 5: Polish & Cross-Cutting Concerns
+## Phase 4: Polish & Cross-Cutting Concerns
 
 **Purpose**: Improvements that affect multiple user stories
 
@@ -161,7 +136,6 @@ description: 'Task list for Lorem Ipsum Generator via Scrolling feature implemen
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
-- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - Integrates with US1 but independently testable
 
 ### Within Each User Story
 
@@ -215,9 +189,7 @@ Task: "T024 [P] [US1] Create GenerationConfig type in src/types/loremText.types.
 
 1. Complete Setup + Foundational → Foundation ready
 2. Add User Story 1 → Test independently → Deploy/Demo (MVP!)
-3. Add User Story 2 → Test independently → Deploy/Demo
-4. Add User Story 3 → Test independently → Deploy/Demo
-5. Each story adds value without breaking previous stories
+3. Each story adds value without breaking previous stories
 
 ### Parallel Team Strategy
 
@@ -226,21 +198,18 @@ With multiple developers:
 1. Team completes Setup + Foundational together
 2. Once Foundational is done:
    - Developer A: User Story 1
-   - Developer B: User Story 2
-   - Developer C: User Story 3
-3. Stories complete and integrate independently
+3. Story completes and integrates independently
 
 ---
 
 ## Summary
 
-- **Total Tasks**: 44 tasks
+- **Total Tasks**: 37 tasks
 - **Task Count per User Story**:
-  - User Story 1: 29 tasks (including tests)
-  - User Story 2: 7 tasks (including tests)
-- **Parallel Opportunities**: 47 tasks marked as parallelizable
+  - User Story 1: 37 tasks (including tests)
+- **Parallel Opportunities**: 40 tasks marked as parallelizable
 - **Independent Test Criteria**: Each user story has clear independent test criteria
-- **Suggested MVP Scope**: User Story 1 only (29 tasks) - provides core scrolling text generation
+- **Suggested MVP Scope**: User Story 1 only (37 tasks) - provides core scrolling text generation
 - **TDD Approach**: Tests required for all user stories following constitution requirements
 
 ---

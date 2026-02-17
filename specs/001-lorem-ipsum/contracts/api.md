@@ -90,17 +90,6 @@ interface PerformanceAPI {
 
 ## Component Contracts
 
-### ResetButton Component
-
-```typescript
-interface ResetButtonProps {
-  onReset: () => void;
-  hasGeneratedContent: boolean;
-  disabled: boolean;
-  className?: string;
-}
-```
-
 ## Hook Contracts
 
 ### useLoremText Hook
@@ -111,7 +100,6 @@ interface UseLoremTextReturn {
   originalText: LoremText;
   isGenerating: boolean;
   generateMore: (count?: number) => Promise<void>;
-  reset: () => void;
   getAllText: () => string;
   getWordCount: () => number;
 }
@@ -137,7 +125,6 @@ interface UseClipboardReturn {
   copyAll: () => Promise<boolean>;
   copySelection: () => Promise<boolean>;
   isSupported: boolean;
-  reset: () => void;
 }
 ```
 
