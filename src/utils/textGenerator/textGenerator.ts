@@ -203,14 +203,3 @@ export function generateLoremText(
   const generator = createTextGenerator(config);
   return generator.generateParagraphs(paragraphCount);
 }
-
-/**
- * Generate a single lorem ipsum sentence
- */
-export function generateLoremSentence(
-  wordCount: number,
-  seed?: string,
-): string {
-  const generator = createTextGenerator();
-  return generator.generateSentence(wordCount, seed);
-}

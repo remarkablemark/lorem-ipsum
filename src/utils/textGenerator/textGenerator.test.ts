@@ -4,7 +4,6 @@
 
 import {
   createTextGenerator,
-  generateLoremSentence,
   generateLoremText,
   SeededRandom,
   TextGenerator,
@@ -264,59 +263,23 @@ describe('generateLoremText', () => {
     expect(Array.isArray(paragraphs)).toBe(true);
     expect(paragraphs).toHaveLength(2);
   });
-});
 
-describe('generateLoremSentence', () => {
-  it('should generate lorem sentence', () => {
-    const sentence = generateLoremSentence(10);
+  it('should generate sentence through TextGenerator class', () => {
+    const generator = createTextGenerator();
+    const sentence = generator.generateSentence(5);
 
     expect(typeof sentence).toBe('string');
     expect(sentence.length).toBeGreaterThan(0);
-    expect(sentence.split(' ').length).toBeGreaterThan(0);
+    expect(sentence.endsWith('.')).toBe(true);
   });
 
-  it('should generate lorem sentence with seed', () => {
-    const sentence1 = generateLoremSentence(10, 'seed1');
-    const sentence2 = generateLoremSentence(10, 'seed1');
-    const sentence3 = generateLoremSentence(10, 'seed2');
+  it('should generate sentence with seed through TextGenerator class', () => {
+    const generator = createTextGenerator();
+    const sentence1 = generator.generateSentence(5, 'seed1');
+    const sentence2 = generator.generateSentence(5, 'seed1');
+    const sentence3 = generator.generateSentence(5, 'seed2');
 
     expect(sentence1).toBe(sentence2);
     expect(sentence2).not.toBe(sentence3);
-  });
-
-  // Edge case tests
-  it('should handle zero word count', () => {
-    const sentence = generateLoremSentence(0);
-    expect(sentence).toBe('');
-  });
-
-  it('should handle negative word count', () => {
-    const sentence = generateLoremSentence(-5);
-    expect(sentence).toBe('');
-  });
-
-  it('should handle very large word count', () => {
-    const sentence = generateLoremSentence(1000);
-    expect(typeof sentence).toBe('string');
-    expect(sentence.length).toBeGreaterThan(0);
-  });
-
-  it('should handle null and undefined seeds', () => {
-    const sentence1 = generateLoremSentence(
-      5,
-      null as unknown as string | undefined,
-    );
-    const sentence2 = generateLoremSentence(5, undefined as string | undefined);
-
-    expect(typeof sentence1).toBe('string');
-    expect(typeof sentence2).toBe('string');
-    expect(sentence1.length).toBeGreaterThan(0);
-    expect(sentence2.length).toBeGreaterThan(0);
-  });
-
-  it('should handle empty string seed', () => {
-    const sentence = generateLoremSentence(5, '');
-    expect(typeof sentence).toBe('string');
-    expect(sentence.length).toBeGreaterThan(0);
   });
 });
