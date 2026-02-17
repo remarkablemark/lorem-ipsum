@@ -7,7 +7,7 @@
 
 ## Summary
 
-A single-page React application that generates lorem ipsum placeholder text progressively as users scroll down the page. The first paragraph displays the original lorem ipsum text, followed by algorithmically generated unique text. The application includes copy functionality (all/selection), reset capability, and maintains 60fps scrolling performance with full accessibility support.
+A single-page React application that generates lorem ipsum placeholder text progressively as users scroll down the page. The first paragraph displays the original lorem ipsum text, followed by algorithmically generated unique text. The application includes reset capability and maintains 60fps scrolling performance with full accessibility support.
 
 ## Technical Context
 
@@ -97,7 +97,6 @@ public/                 # Static assets
 - All technical unknowns resolved in [research.md](./research.md)
 - Scroll detection: Intersection Observer + throttling
 - Text generation: Hardcoded word bank with algorithmic generation
-- Copy functionality: Modern Clipboard API with fallbacks
 - Performance: Virtual scrolling + React Compiler optimization
 
 ### ✅ Phase 1: Design Complete

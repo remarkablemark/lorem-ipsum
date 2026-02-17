@@ -19,10 +19,10 @@ description: 'Task list template for feature implementation'
 
 ## Path Conventions
 
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+- **React SPA**: `src/` at repository root, tests co-located with source files
+- **Web app**: React single-page application structure
+- **Mobile**: React Native structure (if applicable)
+- Paths shown below assume React project structure from plan.md
 
 <!--
   ============================================================================
@@ -61,12 +61,12 @@ description: 'Task list template for feature implementation'
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup lorem ipsum text generation utility
-- [ ] T005 [P] Implement React hooks for text generation state
-- [ ] T006 [P] Setup component routing and navigation structure
-- [ ] T007 Create base TypeScript interfaces that all components depend on
-- [ ] T008 Configure error handling and user feedback system
-- [ ] T009 Setup environment configuration for Vite build
+- [ ] T004 Setup lorem ipsum text generation utility in src/utils/textGenerator/textGenerator.ts
+- [ ] T005 [P] Implement React hooks for text generation state in src/hooks/
+- [ ] T006 [P] Setup component structure and barrel exports
+- [ ] T007 Create base TypeScript interfaces that all components depend on in src/types/
+- [ ] T008 Configure performance monitoring utilities
+- [ ] T009 Setup scroll utilities for scroll detection
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -82,17 +82,17 @@ Examples of foundational tasks (adjust based on your project):
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Component test for TextGenerator in tests/components/TextGenerator.test.tsx
-- [ ] T011 [P] [US1] Integration test for text generation flow in tests/integration/generation.test.tsx
+- [ ] T010 [P] [US1] Component test for App in src/components/App/App.test.tsx
+- [ ] T011 [P] [US1] Integration test for scroll generation flow in src/main.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create LoremText type in src/types/lorem.types.ts
-- [ ] T013 [P] [US1] Create GenerationConfig type in src/types/config.types.ts
-- [ ] T014 [US1] Implement useLoremGenerator hook in src/hooks/useLoremGenerator.ts (depends on T012, T013)
-- [ ] T015 [US1] Implement TextGenerator component in src/components/TextGenerator/TextGenerator.tsx
-- [ ] T016 [US1] Add accessibility attributes and keyboard navigation
-- [ ] T017 [US1] Add smooth scrolling optimization for large text blocks
+- [ ] T012 [P] [US1] Create LoremText type in src/types/loremText.types.ts
+- [ ] T013 [P] [US1] Create GenerationConfig type in src/types/loremText.types.ts
+- [ ] T014 [US1] Implement useLoremText hook in src/hooks/useLoremText/useLoremText.ts (depends on T012, T013)
+- [ ] T015 [US1] Implement useScrollDetection hook in src/hooks/useScrollDetection/useScrollDetection.ts
+- [ ] T016 [US1] Create App component in src/components/App/App.tsx (depends on T014, T015)
+- [ ] T017 [US1] Add accessibility attributes and keyboard navigation to App component
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -106,15 +106,15 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T018 [P] [US2] Component test for CustomControls in tests/components/CustomControls.test.tsx
-- [ ] T019 [P] [US2] Integration test for customization flow in tests/integration/customization.test.tsx
+- [ ] T018 [P] [US2] Component test for ResetButton in src/components/ResetButton/ResetButton.test.tsx
+- [ ] T019 [P] [US2] Integration test for reset functionality in src/main.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T020 [P] [US2] Create CustomControls component in src/components/CustomControls/CustomControls.tsx
-- [ ] T021 [US2] Implement text quantity calculation utilities in src/utils/textCalculations.ts
-- [ ] T022 [US2] Integrate CustomControls with TextGenerator component
-- [ ] T023 [US2] Add responsive design for mobile customization controls
+- [ ] T020 [P] [US2] Create ResetButton component in src/components/ResetButton/ResetButton.tsx
+- [ ] T021 [US2] Add reset functionality to useLoremText hook
+- [ ] T022 [US2] Add reset button visibility logic (only show when content exists)
+- [ ] T023 [US2] Integrate ResetButton with App component
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -128,14 +128,14 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
 
-- [ ] T024 [P] [US3] Component test for CopyButton in tests/components/CopyButton.test.tsx
-- [ ] T025 [P] [US3] Integration test for clipboard functionality in tests/integration/clipboard.test.tsx
+- [ ] T024 [P] [US3] Component test for [ComponentName] in tests/components/[ComponentName].test.tsx
+- [ ] T025 [P] [US3] Integration test for [functionality] in tests/integration/[feature].test.tsx
 
 ### Implementation for User Story 3
 
-- [ ] T026 [P] [US3] Create CopyButton component in src/components/CopyButton/CopyButton.tsx
-- [ ] T027 [US3] Implement clipboard utilities in src/utils/clipboard.ts
-- [ ] T028 [US3] Add visual feedback for copy operations
+- [ ] T026 [P] [US3] Create [ComponentName] component in src/components/[ComponentName]/[ComponentName].tsx
+- [ ] T027 [US3] Implement [utility] utilities in src/utils/[utility].ts
+- [ ] T028 [US3] Add [feature] functionality
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -198,12 +198,12 @@ Examples of foundational tasks (adjust based on your project):
 
 ```bash
 # Launch all tests for User Story 1 together (if tests requested):
-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
+Task: "Component test for [ComponentName] in tests/components/[ComponentName].test.tsx"
+Task: "Integration test for [user journey] in tests/integration/[journey].test.tsx"
 
-# Launch all models for User Story 1 together:
-Task: "Create [Entity1] model in src/models/[entity1].py"
-Task: "Create [Entity2] model in src/models/[entity2].py"
+# Launch all types/models for User Story 1 together:
+Task: "Create [TypeName] type in src/types/[type].ts"
+Task: "Create [EntityName] type in src/types/[entity].ts"
 ```
 
 ---

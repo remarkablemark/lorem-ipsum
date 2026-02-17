@@ -5,7 +5,7 @@
 
 ## Overview
 
-A single-page React application that generates lorem ipsum text progressively as users scroll. The application features smooth 60fps scrolling, copy functionality, and full accessibility support.
+A single-page React application that generates lorem ipsum text progressively as users scroll. The application features smooth 60fps scrolling and full accessibility support.
 
 ## Architecture Summary
 
@@ -16,16 +16,6 @@ src/
 │   │   ├── App.tsx                 # Main application component
 │   │   ├── App.types.ts            # App props interfaces
 │   │   ├── App.test.tsx            # App component tests
-│   │   └── index.ts                # Barrel export
-│   ├── TextContainer/
-│   │   ├── TextContainer.tsx       # Text display and scroll handling
-│   │   ├── TextContainer.types.ts  # Text container interfaces
-│   │   ├── TextContainer.test.tsx  # Text container tests
-│   │   └── index.ts                # Barrel export
-│   ├── CopyButton/
-│   │   ├── CopyButton.tsx          # Copy functionality
-│   │   ├── CopyButton.types.ts     # Copy button interfaces
-│   │   ├── CopyButton.test.tsx     # Copy button tests
 │   │   └── index.ts                # Barrel export
 │   └── ResetButton/
 │       ├── ResetButton.tsx         # Reset functionality
@@ -89,26 +79,6 @@ src/
 - Combines all hooks for state management
 - Handles component composition
 - Manages application lifecycle
-
-### TextContainer Component
-
-**Purpose**: Display text and handle scroll detection
-**Key Features**:
-
-- Renders lorem ipsum text paragraphs
-- Detects scroll position and triggers generation
-- Handles text selection events
-- Maintains smooth scrolling performance
-
-### CopyButton Component
-
-**Purpose**: Copy functionality for all/selected text
-**Key Features**:
-
-- Copy all generated text or selection
-- Shows/hides based on user interaction
-- Provides visual feedback
-- Handles clipboard API fallbacks
 
 ### ResetButton Component
 

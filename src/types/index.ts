@@ -3,7 +3,6 @@
  */
 
 // Re-export all type definitions
-export * from './clipboard.types';
 export * from './loremText.types';
 export * from './performance.types';
 export * from './scroll.types';

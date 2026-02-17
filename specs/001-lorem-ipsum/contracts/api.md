@@ -90,39 +90,6 @@ interface PerformanceAPI {
 
 ## Component Contracts
 
-### TextContainer Component
-
-```typescript
-interface TextContainerProps {
-  texts: LoremText[];
-  isGenerating: boolean;
-  onScroll: (position: ScrollPosition) => void;
-  onSelect: (selectedText: string) => void;
-  onGenerateMore: () => void;
-  className?: string;
-}
-
-interface TextContainerRef {
-  scrollToTop(): void;
-  scrollToBottom(): void;
-  getSelectedText(): string;
-}
-```
-
-### CopyButton Component
-
-```typescript
-interface CopyButtonProps {
-  type: 'all' | 'selection';
-  onCopy: () => Promise<void>;
-  isVisible: boolean;
-  isCopied: boolean;
-  disabled: boolean;
-  config: CopyButtonConfig;
-  className?: string;
-}
-```
-
 ### ResetButton Component
 
 ```typescript

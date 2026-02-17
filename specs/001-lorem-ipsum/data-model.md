@@ -35,21 +35,6 @@ interface ScrollPosition {
 }
 ```
 
-### ClipboardState
-
-Manages the status and feedback for copy operations.
-
-```typescript
-interface ClipboardState {
-  isSupported: boolean; // Browser clipboard API support
-  lastCopyTime: number; // Timestamp of last successful copy
-  copyType: 'all' | 'selection' | null; // Type of last copy
-  isCopied: boolean; // Current feedback state
-  error: string | null; // Last error message
-  selectedText: string; // Currently selected text
-}
-```
-
 ### PerformanceMetrics
 
 Monitors real-time performance for optimization.
@@ -73,11 +58,10 @@ Global application state combining all entities.
 interface AppState {
   texts: LoremText[]; // All generated text segments
   currentPosition: ScrollPosition; // Current scroll state
-  clipboard: ClipboardState; // Copy operation state
   performance: PerformanceMetrics; // Performance monitoring
   isGenerating: boolean; // Text generation in progress
   wordBank: string[]; // Available words for generation
-  generationConfig: GenerationConfig; // Text generation settings
+  config: GenerationConfig; // Generation settings
 }
 ```
 
@@ -98,27 +82,12 @@ interface GenerationConfig {
 }
 ```
 
-### CopyButtonConfig
-
-Configuration for copy button behavior.
-
-```typescript
-interface CopyButtonConfig {
-  showOnHover: boolean; // Show buttons on hover (desktop)
-  showOnTap: boolean; // Show buttons on tap (mobile)
-  showOnSelection: boolean; // Show buttons when text selected
-  autoHideDelay: number; // Milliseconds to hide buttons after interaction
-  feedbackDuration: number; // Milliseconds to show "Copied!" feedback
-}
-```
-
 ## Entity Relationships
 
 ```mermaid
 erDiagram
     AppState ||--o{ LoremText : contains
     AppState ||--|| ScrollPosition : tracks
-    AppState ||--|| ClipboardState : manages
     AppState ||--|| PerformanceMetrics : monitors
     AppState ||--|| GenerationConfig : uses
 
@@ -138,15 +107,6 @@ erDiagram
         boolean isNearBottom
         number lastScrollTime
         number scrollVelocity
-    }
-
-    ClipboardState {
-        boolean isSupported
-        number lastCopyTime
-        string copyType
-        boolean isCopied
-        string error
-        string selectedText
     }
 
     PerformanceMetrics {
@@ -169,17 +129,6 @@ type ScrollState =
   | { type: 'scrolling'; velocity: number } // Active scrolling
   | { type: 'near-bottom'; threshold: number } // Approaching content end
   | { type: 'generating'; chunkSize: number }; // Triggering text generation
-```
-
-### Copy Operation States
-
-```typescript
-type CopyState =
-  | { type: 'hidden' } // Copy buttons not visible
-  | { type: 'visible'; trigger: 'hover' | 'tap' | 'selection' } // Buttons visible
-  | { type: 'copying'; type: 'all' | 'selection' } // Copy in progress
-  | { type: 'success'; timestamp: number; type: 'all' | 'selection' } // Copy succeeded
-  | { type: 'error'; message: string; timestamp: number }; // Copy failed
 ```
 
 ### Text Generation States
@@ -248,26 +197,6 @@ const validateScrollPosition = (
 };
 ```
 
-### ClipboardState Validation
-
-```typescript
-const validateClipboardState = (
-  state: Partial<ClipboardState>,
-): ValidationResult => {
-  const errors: string[] = [];
-
-  if (state.copyType && !['all', 'selection', null].includes(state.copyType)) {
-    errors.push('Copy type must be "all", "selection", or null');
-  }
-
-  if (state.lastCopyTime !== undefined && state.lastCopyTime < 0) {
-    errors.push('Last copy time cannot be negative');
-  }
-
-  return { isValid: errors.length === 0, errors };
-};
-```
-
 ## Data Access Patterns
 
 ### Text Generation Access
@@ -289,17 +218,6 @@ interface ScrollDetector {
   isNearBottom(threshold: number): boolean;
   getScrollVelocity(): number;
   subscribe(callback: (position: ScrollPosition) => void): () => void;
-}
-```
-
-### Clipboard Access
-
-```typescript
-interface ClipboardManager {
-  copyAll(texts: LoremText[]): Promise<boolean>;
-  copySelection(selectedText: string): Promise<boolean>;
-  isSupported(): boolean;
-  getSelectedText(): string;
 }
 ```
 
@@ -331,28 +249,11 @@ const useLoremText = () => {
 const useScrollPosition = () => {
   /* ... */
 };
-const useClipboard = () => {
-  /* ... */
-};
 const usePerformance = () => {
   /* ... */
 };
 ```
 
 ### Component Props Interfaces
-
-```typescript
-interface TextContainerProps {
-  texts: LoremText[];
-  onScroll: (position: ScrollPosition) => void;
-  onSelect: (selectedText: string) => void;
-}
-
-interface CopyButtonProps {
-  clipboardState: ClipboardState;
-  onCopy: (type: 'all' | 'selection') => void;
-  config: CopyButtonConfig;
-}
-```
 
 This data model provides a comprehensive foundation for implementing the lorem ipsum generator with proper type safety, validation, and performance considerations.

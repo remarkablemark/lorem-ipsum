@@ -115,9 +115,8 @@
 
 - `useScrollDetection` hook for scroll position monitoring
 - `useTextGeneration` hook for lorem ipsum generation logic
-- `useClipboard` hook for copy functionality
 - `usePerformanceMonitoring` hook for 60fps tracking
-- Component structure: `App`, `TextContainer`, `CopyButton`, `ResetButton`
+- Component structure: `App`, `ResetButton`
 
 ## Testing Strategy
 
