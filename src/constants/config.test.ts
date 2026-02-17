@@ -2,7 +2,7 @@
  * Tests for configuration constants
  */
 
-import { APP_CONFIG, DEFAULT_GENERATION_CONFIG } from './config';
+import { APP_CONFIG } from './config';
 
 describe('APP_CONFIG', () => {
   it('should have scroll configuration', () => {
@@ -30,27 +30,5 @@ describe('APP_CONFIG', () => {
     expect(APP_CONFIG.generation.chunkSize).toBe(50);
     expect(APP_CONFIG.generation.maxParagraphs).toBe(100);
     expect(APP_CONFIG.generation.seed).toBe('lorem-ipsum-2026');
-  });
-});
-
-describe('DEFAULT_GENERATION_CONFIG', () => {
-  it('should have correct generation configuration', () => {
-    expect(DEFAULT_GENERATION_CONFIG).toBeDefined();
-    expect(DEFAULT_GENERATION_CONFIG.scrollThreshold).toBe(
-      APP_CONFIG.scroll.threshold,
-    );
-    expect(DEFAULT_GENERATION_CONFIG.wordsPerParagraph).toBe(
-      APP_CONFIG.generation.wordsPerParagraph,
-    );
-    expect(DEFAULT_GENERATION_CONFIG.sentencesPerParagraph).toBe(
-      APP_CONFIG.generation.sentencesPerParagraph,
-    );
-    expect(DEFAULT_GENERATION_CONFIG.maxParagraphs).toBe(
-      APP_CONFIG.generation.maxParagraphs,
-    );
-    expect(DEFAULT_GENERATION_CONFIG.chunkSize).toBe(
-      APP_CONFIG.generation.chunkSize,
-    );
-    expect(DEFAULT_GENERATION_CONFIG.seed).toBe(APP_CONFIG.generation.seed);
   });
 });

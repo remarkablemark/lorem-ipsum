@@ -3,6 +3,7 @@
  * Provides algorithmic generation of lorem ipsum text
  */
 
+import { APP_CONFIG } from '../../constants/config';
 import { ORIGINAL_LOREM_TEXT } from '../../constants/loremText';
 import { WORD_BANK } from '../../constants/wordBank';
 import type { GenerationConfig, LoremText } from '../../types/loremText.types';
@@ -180,16 +181,11 @@ export class TextGenerator {
 export function createTextGenerator(
   config?: Partial<GenerationConfig>,
 ): TextGenerator {
-  const defaultConfig: GenerationConfig = {
-    scrollThreshold: 85,
-    wordsPerParagraph: { min: 30, max: 100 },
-    sentencesPerParagraph: { min: 3, max: 8 },
-    maxParagraphs: 100,
-    chunkSize: 50,
-    seed: 'lorem-ipsum-2026',
+  const finalConfig = {
+    scrollThreshold: APP_CONFIG.scroll.threshold,
+    ...APP_CONFIG.generation,
+    ...config,
   };
-
-  const finalConfig = { ...defaultConfig, ...config };
   return new TextGenerator(finalConfig);
 }
 

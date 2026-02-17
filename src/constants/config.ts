@@ -39,15 +39,3 @@ export const APP_CONFIG = {
     seed: 'lorem-ipsum-2026',
   },
 } as const;
-
-/**
- * Default generation configuration
- */
-export const DEFAULT_GENERATION_CONFIG = {
-  scrollThreshold: APP_CONFIG.scroll.threshold,
-  wordsPerParagraph: APP_CONFIG.generation.wordsPerParagraph,
-  sentencesPerParagraph: APP_CONFIG.generation.sentencesPerParagraph,
-  maxParagraphs: APP_CONFIG.generation.maxParagraphs,
-  chunkSize: APP_CONFIG.generation.chunkSize,
-  seed: APP_CONFIG.generation.seed,
-} as const;

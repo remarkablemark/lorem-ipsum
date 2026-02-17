@@ -3,19 +3,11 @@
  * Provides throttled scroll event handling and position tracking
  */
 
+import { APP_CONFIG } from '../../constants/config';
 import type {
   ScrollDetectionConfig,
   ScrollPosition,
 } from '../../types/scroll.types';
-
-/**
- * Default scroll detection configuration
- */
-const DEFAULT_CONFIG: ScrollDetectionConfig = {
-  threshold: 85,
-  debounceMs: 16, // ~60fps
-  maxVelocity: 10000,
-};
 
 /**
  * Scroll detector class implementing scroll position tracking
@@ -34,7 +26,7 @@ export class ScrollDetector {
     config?: Partial<ScrollDetectionConfig>,
   ) {
     this.element = element;
-    this.config = { ...DEFAULT_CONFIG, ...config };
+    this.config = { ...APP_CONFIG.scroll, ...config };
   }
 
   /**
@@ -67,7 +59,7 @@ export class ScrollDetector {
   /**
    * Subscribe to scroll events
    */
-  onScroll(callback: (position: ScrollPosition) => void): () => void {
+  onScroll(callback: (_position: ScrollPosition) => void): () => void {
     this.callbacks.add(callback);
     this.startListening();
 
@@ -164,10 +156,10 @@ export class ScrollDetector {
   /**
    * Notify all callbacks of scroll position change
    */
-  private notifyCallbacks(position: ScrollPosition): void {
+  private notifyCallbacks(_position: ScrollPosition): void {
     this.callbacks.forEach((callback) => {
       try {
-        callback(position);
+        callback(_position);
       } catch {
         // Silently handle callback errors to avoid breaking scroll functionality
       }

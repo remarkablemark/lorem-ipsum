@@ -4,20 +4,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { APP_CONFIG } from '../../constants/config';
 import type {
   ScrollDetectionConfig,
   ScrollPosition,
 } from '../../types/scroll.types';
 import { createScrollDetector } from '../../utils/scrollUtils/scrollUtils';
-
-/**
- * Default configuration for scroll detection
- */
-const DEFAULT_CONFIG: ScrollDetectionConfig = {
-  threshold: 85,
-  debounceMs: 16, // ~60fps
-  maxVelocity: 10000,
-};
 
 /**
  * Hook return type
@@ -38,7 +30,7 @@ export function useScrollDetection(
   element?: HTMLElement | Window,
   config?: Partial<ScrollDetectionConfig>,
 ): UseScrollDetectionReturn {
-  const scrollConfig = { ...DEFAULT_CONFIG, ...config };
+  const scrollConfig = { ...APP_CONFIG.scroll, ...config };
   const [position, setPosition] = useState<ScrollPosition>(() => ({
     scrollTop: 0,
     scrollHeight: 1000,
@@ -58,8 +50,8 @@ export function useScrollDetection(
     const detector = detectorRef.current;
 
     // Subscribe to scroll events
-    const unsubscribe = detector.onScroll((newPosition) => {
-      setPosition((prevPosition) => ({ ...prevPosition, ...newPosition }));
+    const unsubscribe = detector.onScroll((_position) => {
+      setPosition((prevPosition) => ({ ...prevPosition, ..._position }));
     });
 
     // Start detection

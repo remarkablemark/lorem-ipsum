@@ -4,20 +4,9 @@
 
 import { useCallback, useRef, useState } from 'react';
 
+import { APP_CONFIG } from '../../constants/config';
 import type { GenerationConfig, LoremText } from '../../types/loremText.types';
 import { createTextGenerator } from '../../utils/textGenerator/textGenerator';
-
-/**
- * Default configuration for text generation
- */
-const DEFAULT_CONFIG: GenerationConfig = {
-  scrollThreshold: 85,
-  wordsPerParagraph: { min: 30, max: 100 },
-  sentencesPerParagraph: { min: 3, max: 8 },
-  maxParagraphs: 100,
-  chunkSize: 50,
-  seed: 'lorem-ipsum-2026',
-};
 
 /**
  * Hook return type
@@ -39,7 +28,11 @@ interface UseLoremTextReturn {
 export function useLoremText(
   config?: Partial<GenerationConfig>,
 ): UseLoremTextReturn {
-  const generationConfig = { ...DEFAULT_CONFIG, ...config };
+  const generationConfig = {
+    scrollThreshold: APP_CONFIG.scroll.threshold,
+    ...APP_CONFIG.generation,
+    ...config,
+  };
   const generatorRef = useRef(createTextGenerator(generationConfig));
 
   const [texts, setTexts] = useState<LoremText[]>(() => [
