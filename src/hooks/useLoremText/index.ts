@@ -1,0 +1,1 @@
+export { useLoremText } from './useLoremText';

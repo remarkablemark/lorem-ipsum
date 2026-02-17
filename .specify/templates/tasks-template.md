@@ -19,10 +19,10 @@ description: 'Task list template for feature implementation'
 
 ## Path Conventions
 
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+- **React SPA**: `src/` at repository root, tests co-located with source files
+- **Web app**: React single-page application structure
+- **Mobile**: React Native structure (if applicable)
+- Paths shown below assume React project structure from plan.md
 
 <!--
   ============================================================================
@@ -61,12 +61,12 @@ description: 'Task list template for feature implementation'
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup lorem ipsum text generation utility
-- [ ] T005 [P] Implement React hooks for text generation state
-- [ ] T006 [P] Setup component routing and navigation structure
-- [ ] T007 Create base TypeScript interfaces that all components depend on
-- [ ] T008 Configure error handling and user feedback system
-- [ ] T009 Setup environment configuration for Vite build
+- [ ] T004 Setup lorem ipsum text generation utility in src/utils/textGenerator/textGenerator.ts
+- [ ] T005 [P] Implement React hooks for text generation state in src/hooks/
+- [ ] T006 [P] Setup component structure and barrel exports
+- [ ] T007 Create base TypeScript interfaces that all components depend on in src/types/
+- [ ] T008 Configure performance monitoring utilities
+- [ ] T009 Setup scroll utilities for scroll detection
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -82,79 +82,39 @@ Examples of foundational tasks (adjust based on your project):
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T010 [P] [US1] Component test for TextGenerator in tests/components/TextGenerator.test.tsx
-- [ ] T011 [P] [US1] Integration test for text generation flow in tests/integration/generation.test.tsx
+- [ ] T010 [P] [US1] Component test for App in src/components/App/App.test.tsx
+- [ ] T011 [P] [US1] Integration test for scroll generation flow in src/main.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T012 [P] [US1] Create LoremText type in src/types/lorem.types.ts
-- [ ] T013 [P] [US1] Create GenerationConfig type in src/types/config.types.ts
-- [ ] T014 [US1] Implement useLoremGenerator hook in src/hooks/useLoremGenerator.ts (depends on T012, T013)
-- [ ] T015 [US1] Implement TextGenerator component in src/components/TextGenerator/TextGenerator.tsx
-- [ ] T016 [US1] Add accessibility attributes and keyboard navigation
-- [ ] T017 [US1] Add smooth scrolling optimization for large text blocks
+- [ ] T012 [P] [US1] Create LoremText type in src/types/loremText.types.ts
+- [ ] T013 [P] [US1] Create GenerationConfig type in src/types/loremText.types.ts
+- [ ] T014 [US1] Implement useLoremText hook in src/hooks/useLoremText/useLoremText.ts (depends on T012, T013)
+- [ ] T015 [US1] Implement useScrollDetection hook in src/hooks/useScrollDetection/useScrollDetection.ts
+- [ ] T016 [US1] Create App component in src/components/App/App.tsx (depends on T014, T015)
+- [ ] T017 [US1] Add accessibility attributes and keyboard navigation to App component
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
 ---
 
-## Phase 4: User Story 2 - [Title] (Priority: P2)
-
-**Goal**: [Brief description of what this story delivers]
-
-**Independent Test**: [How to verify this story works on its own]
-
-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
-
-- [ ] T018 [P] [US2] Component test for CustomControls in tests/components/CustomControls.test.tsx
-- [ ] T019 [P] [US2] Integration test for customization flow in tests/integration/customization.test.tsx
-
-### Implementation for User Story 2
-
-- [ ] T020 [P] [US2] Create CustomControls component in src/components/CustomControls/CustomControls.tsx
-- [ ] T021 [US2] Implement text quantity calculation utilities in src/utils/textCalculations.ts
-- [ ] T022 [US2] Integrate CustomControls with TextGenerator component
-- [ ] T023 [US2] Add responsive design for mobile customization controls
-
-**Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
-
----
-
-## Phase 5: User Story 3 - [Title] (Priority: P3)
-
-**Goal**: [Brief description of what this story delivers]
-
-**Independent Test**: [How to verify this story works on its own]
-
-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
-
-- [ ] T024 [P] [US3] Component test for CopyButton in tests/components/CopyButton.test.tsx
-- [ ] T025 [P] [US3] Integration test for clipboard functionality in tests/integration/clipboard.test.tsx
-
-### Implementation for User Story 3
-
-- [ ] T026 [P] [US3] Create CopyButton component in src/components/CopyButton/CopyButton.tsx
-- [ ] T027 [US3] Implement clipboard utilities in src/utils/clipboard.ts
-- [ ] T028 [US3] Add visual feedback for copy operations
-
-**Checkpoint**: All user stories should now be independently functional
-
----
-
-[Add more user story phases as needed, following the same pattern]
-
----
-
-## Phase N: Polish & Cross-Cutting Concerns
+## Phase 4: Polish & Cross-Cutting Concerns
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] TXXX [P] Component documentation updates
-- [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Performance optimization for scrolling
-- [ ] TXXX [P] Additional unit tests in tests/unit/
-- [ ] TXXX Accessibility audit and improvements
-- [ ] TXXX Run component integration validation
+- [ ] T018 [P] Component documentation updates for all components
+- [ ] T019 Code cleanup and refactoring across all modules
+- [ ] T020 Performance optimization for scrolling (virtual scrolling implementation)
+- [ ] T021 [P] Additional unit tests for edge cases in all test files
+- [ ] T022 Accessibility audit and improvements (WCAG 2.1 AA compliance)
+- [ ] T023 Run component integration validation across all stories
+- [ ] T024 Add error boundaries for robust error handling
+- [ ] T025 Implement memory cleanup for large text generations
+- [ ] T026 Add comprehensive error handling and user feedback
+- [ ] T027 Create type barrel exports in src/types/index.ts
+- [ ] T028 Create constants barrel exports in src/constants/index.ts
+
+**Checkpoint**: All user stories should now be independently functional
 
 ---
 
@@ -164,22 +124,21 @@ Examples of foundational tasks (adjust based on your project):
 
 - **Setup (Phase 1)**: No dependencies - can start immediately
 - **Foundational (Phase 2)**: Depends on Setup completion - BLOCKS all user stories
-- **User Stories (Phase 3+)**: All depend on Foundational phase completion
-  - User stories can then proceed in parallel (if staffed)
-  - Or sequentially in priority order (P1 → P2 → P3)
+- **User Stories (Phase 3)**: All depend on Foundational phase completion
+  - User story can proceed independently (if staffed)
+  - Or sequentially in priority order (P1)
 - **Polish (Final Phase)**: Depends on all desired user stories being complete
 
 ### User Story Dependencies
 
 - **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
-- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - May integrate with US1 but should be independently testable
-- **User Story 3 (P3)**: Can start after Foundational (Phase 2) - May integrate with US1/US2 but should be independently testable
 
 ### Within Each User Story
 
-- Tests (if included) MUST be written and FAIL before implementation
-- Models before services
-- Services before endpoints
+- Tests (if included) MUST be written and FAIL before implementation (TDD approach)
+- Types before implementation
+- Utilities before hooks
+- Hooks before components
 - Core implementation before integration
 - Story complete before moving to next priority
 
@@ -189,7 +148,7 @@ Examples of foundational tasks (adjust based on your project):
 - All Foundational tasks marked [P] can run in parallel (within Phase 2)
 - Once Foundational phase completes, all user stories can start in parallel (if team capacity allows)
 - All tests for a user story marked [P] can run in parallel
-- Models within a story marked [P] can run in parallel
+- Types within a story marked [P] can run in parallel
 - Different user stories can be worked on in parallel by different team members
 
 ---
@@ -198,12 +157,16 @@ Examples of foundational tasks (adjust based on your project):
 
 ```bash
 # Launch all tests for User Story 1 together (if tests requested):
-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
+Task: "Component test for App in src/components/App/App.test.tsx"
+Task: "Hook test for useLoremText in src/hooks/useLoremText/useLoremText.test.ts"
+Task: "Hook test for useScrollDetection in src/hooks/useScrollDetection/useScrollDetection.test.ts"
+Task: "Utility test for textGenerator in src/utils/textGenerator/textGenerator.test.ts"
 
-# Launch all models for User Story 1 together:
-Task: "Create [Entity1] model in src/models/[entity1].py"
-Task: "Create [Entity2] model in src/models/[entity2].py"
+# Launch all types for User Story 1 together:
+Task: "Create LoremText type in src/types/loremText.types.ts"
+Task: "Create ScrollPosition type in src/types/scroll.types.ts"
+Task: "Create PerformanceMetrics type in src/types/performance.types.ts"
+Task: "Create GenerationConfig type in src/types/loremText.types.ts"
 ```
 
 ---
@@ -222,9 +185,7 @@ Task: "Create [Entity2] model in src/models/[entity2].py"
 
 1. Complete Setup + Foundational → Foundation ready
 2. Add User Story 1 → Test independently → Deploy/Demo (MVP!)
-3. Add User Story 2 → Test independently → Deploy/Demo
-4. Add User Story 3 → Test independently → Deploy/Demo
-5. Each story adds value without breaking previous stories
+3. Each story adds value without breaking previous stories
 
 ### Parallel Team Strategy
 
@@ -233,9 +194,7 @@ With multiple developers:
 1. Team completes Setup + Foundational together
 2. Once Foundational is done:
    - Developer A: User Story 1
-   - Developer B: User Story 2
-   - Developer C: User Story 3
-3. Stories complete and integrate independently
+3. Story completes and integrates independently
 
 ---
 
@@ -244,7 +203,7 @@ With multiple developers:
 - [P] tasks = different files, no dependencies
 - [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
-- Verify tests fail before implementing
+- **TDD REQUIRED**: Verify tests fail before implementing (if tests included)
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
