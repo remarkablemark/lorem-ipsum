@@ -13,6 +13,7 @@
 - Q: Is there ever a state with no text to copy? → A: No, the app always displays original lorem ipsum text on load, so copy button is always enabled
 - Q: Is the button a text button or icon button? → A: Icon-only button
 - Q: What icon will be used? → A: Clipboard emoji 📋
+- Q: How will user know text is copied? → A: Button emoji changes temporarily (📋 → ✓ or checkmark for 2-3 seconds)
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -78,7 +79,7 @@ User can activate the copy button using keyboard navigation for accessibility co
 
 - **FR-001**: System MUST provide an icon-only copy button using the clipboard emoji (📋) in the header/navigation area that is persistent across all views
 - **FR-002**: Copy button MUST use the Clipboard API to copy text to the user's clipboard
-- **FR-003**: System MUST provide visual feedback when copy operation succeeds (button state change, confirmation message)
+- **FR-003**: System MUST provide visual feedback when copy operation succeeds by changing the button emoji from 📋 to ✓ (checkmark) for 2-3 seconds before reverting
 - **FR-004**: Copy button MUST be keyboard accessible with visible focus indicators
 - **FR-005**: System MUST handle clipboard API permission denials gracefully with user-friendly error messages
 - **FR-006**: Copy button MUST include appropriate ARIA labels (e.g., "Copy text to clipboard") for screen reader accessibility since it is icon-only
