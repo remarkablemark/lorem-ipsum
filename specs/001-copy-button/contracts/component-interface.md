@@ -16,7 +16,7 @@ This contract defines the public interface for the `CopyButton` component, inclu
 import type { LoremText } from 'src/types';
 
 interface CopyButtonProps {
-  originalText: LoremText;
+  /** Array of all lorem ipsum paragraphs (includes original as first element) */
   texts: LoremText[];
 }
 
@@ -29,24 +29,18 @@ export function CopyButton(props: CopyButtonProps): JSX.Element;
 
 ### Required Props
 
-#### `originalText: LoremText`
-
-- **Description**: The initial lorem ipsum text displayed on page load
-- **Type**: `LoremText` (from `src/types/loremText.types.ts`)
-- **Validation**: Must be a valid LoremText object with non-empty `content` property
-- **Example**:
-  ```typescript
-  { id: '1', content: 'Lorem ipsum dolor sit amet...' }
-  ```
-
 #### `texts: LoremText[]`
 
-- **Description**: Array of generated lorem ipsum paragraphs
-- **Type**: `LoremText[]`
-- **Validation**: Must be an array (can be empty)
+- **Required**: Yes
+- **Description**: Array of all lorem ipsum paragraphs including the original text as the first element
+- **Type**: `LoremText[]` (array of `LoremText` objects)
+- **Usage**: All text content to be copied to clipboard
+- **Validation**: Must contain at least one element (the original text)
+- **Note**: The first element (`texts[0]`) is always the original lorem ipsum text
 - **Example**:
   ```typescript
   [
+    { id: '1', content: 'Lorem ipsum dolor sit amet...' },
     { id: '2', content: 'Consectetur adipiscing elit...' },
     { id: '3', content: 'Sed do eiusmod tempor...' },
   ];

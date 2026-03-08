@@ -15,62 +15,78 @@ This contract defines the utility functions for clipboard operations and text co
 ### Signature
 
 ```typescript
-function concatenateLoremText(
-  originalText: LoremText,
-  texts: LoremText[],
-): string;
+function concatenateLoremText(texts: LoremText[]): string;
 ```
 
 ### Purpose
 
-Combines the original lorem ipsum text with all generated paragraphs into a single string suitable for clipboard copying.
+Combines all lorem ipsum paragraphs into a single string suitable for clipboard copying. The texts array should already include the original text as the first element.
 
 ### Parameters
 
-#### `originalText: LoremText`
-
-- **Description**: The initial lorem ipsum text
-- **Type**: `LoremText`
-- **Required**: Yes
-- **Validation**: Must have non-empty `content` property
-- **Example**: `{ id: '1', content: 'Lorem ipsum dolor sit amet' }`
-
 #### `texts: LoremText[]`
 
-- **Description**: Array of generated paragraphs
+- **Description**: Array of all paragraphs including the original text as the first element
 - **Type**: `LoremText[]`
-- **Required**: Yes (can be empty array)
-- **Validation**: Must be array
-- **Example**: `[{ id: '2', content: 'Paragraph 2' }]`
+- **Required**: Yes
+- **Validation**: Must be array with at least one element
+- **Example**: `[{ id: '1', content: 'Lorem ipsum' }, { id: '2', content: 'Dolor sit' }]`
+- **Note**: First element should be the original lorem ipsum text
 
 ### Return Value
 
 - **Type**: `string`
 - **Format**: All paragraph content joined with double newlines (`\n\n`)
-- **Empty case**: If `texts` is empty, returns only `originalText.content`
+- **Single element case**: If `texts` has one element, returns that element's content
 
 ### Behavior
 
-1. Combine `originalText` and `texts` into single array
-2. Extract `content` property from each `LoremText` object
-3. Join all content strings with `\n\n` separator
-4. Return concatenated string
+1. Extract `content` property from each `LoremText` object in the array
+2. Join all content strings with `\n\n` separator
+3. Return concatenated string
 
 ### Examples
 
-#### Example 1: Single paragraph (texts empty)
+#### Example 1: Single paragraph
 
 ```typescript
-const result = concatenateLoremText({ id: '1', content: 'Lorem ipsum' }, []);
+const result = concatenateLoremText([
+  {
+    id: '1',
+    content: 'Lorem ipsum',
+    type: 'original',
+    position: 0,
+    paragraphIndex: 1,
+  },
+]);
 // Returns: "Lorem ipsum"
 ```
 
 #### Example 2: Multiple paragraphs
 
 ```typescript
-const result = concatenateLoremText({ id: '1', content: 'Lorem ipsum' }, [
-  { id: '2', content: 'Dolor sit amet' },
-  { id: '3', content: 'Consectetur adipiscing' },
+const result = concatenateLoremText([
+  {
+    id: '1',
+    content: 'Lorem ipsum',
+    type: 'original',
+    position: 0,
+    paragraphIndex: 1,
+  },
+  {
+    id: '2',
+    content: 'Dolor sit amet',
+    type: 'generated',
+    position: 1,
+    paragraphIndex: 2,
+  },
+  {
+    id: '3',
+    content: 'Consectetur adipiscing',
+    type: 'generated',
+    position: 2,
+    paragraphIndex: 3,
+  },
 ]);
 // Returns: "Lorem ipsum\n\nDolor sit amet\n\nConsectetur adipiscing"
 ```
@@ -78,10 +94,16 @@ const result = concatenateLoremText({ id: '1', content: 'Lorem ipsum' }, [
 #### Example 3: Large text (10,000 words)
 
 ```typescript
-const result = concatenateLoremText(
+const result = concatenateLoremText([
   originalText,
-  Array(50).fill({ id: 'x', content: '200 words...' }),
-);
+  ...Array(50).fill({
+    id: 'x',
+    content: '200 words...',
+    type: 'generated',
+    position: 1,
+    paragraphIndex: 2,
+  }),
+]);
 // Returns: String with 51 paragraphs separated by \n\n
 // Performance: <10ms
 ```
@@ -95,12 +117,12 @@ const result = concatenateLoremText(
 
 ### Edge Cases
 
-| Case              | Input                          | Output                                  |
-| ----------------- | ------------------------------ | --------------------------------------- |
-| Empty texts array | `originalText, []`             | `originalText.content`                  |
-| Single text       | `originalText, [text1]`        | `originalText.content\n\ntext1.content` |
-| Empty content     | `{ id: '1', content: '' }, []` | `""`                                    |
-| Large array       | `originalText, Array(100)`     | All paragraphs joined                   |
+| Case          | Input                                               | Output                                  |
+| ------------- | --------------------------------------------------- | --------------------------------------- |
+| Single text   | `[originalText]`                                    | `originalText.content`                  |
+| Two texts     | `[originalText, text1]`                             | `originalText.content\n\ntext1.content` |
+| Empty content | `[{ id: '1', content: '', type: 'original', ... }]` | `""`                                    |
+| Large array   | `[originalText, ...Array(100)]`                     | All paragraphs joined                   |
 
 ### Error Handling
 
@@ -108,8 +130,8 @@ This function does not throw errors. It assumes valid input per TypeScript types
 
 **Assumptions**:
 
-- `originalText` is valid `LoremText` object
 - `texts` is valid array of `LoremText` objects
+- `texts` contains at least one element (the original text)
 - TypeScript enforces type safety at compile time
 
 ---
@@ -153,37 +175,27 @@ Copies text to the system clipboard using the Clipboard API with proper error ha
 
 ```typescript
 async function copyToClipboard(text: string): Promise<void> {
-  if (!navigator.clipboard) {
-    throw new Error('Clipboard API not available');
-  }
   await navigator.clipboard.writeText(text);
 }
 ```
 
 ### Error Cases
 
-#### 1. Clipboard API Not Available
-
-- **Cause**: `navigator.clipboard` is `undefined`
-- **Error Type**: `Error`
-- **Error Message**: `"Clipboard API not available"`
-- **When**: Old browsers, insecure context (HTTP)
-
-#### 2. Permission Denied
+#### 1. Permission Denied
 
 - **Cause**: User denied clipboard access
 - **Error Type**: `DOMException`
 - **Error Name**: `"NotAllowedError"`
 - **When**: User explicitly denied permission
 
-#### 3. Security Error
+#### 2. Security Error
 
 - **Cause**: Clipboard API called outside user gesture or secure context
 - **Error Type**: `DOMException`
 - **Error Name**: `"SecurityError"`
 - **When**: HTTP (not HTTPS), not triggered by user action
 
-#### 4. Invalid State
+#### 3. Invalid State
 
 - **Cause**: Document not focused or other browser-specific restriction
 - **Error Type**: `DOMException`
@@ -211,18 +223,6 @@ try {
 } catch (error) {
   // error.name === "NotAllowedError"
   // Handle permission denied
-}
-```
-
-#### Example 3: API Not Available
-
-```typescript
-// In old browser without Clipboard API
-try {
-  await copyToClipboard('Lorem ipsum');
-} catch (error) {
-  // error.message === "Clipboard API not available"
-  // Handle unsupported browser
 }
 ```
 
@@ -272,10 +272,7 @@ describe('concatenateLoremText', () => {
 ```typescript
 describe('copyToClipboard', () => {
   it('should call navigator.clipboard.writeText with text');
-  it('should throw error if Clipboard API not available');
   it('should propagate clipboard API errors');
-  it('should handle permission denied error');
-  it('should handle security errors');
 });
 ```
 
@@ -321,9 +318,10 @@ import type { LoremText } from 'src/types';
 
 ## Version History
 
-| Version | Date       | Changes                     |
-| ------- | ---------- | --------------------------- |
-| 1.0.0   | 2026-03-07 | Initial contract definition |
+| Version | Date       | Changes                                                                |
+| ------- | ---------- | ---------------------------------------------------------------------- |
+| 1.1.0   | 2026-03-08 | Removed originalText parameter - texts array includes it as first elem |
+| 1.0.0   | 2026-03-07 | Initial contract definition                                            |
 
 ---
 
