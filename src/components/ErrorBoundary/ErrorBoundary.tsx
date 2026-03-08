@@ -18,7 +18,7 @@ interface ErrorBoundaryState {
   errorInfo?: ErrorInfo;
 }
 
-export default class ErrorBoundary extends Component<
+export class ErrorBoundary extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {

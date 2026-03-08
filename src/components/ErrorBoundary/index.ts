@@ -2,4 +2,4 @@
  * Barrel exports for ErrorBoundary component
  */
 
-export { default } from './ErrorBoundary';
+export { ErrorBoundary } from './ErrorBoundary';

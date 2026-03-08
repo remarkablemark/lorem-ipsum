@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { APP_CONFIG } from 'src/constants/config';
 import { useLoremText, useScrollDetection } from 'src/hooks';
 
-export default function App() {
+export function App() {
   const { texts, originalText, isGenerating, generateMore } = useLoremText();
   const { isNearBottom } = useScrollDetection();
 

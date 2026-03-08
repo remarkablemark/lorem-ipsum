@@ -4,7 +4,7 @@
 
 import { render, screen } from '@testing-library/react';
 
-import ErrorBoundary from './ErrorBoundary';
+import { ErrorBoundary } from './ErrorBoundary';
 
 // Component that throws an error for testing
 const ThrowErrorComponent = ({ shouldThrow }: { shouldThrow: boolean }) => {
