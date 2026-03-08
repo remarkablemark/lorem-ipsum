@@ -17,6 +17,8 @@
 - Q: How is the text copied? → A: All visible text on the page (original + all generated paragraphs)
 - Q: What method extracts the text? → A: Concatenate originalText.content + texts array content values
 - Q: Are newlines preserved between paragraphs? → A: Yes, separate paragraphs with double newlines (\n\n)
+- Q: Icon button styling, will there be cursor pointer? → A: Yes, cursor pointer on hover
+- Q: What about hover and focus state styling? → A: No background by default, light gray background on hover, focus ring on focus
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -80,10 +82,10 @@ User can activate the copy button using keyboard navigation for accessibility co
 
 ### Functional Requirements
 
-- **FR-001**: System MUST provide an icon-only copy button using the clipboard emoji (📋) in the header/navigation area that is persistent across all views
+- **FR-001**: System MUST provide an icon-only copy button using the clipboard emoji (📋) in the header/navigation area that is persistent across all views, with no background by default, light gray background on hover, and cursor pointer on hover
 - **FR-002**: Copy button MUST use the Clipboard API to copy all visible text (originalText + all generated paragraphs) to the user's clipboard, with paragraphs separated by double newlines (\n\n)
 - **FR-003**: System MUST provide visual feedback when copy operation succeeds by changing the button emoji from 📋 to ✓ (checkmark) for 2-3 seconds before reverting
-- **FR-004**: Copy button MUST be keyboard accessible with visible focus indicators
+- **FR-004**: Copy button MUST be keyboard accessible with visible focus ring indicators
 - **FR-005**: System MUST handle clipboard API permission denials gracefully with user-friendly error messages
 - **FR-006**: Copy button MUST include appropriate ARIA labels (e.g., "Copy text to clipboard") for screen reader accessibility since it is icon-only
 - **FR-007**: System MUST reset visual feedback state after a reasonable timeout (2-3 seconds)
