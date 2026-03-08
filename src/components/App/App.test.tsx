@@ -48,7 +48,7 @@ describe('App', () => {
 
     const heading = screen.getByRole('heading', { level: 1 });
     expect(heading).toBeInTheDocument();
-    expect(heading.textContent).toBe('Lorem Ipsum Generator');
+    expect(heading.textContent).toBe('Lorem Ipsum');
   });
 
   it('should render the original lorem ipsum text', () => {
