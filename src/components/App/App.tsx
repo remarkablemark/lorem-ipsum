@@ -3,6 +3,7 @@
  */
 
 import { useEffect } from 'react';
+import { CopyButton } from 'src/components/CopyButton';
 import { APP_CONFIG } from 'src/constants/config';
 import { useLoremText, useScrollDetection } from 'src/hooks';
 
@@ -19,8 +20,13 @@ export function App() {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 flex h-16 items-center justify-center border-b border-slate-200 bg-white text-center select-none">
-        <h1 className="text-3xl text-slate-900">Lorem Ipsum</h1>
+      <header className="fixed top-0 right-0 left-0 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-6 select-none">
+        <h1 className="flex-1 text-center text-3xl text-slate-900">
+          Lorem Ipsum
+        </h1>
+        <div className="flex items-center gap-2">
+          <CopyButton originalText={originalText} texts={texts} />
+        </div>
       </header>
 
       <main

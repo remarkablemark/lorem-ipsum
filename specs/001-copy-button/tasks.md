@@ -30,17 +30,17 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T003 [P] Create ClipboardState type in src/types/clipboard.types.ts
-- [ ] T004 [P] Export ClipboardState from src/types/index.ts
-- [ ] T005 [P] Add COPY_FEEDBACK_DURATION constant (2500ms) to src/constants/config.ts
-- [ ] T006 [P] Export COPY_FEEDBACK_DURATION from src/constants/index.ts
-- [ ] T007 Write tests for concatenateLoremText in src/utils/clipboard.test.ts (TDD - RED)
-- [ ] T008 Write tests for copyToClipboard in src/utils/clipboard.test.ts (TDD - RED)
-- [ ] T009 Verify tests fail with `npm test -- src/utils/clipboard.test.ts`
-- [ ] T010 [P] Implement concatenateLoremText function in src/utils/clipboard.ts (TDD - GREEN)
-- [ ] T011 [P] Implement copyToClipboard function in src/utils/clipboard.ts (TDD - GREEN)
-- [ ] T012 Export clipboard utilities from src/utils/index.ts
-- [ ] T013 Verify tests pass with `npm test -- src/utils/clipboard.test.ts`
+- [x] T003 [P] Create ClipboardState type in src/types/clipboard.types.ts
+- [x] T004 [P] Export ClipboardState from src/types/index.ts
+- [x] T005 [P] Add COPY_FEEDBACK_DURATION constant (2500ms) to src/constants/config.ts
+- [x] T006 [P] Export COPY_FEEDBACK_DURATION from src/constants/index.ts
+- [x] T007 Write tests for concatenateLoremText in src/utils/clipboard.test.ts (TDD - RED)
+- [x] T008 Write tests for copyToClipboard in src/utils/clipboard.test.ts (TDD - RED)
+- [x] T009 Verify tests fail with `npm test -- src/utils/clipboard.test.ts`
+- [x] T010 [P] Implement concatenateLoremText function in src/utils/clipboard.ts (TDD - GREEN)
+- [x] T011 [P] Implement copyToClipboard function in src/utils/clipboard.ts (TDD - GREEN)
+- [x] T012 Export clipboard utilities from src/utils/index.ts
+- [x] T013 Verify tests pass with `npm test -- src/utils/clipboard.test.ts`
 - [ ] T014 Create CopyButtonProps interface in src/components/CopyButton/CopyButton.types.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
