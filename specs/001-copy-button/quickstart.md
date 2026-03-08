@@ -49,7 +49,6 @@ export type { ClipboardState } from './clipboard.types';
 **File**: `src/utils/clipboard.test.ts`
 
 ```typescript
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { concatenateLoremText, copyToClipboard } from './clipboard';
 import type { LoremText } from 'src/types';
 
@@ -225,7 +224,6 @@ export interface CopyButtonProps {
 ```typescript
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { CopyButton } from './CopyButton';
 import type { LoremText } from 'src/types';
 

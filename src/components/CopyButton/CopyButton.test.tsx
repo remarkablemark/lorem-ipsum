@@ -1,6 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import type { LoremText } from 'src/types';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { CopyButton } from './CopyButton';
 

@@ -1,5 +1,4 @@
 import type { LoremText } from 'src/types';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { concatenateLoremText, copyToClipboard } from './clipboard';
 
