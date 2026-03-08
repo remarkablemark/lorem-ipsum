@@ -74,10 +74,9 @@ export function CopyButton(props: CopyButtonProps): JSX.Element;
 
 ### State: Success
 
-- **Icon**: ✓ (checkmark)
+- **Icon**: ✅ (checkmark)
 - **ARIA Label**: "Text copied"
 - **Duration**: 2500ms (2.5 seconds)
-- **Background**: Light green background (`bg-green-100`)
 - **Auto-reset**: Returns to idle after timeout
 
 ### State: Error
@@ -85,7 +84,6 @@ export function CopyButton(props: CopyButtonProps): JSX.Element;
 - **Icon**: ❌ (cross mark)
 - **ARIA Label**: "Failed to copy text"
 - **Duration**: 2500ms (2.5 seconds)
-- **Background**: Light red background (`bg-red-100`)
 - **Auto-reset**: Returns to idle after timeout
 
 ---
@@ -245,12 +243,6 @@ texts = [
 // State-specific styles
 'hover:bg-gray-100 active:bg-gray-200';
 'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2';
-
-// Success state
-'bg-green-100';
-
-// Error state
-'bg-red-100';
 ```
 
 ### Customization

@@ -282,7 +282,7 @@ describe('CopyButton', () => {
     await user.click(button);
 
     expect(screen.getByRole('button', { name: /text copied/i })).toBeInTheDocument();
-    expect(screen.getByRole('button')).toHaveTextContent('✓');
+    expect(screen.getByRole('button')).toHaveTextContent('✅');
   });
 
   it('should reset to idle state after feedback timeout', async () => {
@@ -398,7 +398,7 @@ export function CopyButton({ originalText, texts }: CopyButtonProps) {
   const getButtonIcon = () => {
     switch (clipboardState) {
       case 'success':
-        return '✓';
+        return '✅';
       case 'error':
         return '❌';
       default:
@@ -418,29 +418,6 @@ export function CopyButton({ originalText, texts }: CopyButtonProps) {
         return 'Copy text to clipboard';
     }
   };
-
-  const getBackgroundClass = () => {
-    switch (clipboardState) {
-      case 'success':
-        return 'bg-green-100';
-      case 'error':
-        return 'bg-red-100';
-      default:
-        return '';
-    }
-  };
-
-  return (
-    <button
-      type="button"
-      aria-label={getAriaLabel()}
-      onClick={handleCopy}
-      className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-150 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer ${getBackgroundClass()}`}
-    >
-      {getButtonIcon()}
-    </button>
-  );
-}
 ```
 
 **File**: `src/components/CopyButton/index.ts`
@@ -522,7 +499,7 @@ npm start
 - [ ] Copy button visible in header
 - [ ] Click button copies text to clipboard
 - [ ] Paste in external app shows correct text with paragraph breaks
-- [ ] Success feedback (✓) appears for 2.5 seconds
+- [ ] Success feedback (✅) appears for 2.5 seconds
 - [ ] Button returns to idle state (📋) after timeout
 - [ ] Tab to button shows focus ring
 - [ ] Enter/Space activates copy

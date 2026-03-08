@@ -22,7 +22,7 @@ export function App() {
     <>
       <header className="fixed top-0 right-0 left-0 flex h-16 items-center justify-center border-b border-slate-200 bg-white px-6 select-none">
         <h1 className="text-3xl text-slate-900">Lorem Ipsum</h1>
-        <div className="ml-1">
+        <div className="ml-2">
           <CopyButton originalText={originalText} texts={texts} />
         </div>
       </header>

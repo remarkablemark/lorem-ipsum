@@ -87,13 +87,13 @@
 
 **Goal**: User receives clear visual confirmation when text is successfully copied to clipboard.
 
-**Independent Test**: Can be tested by clicking copy button and observing visual state changes (button icon changes from 📋 to ✓)
+**Independent Test**: Can be tested by clicking copy button and observing visual state changes (button icon changes from 📋 to ✅)
 
 ### Tests for User Story 2 (TDD - RED)
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T033 [P] [US2] Write test for success feedback display (✓ icon) in src/components/CopyButton/CopyButton.test.tsx
+- [ ] T033 [P] [US2] Write test for success feedback display (✅ icon) in src/components/CopyButton/CopyButton.test.tsx
 - [ ] T034 [P] [US2] Write test for error feedback display (❌ icon) in src/components/CopyButton/CopyButton.test.tsx
 - [ ] T035 [P] [US2] Write test for feedback timeout (2500ms reset to idle) in src/components/CopyButton/CopyButton.test.tsx
 - [ ] T036 [P] [US2] Write test for rapid clicks resetting timer in src/components/CopyButton/CopyButton.test.tsx
@@ -103,14 +103,14 @@
 ### Implementation for User Story 2 (TDD - GREEN)
 
 - [ ] T039 [US2] Add getButtonIcon function with state-based emoji logic in src/components/CopyButton/CopyButton.tsx
-- [ ] T040 [US2] Add getBackgroundClass function for success/error background colors in src/components/CopyButton/CopyButton.tsx
-- [ ] T041 [US2] Update useEffect to handle success/error state timeout reset in src/components/CopyButton/CopyButton.tsx
+- [x] T040 [US2] ~~Add getBackgroundClass function for success/error background colors~~ (REMOVED - no background color changes)
+- [x] T041 [US2] ~~Update button className to use getBackgroundClass()~~ (REMOVED - no background color changes)
 - [ ] T042 [US2] Add Tailwind classes for hover (hover:bg-gray-100) and active (active:bg-gray-200) states in src/components/CopyButton/CopyButton.tsx
 - [ ] T043 [US2] Add cursor-pointer class to button in src/components/CopyButton/CopyButton.tsx
 - [ ] T044 [US2] Add transition-colors duration-150 for smooth state changes in src/components/CopyButton/CopyButton.tsx
 - [ ] T045 [US2] Verify all tests pass with `npm test -- src/components/CopyButton/CopyButton.test.tsx`
 - [ ] T046 [US2] Manual test: Start dev server with `npm start` and verify visual feedback works
-- [ ] T047 [US2] Manual test: Verify success state (✓) appears for 2.5 seconds after copy
+- [ ] T047 [US2] Manual test: Verify success state (✅) appears for 2.5 seconds after copy
 - [ ] T048 [US2] Manual test: Verify hover shows light gray background
 - [ ] T049 [US2] Manual test: Verify cursor changes to pointer on hover
 
@@ -324,7 +324,7 @@ With multiple developers:
 **Independent Test Criteria**:
 
 - US1: Click copy button, paste in external app, verify text matches with paragraph breaks
-- US2: Click copy button, observe ✓ icon for 2.5 seconds, verify hover states
+- US2: Click copy button, observe ✅ icon for 2.5 seconds, verify hover states
 - US3: Tab to button (focus ring visible), press Enter/Space, verify copy works
 
 **Suggested MVP Scope**: User Story 1 only (basic copy functionality)

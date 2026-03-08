@@ -111,7 +111,7 @@ useEffect(() => {
   className="focus:ring-2 focus:ring-blue-500 focus:outline-none"
   onClick={handleCopy}
 >
-  {clipboardState === 'success' ? '✓' : '📋'}
+  {clipboardState === 'success' ? '✅' : '📋'}
 </button>
 ```
 
@@ -184,7 +184,7 @@ async function handleCopy() {
 
 ## 5. Visual Feedback Patterns
 
-### Decision: Emoji state transition (📋 → ✓) with 2-3 second timeout
+### Decision: Emoji state transition (📋 → ✅) with 2-3 second timeout
 
 **Rationale**:
 
@@ -197,7 +197,7 @@ async function handleCopy() {
 
 - **Idle**: 📋 (clipboard emoji)
 - **Copying**: 📋 (same, operation is fast <200ms)
-- **Success**: ✓ (checkmark, 2-3 seconds)
+- **Success**: ✅ (checkmark, 2-3 seconds)
 - **Error**: ❌ (cross mark, 2-3 seconds)
 
 **Timing Constant**:
@@ -346,7 +346,7 @@ interface CopyButtonProps {
 | **State Management**   | useState + useEffect            | Simple, aligns with React 19 patterns |
 | **Accessibility**      | Semantic <button> + aria-label  | WCAG 2.1 AA compliance                |
 | **Error Handling**     | Try-catch with state feedback   | Graceful, user-friendly               |
-| **Visual Feedback**    | Emoji transition (📋 → ✓)       | Universal, no dependencies            |
+| **Visual Feedback**    | Emoji transition (📋 → ✅)      | Universal, no dependencies            |
 | **Text Concatenation** | Array.join('\n\n')              | Efficient, preserves formatting       |
 | **Testing**            | TDD with mocked Clipboard API   | Constitutional requirement            |
 | **Integration**        | Props from App component        | Decoupled, simple data flow           |

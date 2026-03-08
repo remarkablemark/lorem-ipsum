@@ -88,7 +88,7 @@ describe('CopyButton', () => {
         screen.getByRole('button', { name: /text copied/i }),
       ).toBeInTheDocument();
     });
-    expect(screen.getByRole('button')).toHaveTextContent('✓');
+    expect(screen.getByRole('button')).toHaveTextContent('✅');
   });
 
   it('should reset to idle state after feedback timeout', async () => {

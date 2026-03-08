@@ -35,7 +35,7 @@ export function CopyButton({ originalText, texts }: CopyButtonProps) {
   function getButtonIcon() {
     switch (clipboardState) {
       case 'success':
-        return '✓';
+        return '✅';
       case 'error':
         return '❌';
       default:
@@ -56,17 +56,6 @@ export function CopyButton({ originalText, texts }: CopyButtonProps) {
     }
   }
 
-  function getBackgroundClass() {
-    switch (clipboardState) {
-      case 'success':
-        return 'bg-green-100';
-      case 'error':
-        return 'bg-red-100';
-      default:
-        return '';
-    }
-  }
-
   return (
     <button
       type="button"
@@ -74,7 +63,7 @@ export function CopyButton({ originalText, texts }: CopyButtonProps) {
       onClick={() => {
         void handleCopy();
       }}
-      className={`inline-flex cursor-pointer items-center justify-center rounded-md p-2 transition-colors duration-150 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none active:bg-gray-200 ${getBackgroundClass()}`}
+      className="inline-flex cursor-pointer items-center justify-center rounded-md p-2 transition-colors duration-150 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none active:bg-gray-200"
     >
       {getButtonIcon()}
     </button>

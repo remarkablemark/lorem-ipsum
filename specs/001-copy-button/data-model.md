@@ -203,7 +203,7 @@ const [clipboardState, setClipboardState] = useState<ClipboardState>('idle');
 
 - **buttonIcon**: Computed from clipboardState
   - idle/copying: '📋'
-  - success: '✓'
+  - success: '✅'
   - error: '❌'
 - **ariaLabel**: Computed from clipboardState
   - idle: 'Copy text to clipboard'
