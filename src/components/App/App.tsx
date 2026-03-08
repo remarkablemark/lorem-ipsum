@@ -19,12 +19,12 @@ export function App() {
 
   return (
     <>
-      <header className="flex h-16 items-center justify-center border-b border-slate-200 text-center select-none">
+      <header className="fixed top-0 right-0 left-0 flex h-16 items-center justify-center border-b border-slate-200 bg-white text-center select-none">
         <h1 className="text-3xl text-slate-900">Lorem Ipsum</h1>
       </header>
 
       <main
-        className="mx-auto min-h-screen max-w-4xl px-4 py-8 sm:px-6 lg:px-8"
+        className="mx-auto min-h-[calc(100vh+1px)] max-w-4xl px-6 pt-24"
         role="main"
         aria-label="Main content"
       >

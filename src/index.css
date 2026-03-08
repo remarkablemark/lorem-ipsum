@@ -3,6 +3,10 @@
 /**
  * GitHub Corners (used in index.html)
  */
+.github-corner {
+  @apply fixed top-0 right-0 z-50;
+}
+
 .github-corner > svg {
   @apply hidden h-16 w-16 opacity-50 transition-opacity duration-400 sm:block;
 }
