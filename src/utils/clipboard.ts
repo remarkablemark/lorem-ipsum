@@ -2,13 +2,10 @@ import type { LoremText } from 'src/types';
 
 /**
  * Concatenates lorem ipsum text with double newline separators
+ * Note: texts array should already include the original text as the first element
  */
-export function concatenateLoremText(
-  originalText: LoremText,
-  texts: LoremText[],
-): string {
-  const allTexts = [originalText, ...texts];
-  return allTexts.map((text) => text.content).join('\n\n');
+export function concatenateLoremText(texts: LoremText[]): string {
+  return texts.map((text) => text.content).join('\n\n');
 }
 
 /**

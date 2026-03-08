@@ -3,7 +3,7 @@ import type { LoremText } from 'src/types';
 import { concatenateLoremText, copyToClipboard } from './clipboard';
 
 describe('concatenateLoremText', () => {
-  it('should concatenate originalText and texts with double newlines', () => {
+  it('should concatenate texts with double newlines', () => {
     const originalText: LoremText = {
       id: '1',
       content: 'Lorem ipsum',
@@ -12,6 +12,7 @@ describe('concatenateLoremText', () => {
       paragraphIndex: 1,
     };
     const texts: LoremText[] = [
+      originalText,
       {
         id: '2',
         content: 'Dolor sit',
@@ -28,12 +29,12 @@ describe('concatenateLoremText', () => {
       },
     ];
 
-    const result = concatenateLoremText(originalText, texts);
+    const result = concatenateLoremText(texts);
 
     expect(result).toBe('Lorem ipsum\n\nDolor sit\n\nAmet consectetur');
   });
 
-  it('should handle empty texts array', () => {
+  it('should handle single text', () => {
     const originalText: LoremText = {
       id: '1',
       content: 'Lorem ipsum',
@@ -41,9 +42,9 @@ describe('concatenateLoremText', () => {
       position: 0,
       paragraphIndex: 1,
     };
-    const texts: LoremText[] = [];
+    const texts: LoremText[] = [originalText];
 
-    const result = concatenateLoremText(originalText, texts);
+    const result = concatenateLoremText(texts);
 
     expect(result).toBe('Lorem ipsum');
   });
@@ -57,6 +58,7 @@ describe('concatenateLoremText', () => {
       paragraphIndex: 1,
     };
     const texts: LoremText[] = [
+      originalText,
       {
         id: '2',
         content: 'Second',
@@ -73,7 +75,7 @@ describe('concatenateLoremText', () => {
       },
     ];
 
-    const result = concatenateLoremText(originalText, texts);
+    const result = concatenateLoremText(texts);
 
     expect(result).toBe('First\n\nSecond\n\nThird');
   });

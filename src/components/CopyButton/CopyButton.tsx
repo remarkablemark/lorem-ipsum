@@ -5,7 +5,7 @@ import { concatenateLoremText, copyToClipboard } from 'src/utils';
 
 import type { CopyButtonProps } from './CopyButton.types';
 
-export function CopyButton({ originalText, texts }: CopyButtonProps) {
+export function CopyButton({ texts }: CopyButtonProps) {
   const [clipboardState, setClipboardState] = useState<ClipboardState>('idle');
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function CopyButton({ originalText, texts }: CopyButtonProps) {
     setClipboardState('copying');
 
     try {
-      const textToCopy = concatenateLoremText(originalText, texts);
+      const textToCopy = concatenateLoremText(texts);
       await copyToClipboard(textToCopy);
       setClipboardState('success');
     } catch {
