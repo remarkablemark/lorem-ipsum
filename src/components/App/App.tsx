@@ -20,8 +20,8 @@ export function App() {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 flex h-16 items-center justify-center border-b border-slate-200 bg-white px-6 select-none">
-        <h1 className="text-3xl text-slate-900">Lorem Ipsum</h1>
+      <header className="fixed top-0 right-0 left-0 flex h-16 items-center justify-center border-b border-slate-200 bg-white px-6 select-none dark:border-slate-700 dark:bg-slate-900">
+        <h1 className="text-3xl text-slate-900 dark:text-white">Lorem Ipsum</h1>
         <div className="ml-2">
           <CopyButton texts={texts} />
         </div>
@@ -39,7 +39,7 @@ export function App() {
           data-testid="text-container"
         >
           {/* Manual trigger */}
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 select-none">
+          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 select-none dark:border-slate-700 dark:bg-slate-800">
             <h2 className="sr-only">Text Generation Controls</h2>
             <button
               onClick={() => {
@@ -48,21 +48,24 @@ export function App() {
               disabled={isGenerating}
               aria-describedby="generation-help"
               aria-busy={isGenerating}
-              className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-400"
+              className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-400 dark:focus:ring-offset-slate-900"
             >
               {isGenerating
                 ? 'Generating...'
                 : `Generate ${APP_CONFIG.generation.buttonGenerationCount.toString()} Paragraphs`}
             </button>
-            <p id="generation-help" className="mt-2 text-sm text-slate-600">
+            <p
+              id="generation-help"
+              className="mt-2 text-sm text-slate-600 dark:text-slate-400"
+            >
               Or scroll down to trigger automatic generation
             </p>
           </div>
 
           {/* Original text */}
           <section aria-label="Original lorem ipsum text">
-            <article className="prose prose-slate max-w-none">
-              <p className="leading-relaxed text-slate-700">
+            <article className="prose prose-slate dark:prose-invert max-w-none">
+              <p className="leading-relaxed text-slate-700 dark:text-slate-300">
                 {originalText.content}
               </p>
             </article>
@@ -77,10 +80,10 @@ export function App() {
                 {texts.slice(1).map((text, index) => (
                   <article
                     key={text.id}
-                    className="prose prose-slate max-w-none"
+                    className="prose prose-slate dark:prose-invert max-w-none"
                     aria-label={`Generated paragraph ${String(index + 1)}`}
                   >
-                    <p className="leading-relaxed text-slate-700">
+                    <p className="leading-relaxed text-slate-700 dark:text-slate-300">
                       {text.content}
                     </p>
                   </article>
@@ -96,7 +99,9 @@ export function App() {
               role="status"
               aria-live="polite"
             >
-              <div className="text-slate-600">Generating more text...</div>
+              <div className="text-slate-600 dark:text-slate-400">
+                Generating more text...
+              </div>
             </div>
           )}
 
@@ -107,17 +112,19 @@ export function App() {
               role="status"
               aria-live="polite"
             >
-              <p className="text-slate-500">No text generated yet</p>
+              <p className="text-slate-500 dark:text-slate-400">
+                No text generated yet
+              </p>
             </div>
           )}
 
           {/* Spacer to make page scrollable */}
           <div
-            className="flex h-96 items-center justify-center rounded-lg border-2 border-dashed border-slate-300 select-none"
+            className="flex h-96 items-center justify-center rounded-lg border-2 border-dashed border-slate-300 select-none dark:border-slate-700"
             role="region"
             aria-label="Scroll trigger area"
           >
-            <div className="text-center text-slate-500">
+            <div className="text-center text-slate-500 dark:text-slate-400">
               <p className="text-lg" aria-hidden="true">
                 📜
               </p>

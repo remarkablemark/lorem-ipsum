@@ -63,7 +63,7 @@ export function CopyButton({ texts }: CopyButtonProps) {
       onClick={() => {
         void handleCopy();
       }}
-      className="inline-flex cursor-pointer items-center justify-center rounded-md p-2 transition-colors duration-150 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none active:bg-gray-200"
+      className="inline-flex cursor-pointer items-center justify-center rounded-md p-2 transition-colors duration-150 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none active:bg-gray-200 dark:hover:bg-slate-800 dark:focus:ring-offset-slate-900 dark:active:bg-slate-700"
     >
       {getButtonIcon()}
     </button>
