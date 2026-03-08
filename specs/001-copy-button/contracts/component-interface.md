@@ -18,7 +18,6 @@ import type { LoremText } from 'src/types';
 interface CopyButtonProps {
   originalText: LoremText;
   texts: LoremText[];
-  className?: string;
 }
 
 export function CopyButton(props: CopyButtonProps): JSX.Element;
@@ -52,15 +51,6 @@ export function CopyButton(props: CopyButtonProps): JSX.Element;
     { id: '3', content: 'Sed do eiusmod tempor...' },
   ];
   ```
-
-### Optional Props
-
-#### `className?: string`
-
-- **Description**: Additional Tailwind CSS classes for styling customization
-- **Type**: `string | undefined`
-- **Default**: `undefined`
-- **Example**: `"ml-4 text-lg"`
 
 ---
 
@@ -265,9 +255,8 @@ texts = [
 
 ### Customization
 
-- `className` prop appends to default styles (does not replace)
-- Tailwind utility classes can override defaults
-- Component maintains minimum accessibility requirements regardless of customization
+- Component uses fixed Tailwind classes for consistent styling
+- All styling is internal to maintain accessibility requirements
 
 ---
 

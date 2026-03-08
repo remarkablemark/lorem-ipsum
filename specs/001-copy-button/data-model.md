@@ -54,7 +54,6 @@ idle → copying → error → idle (after timeout)
 interface CopyButtonProps {
   originalText: LoremText;
   texts: LoremText[];
-  className?: string;
 }
 ```
 
@@ -66,9 +65,6 @@ interface CopyButtonProps {
 - **texts** (required): Array of generated lorem ipsum paragraphs
   - Type: `LoremText[]` (from existing types)
   - Validation: Can be empty array (only originalText copied)
-- **className** (optional): Additional Tailwind CSS classes for styling customization
-  - Type: `string`
-  - Default: `undefined`
 
 **Relationships**:
 
@@ -250,8 +246,6 @@ export interface CopyButtonProps {
   originalText: LoremText;
   /** Array of generated lorem ipsum paragraphs */
   texts: LoremText[];
-  /** Optional additional CSS classes */
-  className?: string;
 }
 ```
 

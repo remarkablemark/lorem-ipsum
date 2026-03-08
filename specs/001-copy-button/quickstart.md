@@ -213,8 +213,6 @@ export interface CopyButtonProps {
   originalText: LoremText;
   /** Array of generated lorem ipsum paragraphs */
   texts: LoremText[];
-  /** Optional additional CSS classes */
-  className?: string;
 }
 ```
 
@@ -372,7 +370,7 @@ import { concatenateLoremText, copyToClipboard } from 'src/utils';
 
 import type { CopyButtonProps } from './CopyButton.types';
 
-export function CopyButton({ originalText, texts, className = '' }: CopyButtonProps) {
+export function CopyButton({ originalText, texts }: CopyButtonProps) {
   const [clipboardState, setClipboardState] = useState<ClipboardState>('idle');
 
   useEffect(() => {
@@ -437,7 +435,7 @@ export function CopyButton({ originalText, texts, className = '' }: CopyButtonPr
       type="button"
       aria-label={getAriaLabel()}
       onClick={handleCopy}
-      className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-150 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer ${getBackgroundClass()} ${className}`}
+      className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-150 hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer ${getBackgroundClass()}`}
     >
       {getButtonIcon()}
     </button>
