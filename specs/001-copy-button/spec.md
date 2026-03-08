@@ -5,6 +5,13 @@
 **Status**: Draft  
 **Input**: User description: "copy button"
 
+## Clarifications
+
+### Session 2026-03-07
+
+- Q: Where is the copy button rendered? In the header? → A: In the header/navigation area (persistent across all views)
+- Q: Is there ever a state with no text to copy? → A: No, the app always displays original lorem ipsum text on load, so copy button is always enabled
+
 ## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Copy Generated Text (Priority: P1)
@@ -58,7 +65,6 @@ User can activate the copy button using keyboard navigation for accessibility co
 ### Edge Cases
 
 - What happens when clipboard API is not available or denied by browser permissions?
-- How does the system handle copy attempts when no text has been generated yet?
 - What happens when user clicks copy button multiple times in rapid succession?
 - How does the copy button behave on touch devices (mobile/tablet)?
 - What happens when the generated text is extremely large (10,000+ words)?
@@ -68,16 +74,15 @@ User can activate the copy button using keyboard navigation for accessibility co
 
 ### Functional Requirements
 
-- **FR-001**: System MUST provide a clearly labeled copy button visible when lorem ipsum text is displayed
+- **FR-001**: System MUST provide a clearly labeled copy button in the header/navigation area that is persistent across all views
 - **FR-002**: Copy button MUST use the Clipboard API to copy text to the user's clipboard
 - **FR-003**: System MUST provide visual feedback when copy operation succeeds (button state change, confirmation message)
 - **FR-004**: Copy button MUST be keyboard accessible with visible focus indicators
 - **FR-005**: System MUST handle clipboard API permission denials gracefully with user-friendly error messages
 - **FR-006**: Copy button MUST include appropriate ARIA labels for screen reader accessibility
 - **FR-007**: System MUST reset visual feedback state after a reasonable timeout (2-3 seconds)
-- **FR-008**: Copy button MUST be disabled or hidden when no text is available to copy
-- **FR-009**: System MUST handle copy failures with appropriate error messaging
-- **FR-010**: Copy button MUST work on both desktop and mobile/touch devices
+- **FR-008**: System MUST handle copy failures with appropriate error messaging
+- **FR-009**: Copy button MUST work on both desktop and mobile/touch devices
 
 ### Key Entities
 
