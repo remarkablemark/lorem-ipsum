@@ -1,8 +1,5 @@
 @import 'tailwindcss';
 
-/**
- * GitHub Corners (used in index.html)
- */
 .github-corner {
   @apply fixed top-0 right-0 z-50;
 }
