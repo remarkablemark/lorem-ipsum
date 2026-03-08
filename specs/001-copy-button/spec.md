@@ -14,6 +14,9 @@
 - Q: Is the button a text button or icon button? → A: Icon-only button
 - Q: What icon will be used? → A: Clipboard emoji 📋
 - Q: How will user know text is copied? → A: Button emoji changes temporarily (📋 → ✓ or checkmark for 2-3 seconds)
+- Q: How is the text copied? → A: All visible text on the page (original + all generated paragraphs)
+- Q: What method extracts the text? → A: Concatenate originalText.content + texts array content values
+- Q: Are newlines preserved between paragraphs? → A: Yes, separate paragraphs with double newlines (\n\n)
 
 ## User Scenarios & Testing _(mandatory)_
 
@@ -78,7 +81,7 @@ User can activate the copy button using keyboard navigation for accessibility co
 ### Functional Requirements
 
 - **FR-001**: System MUST provide an icon-only copy button using the clipboard emoji (📋) in the header/navigation area that is persistent across all views
-- **FR-002**: Copy button MUST use the Clipboard API to copy text to the user's clipboard
+- **FR-002**: Copy button MUST use the Clipboard API to copy all visible text (originalText + all generated paragraphs) to the user's clipboard, with paragraphs separated by double newlines (\n\n)
 - **FR-003**: System MUST provide visual feedback when copy operation succeeds by changing the button emoji from 📋 to ✓ (checkmark) for 2-3 seconds before reverting
 - **FR-004**: Copy button MUST be keyboard accessible with visible focus indicators
 - **FR-005**: System MUST handle clipboard API permission denials gracefully with user-friendly error messages
@@ -92,7 +95,7 @@ User can activate the copy button using keyboard navigation for accessibility co
 - **CopyButton**: Interactive element that triggers clipboard copy operation
 - **ClipboardState**: Status of copy operation (idle, copying, success, error)
 - **FeedbackTimer**: Manages the duration of success/error feedback display
-- **LoremText**: The generated text content to be copied
+- **LoremText**: The generated text content to be copied (includes originalText.content and all texts array content values concatenated with \n\n separators)
 
 ## Success Criteria _(mandatory)_
 
