@@ -2,7 +2,7 @@
 
 **Feature Branch**: `001-lorem-ipsum`
 **Created**: 2026-02-16
-**Status**: Draft
+**Status**: Done
 **Input**: User description: "lorem ipsum generator via scrolling the page"
 
 ## Clarifications

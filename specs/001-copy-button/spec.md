@@ -2,7 +2,7 @@
 
 **Feature Branch**: `001-copy-button`  
 **Created**: 2026-03-07  
-**Status**: Draft  
+**Status**: Done  
 **Input**: User description: "copy button"
 
 ## Clarifications
