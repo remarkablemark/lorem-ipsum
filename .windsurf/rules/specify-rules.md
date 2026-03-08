@@ -4,6 +4,9 @@ Auto-generated from all feature plans. Last updated: 2026-02-16
 
 ## Active Technologies
 
+- TypeScript 5 with React 19 + Vite 7, Vitest 4, Tailwind CSS 4, Clipboard API (browser native) (001-copy-button)
+- N/A (client-side only, clipboard managed by browser) (001-copy-button)
+
 - TypeScript 5 with React 19 + Vite 7, Vitest 4, Tailwind CSS 4 (001-lorem-ipsum)
 
 ## Project Structure
@@ -22,6 +25,8 @@ npm test && npm run lint
 TypeScript 5 with React 19: Follow standard conventions
 
 ## Recent Changes
+
+- 001-copy-button: Added TypeScript 5 with React 19 + Vite 7, Vitest 4, Tailwind CSS 4, Clipboard API (browser native)
 
 - 001-lorem-ipsum: Added TypeScript 5 with React 19 + Vite 7, Vitest 4, Tailwind CSS 4
 
