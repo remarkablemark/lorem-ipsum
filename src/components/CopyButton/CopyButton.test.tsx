@@ -65,12 +65,14 @@ describe('CopyButton', () => {
       name: /copy text to clipboard/i,
     });
 
-    fireEvent.click(button);
-    await vi.waitFor(() => {
-      expect(mockWriteText).toHaveBeenCalledWith(
-        'Lorem ipsum\n\nDolor sit\n\nAmet consectetur',
-      );
+    await act(async () => {
+      fireEvent.click(button);
+      await vi.runOnlyPendingTimersAsync();
     });
+
+    expect(mockWriteText).toHaveBeenCalledWith(
+      'Lorem ipsum\n\nDolor sit\n\nAmet consectetur',
+    );
   });
 
   it('should show success feedback after successful copy', async () => {
@@ -81,13 +83,14 @@ describe('CopyButton', () => {
       name: /copy text to clipboard/i,
     });
 
-    fireEvent.click(button);
-
-    await vi.waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: /text copied/i }),
-      ).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(button);
+      await vi.runOnlyPendingTimersAsync();
     });
+
+    expect(
+      screen.getByRole('button', { name: /text copied/i }),
+    ).toBeInTheDocument();
     expect(screen.getByRole('button')).toHaveTextContent('✅');
   });
 
@@ -99,15 +102,17 @@ describe('CopyButton', () => {
       name: /copy text to clipboard/i,
     });
 
-    fireEvent.click(button);
-    await vi.waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: /text copied/i }),
-      ).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(button);
+      await vi.runOnlyPendingTimersAsync();
     });
 
-    act(() => {
-      vi.advanceTimersByTime(2500);
+    expect(
+      screen.getByRole('button', { name: /text copied/i }),
+    ).toBeInTheDocument();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2500);
     });
 
     expect(
@@ -124,13 +129,14 @@ describe('CopyButton', () => {
       name: /copy text to clipboard/i,
     });
 
-    fireEvent.click(button);
-
-    await vi.waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: /failed to copy text/i }),
-      ).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(button);
+      await vi.runOnlyPendingTimersAsync();
     });
+
+    expect(
+      screen.getByRole('button', { name: /failed to copy text/i }),
+    ).toBeInTheDocument();
     expect(screen.getByRole('button')).toHaveTextContent('❌');
   });
 
@@ -154,26 +160,30 @@ describe('CopyButton', () => {
       name: /copy text to clipboard/i,
     });
 
-    fireEvent.click(button);
-    await vi.waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: /text copied/i }),
-      ).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(button);
+      await vi.runOnlyPendingTimersAsync();
     });
 
-    act(() => {
-      vi.advanceTimersByTime(1000);
-    });
-    fireEvent.click(button);
+    expect(
+      screen.getByRole('button', { name: /text copied/i }),
+    ).toBeInTheDocument();
 
-    await vi.waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: /text copied/i }),
-      ).toBeInTheDocument();
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1000);
     });
 
-    act(() => {
-      vi.advanceTimersByTime(2500);
+    await act(async () => {
+      fireEvent.click(button);
+      await vi.runOnlyPendingTimersAsync();
+    });
+
+    expect(
+      screen.getByRole('button', { name: /text copied/i }),
+    ).toBeInTheDocument();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2500);
     });
     expect(
       screen.getByRole('button', { name: /copy text to clipboard/i }),
