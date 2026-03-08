@@ -1,9 +1,3 @@
-/**
- * Tests for scroll utilities
- */
-
-import { describe, expect, it, vi } from 'vitest';
-
 import { createScrollDetector, ScrollDetector } from './scrollUtils';
 
 describe('ScrollDetector', () => {

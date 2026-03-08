@@ -39,3 +39,8 @@ export const APP_CONFIG = {
     seed: 'lorem-ipsum-2026',
   },
 } as const;
+
+/**
+ * Duration in milliseconds to display copy feedback (success/error)
+ */
+export const COPY_FEEDBACK_DURATION = 2500;

@@ -267,7 +267,9 @@ describe('App', () => {
 
     render(<App />);
 
-    const generateButton = screen.getByRole('button');
+    const generateButton = screen.getByRole('button', {
+      name: /generate 3 paragraphs/i,
+    });
     expect(generateButton).toBeInTheDocument();
     expect(generateButton).toHaveTextContent('Generate 3 Paragraphs');
   });
@@ -482,9 +484,16 @@ describe('App', () => {
     const mainHeading = screen.getByRole('heading', { level: 1 });
     expect(mainHeading).toBeInTheDocument();
 
-    // Check for button exists (aria-label might not be required if button has visible text)
-    const generateButton = screen.getByRole('button');
+    // Check for buttons exist
+    const generateButton = screen.getByRole('button', {
+      name: /generate 3 paragraphs/i,
+    });
     expect(generateButton).toBeInTheDocument();
+
+    const copyButton = screen.getByRole('button', {
+      name: /copy text to clipboard/i,
+    });
+    expect(copyButton).toBeInTheDocument();
 
     // Check for proper landmark regions
     const mainRegion = screen.getByRole('main');
@@ -517,7 +526,9 @@ describe('App', () => {
 
     render(<App />);
 
-    const generateButton = screen.getByRole('button');
+    const generateButton = screen.getByRole('button', {
+      name: /generate 3 paragraphs/i,
+    });
 
     // Test keyboard interaction
     generateButton.focus();
