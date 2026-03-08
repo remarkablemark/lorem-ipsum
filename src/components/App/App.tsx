@@ -18,13 +18,9 @@ export function App() {
   }, [isNearBottom, isGenerating, generateMore]);
 
   return (
-    <div className="min-h-screen" data-testid="app">
-      <header className="border-b border-slate-200 text-center select-none">
-        <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            Lorem Ipsum
-          </h1>
-        </div>
+    <>
+      <header className="flex h-16 items-center justify-center border-b border-slate-200 text-center select-none">
+        <h1 className="text-3xl text-slate-900">Lorem Ipsum</h1>
       </header>
 
       <main
@@ -129,6 +125,6 @@ export function App() {
           </div>
         </section>
       </main>
-    </div>
+    </>
   );
 }
