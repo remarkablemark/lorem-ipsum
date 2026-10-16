@@ -1,0 +1,17 @@
+{
+  "name": "Lorem Ipsum Generator",
+  "short_name": "Lorem Ipsum",
+  "description": "Generate lorem ipsum placeholder text.",
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
